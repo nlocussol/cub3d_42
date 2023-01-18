@@ -70,7 +70,8 @@ SRCS 	= ft_atoi.c \
 		  ft_lltoa.c \
 		  ft_split_parenthesis.c \
 		  ft_split_quotes_parenthesis.c \
-		  ft_strdup_suppress_quotes.c
+		  ft_strdup_suppress_quotes.c \
+		  append_to_tab.c
 
 OBJS 	= ${SRCS:.c=.o}
 

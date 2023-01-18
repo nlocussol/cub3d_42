@@ -6,12 +6,14 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/01/18 17:07:59 by nlocusso         ###   ########.fr        #
+#    Updated: 2023/01/18 21:01:50 by averdon          ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS		?= main.c \
+			   early_parsing.c \
+			   game/start_game.c
 
 OBJS		?= ${SRCS:.c=.o}
 

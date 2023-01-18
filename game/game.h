@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 17:03:15 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/18 21:00:59 by averdon          ###   ########.fr       */
+/*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
+/*   Updated: 2023/01/18 21:58:33 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef GAME_H
 
-int	main(int argc, char **argv)
+# define GAME_H
+
+typedef struct s_game
 {
-	char	**map;
+}	t_game;
 
-	map = early_parsing(argc, argv);
-	if (map)
-		start_game(map);
-	else
-		return (1);
-	return (0);
-}
+void	start_game(char **map);
+
+#endif

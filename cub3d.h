@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:55:20 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/18 17:03:56 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/18 21:00:08 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,5 @@
 
 # include "sources/includes.h"
 
+char	**early_parsing(int argc, char **argv);
 #endif

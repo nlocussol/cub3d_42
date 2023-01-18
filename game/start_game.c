@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 17:03:15 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/18 21:00:59 by averdon          ###   ########.fr       */
+/*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
+/*   Updated: 2023/01/18 21:59:12 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-int	main(int argc, char **argv)
+void	start_game(char **map)
 {
-	char	**map;
-
-	map = early_parsing(argc, argv);
-	if (map)
-		start_game(map);
-	else
-		return (1);
-	return (0);
 }
