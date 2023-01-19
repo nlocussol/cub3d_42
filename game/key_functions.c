@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   key_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 23:32:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 11:21:11 by averdon          ###   ########.fr       */
+/*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
+/*   Updated: 2023/01/19 10:48:21 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
+#include "../cub3d.h"
 
-# define INCLUDES_H
+void	move_player(t_game	*game)
+{
+}
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <X11/X.h>
-# include <math.h>
-
-# include "libft/libft.h"
-# include "minilibx/mlx.h"
-# include "../parsing/parsing.h"
-# include "../game/game.h"
-
-#endif
+void	move_camera(t_game	*game)
+{
+}
