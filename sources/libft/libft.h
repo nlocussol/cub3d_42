@@ -29,6 +29,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int			check_extension(char *str, char *extension);
 void		ft_free_array(char **str);
 char		**ft_split_multiple_arg(char *str, char *charset);
 int			ft_strcmp(char *s1, char *s2);

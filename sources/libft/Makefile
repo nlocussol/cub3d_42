@@ -68,6 +68,7 @@ SRCS 	= ft_atoi.c \
 		  ft_split_quotes.c \
 		  ft_atoll.c \
 		  ft_lltoa.c \
+		  extension.c \
 		  ft_split_parenthesis.c \
 		  ft_split_quotes_parenthesis.c \
 		  ft_strdup_suppress_quotes.c \

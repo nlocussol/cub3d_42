@@ -6,11 +6,11 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:58:05 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/18 20:59:52 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/19 09:22:41 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 char	**early_parsing(int argc, char **argv)
 {
@@ -19,8 +19,7 @@ char	**early_parsing(int argc, char **argv)
 	int		fd;
 	int		i;
 
-	if (argc != 2)
-		return (NULL);
+	(void)argc;
 	fd = open(argv[1], O_RDONLY);
 	map = NULL;
 	str = get_next_line(fd);
@@ -38,5 +37,6 @@ char	**early_parsing(int argc, char **argv)
 		map[i][ft_strlen(map[i]) - 1] = '\0';
 		i++;
 	}
+	print_tab(map);
 	return (map);
 }

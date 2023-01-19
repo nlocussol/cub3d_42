@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 23:32:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 09:22:29 by nlocusso         ###   ########.fr       */
+/*   Created: 2023/01/19 09:20:37 by nlocusso          #+#    #+#             */
+/*   Updated: 2023/01/19 09:21:21 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
+#ifndef PARSING_H
+# define PARSING_H
 
-# define INCLUDES_H
-
-# include <fcntl.h>
-# include <stdio.h>
-
-# include "libft/libft.h"
-# include "minilibx/mlx.h"
-# include "../game/game.h"
-# include "../parsing/parsing.h"
+# include "../cub3d.h"
 
 #endif

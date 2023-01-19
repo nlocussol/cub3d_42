@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   extension.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 17:03:15 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 09:17:22 by nlocusso         ###   ########.fr       */
+/*   Created: 2022/11/14 15:03:25 by nlocusso          #+#    #+#             */
+/*   Updated: 2023/01/19 09:18:13 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	print_error(char *message)
+int	check_extension(char *str, char *extension)
 {
-	ft_fdprintf(2, "%s", message);
-	exit(EXIT_FAILURE);
-}
+	int	i;
 
-int	main(int argc, char **argv)
-{
-	char	**map;
-
-	if (argc != 2 || check_extension(argv[1], ".cub") == 1)
-		print_error("Error\nUsage: ./cub3D <map.cub>\n");
-	map = early_parsing(argc, argv);
-	//if (map)
-	//	start_game(map);
-	//else
-	//	return (1);
+	i = ft_strlen(str);
+	i -= ft_strlen(extension);
+	if (ft_strlen(str) <= ft_strlen(extension))
+		return (1);
+	if (str[i - 1] == '/')
+		return (1);
+	if (ft_strcmp(&str[ft_strlen(str) - ft_strlen(extension)], extension))
+		return (1);
 	return (0);
 }

@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 23:32:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 09:22:29 by nlocusso         ###   ########.fr       */
+/*   Created: 2023/01/19 09:04:37 by nlocusso          #+#    #+#             */
+/*   Updated: 2023/01/19 09:06:09 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
+#include "cub3d.h"
 
-# define INCLUDES_H
+void	print_tab(char **map)
+{
+	int	i;
+	int	j;
 
-# include <fcntl.h>
-# include <stdio.h>
-
-# include "libft/libft.h"
-# include "minilibx/mlx.h"
-# include "../game/game.h"
-# include "../parsing/parsing.h"
-
-#endif
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			printf("%c", map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
