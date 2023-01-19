@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/18 21:58:33 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/19 09:42:12 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 # define GAME_H
 
+# include "../cub3d.h"
+
 typedef struct s_game
 {
 }	t_game;
 
-void	start_game(char **map);
+void	start_game(t_data *data);
 
 #endif

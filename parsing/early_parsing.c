@@ -6,15 +6,14 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:58:05 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 09:28:54 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:38:17 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-char	**early_parsing(int argc, char **argv)
+int	early_parsing(int argc, char **argv, t_data *data)
 {
-	char	**map;
 	char	*str;
 	int		fd;
 	int		i;
@@ -23,22 +22,21 @@ char	**early_parsing(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		print_error("Error\nThe file cannot be opened\n");
-	map = NULL;
 	str = get_next_line(fd);
 	while (str)
 	{
-		map = append_to_tab(map, str);
+		data->map = append_to_tab(data->map, str);
 		free(str);
-		if (!map)
-			return (NULL);
+		if (!data->map)
+			return (1);
 		str = get_next_line(fd);
 	}
 	i = 0;
-	while (map[i])
+	while (data->map[i])
 	{
-		map[i][ft_strlen(map[i]) - 1] = '\0';
+		data->map[i][ft_strlen(data->map[i]) - 1] = '\0';
 		i++;
 	}
-	print_tab(map);
-	return (map);
+	print_tab(data->map);
+	return (0);
 }
