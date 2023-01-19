@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:58:05 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 09:22:41 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:28:54 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	**early_parsing(int argc, char **argv)
 
 	(void)argc;
 	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		print_error("Error\nThe file cannot be opened\n");
 	map = NULL;
 	str = get_next_line(fd);
 	while (str)

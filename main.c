@@ -6,17 +6,11 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:03:15 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 09:17:22 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:27:42 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	print_error(char *message)
-{
-	ft_fdprintf(2, "%s", message);
-	exit(EXIT_FAILURE);
-}
 
 int	main(int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:20:37 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 09:21:21 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:26:29 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define PARSING_H
 
 # include "../cub3d.h"
+
+char	**early_parsing(int argc, char **argv);
 
 #endif
