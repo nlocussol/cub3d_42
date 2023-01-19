@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:51:42 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 13:13:58 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:26:39 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,4 +123,5 @@ void	find_texture(t_data *data)
 	ft_free_array(data->map);
 	data->map = new_map;
 	pars_map(data);
+	check_data(data);
 }

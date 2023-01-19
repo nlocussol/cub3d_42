@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 18:53:35 by nlocusso          #+#    #+#             */
-/*   Updated: 2022/11/27 18:54:38 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:37:18 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ void	ft_free_array(char **str)
 	int	i;
 
 	i = 0;
-	while (str[i] != NULL)
+	if (str)
 	{
-		free(str[i]);
-		i++;
+		while (str[i] != NULL)
+		{
+			free(str[i]);
+			i++;
+		}
+		free(str);
 	}
-	free(str);
 }

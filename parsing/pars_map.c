@@ -6,11 +6,20 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:54:29 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 12:32:24 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:29:28 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	check_data(t_data *data)
+{
+	if (data->orientation == 0)
+	{
+		free_data(data);
+		print_error("Error\nA player position is missing\n");
+	}
+}
 
 void	pars_empty(t_data *data, int i, int j)
 {

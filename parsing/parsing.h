@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:20:37 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 11:51:38 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:37:56 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_data
 	char	orientation;
 }	t_data;
 
+void	check_data(t_data *data);
 void	pars_map(t_data *data);
 void	open_texture(t_data *data, char *texture);
 void	free_data(t_data *data);
