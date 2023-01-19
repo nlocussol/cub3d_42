@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:55:20 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 09:06:42 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:29:39 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define CUB3D_H
 
 # include "sources/includes.h"
+
+typedef struct s_data
+{
+	char	**map;
+	//direction start
+	//faces of wall
+}	t_data;
 
 char	**early_parsing(int argc, char **argv);
 void	print_tab(char **map);
