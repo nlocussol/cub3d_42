@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 10:41:32 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/19 22:46:27 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
-	char	orientation;
+	double	x;
+	double	y;
+	int		orientation;
+	char	direction;
 }	t_player;
 
 typedef struct s_game
@@ -32,7 +33,7 @@ typedef struct s_game
 }	t_game;
 
 # define WIDTH_SCREEN 1920
-# define LENGTH_SCREEN 1080
+# define HEIGHT_SCREEN 1080
 # define TITLE "Game"
 
 # define ECHAP 65307
@@ -41,12 +42,18 @@ typedef struct s_game
 # define S 115
 # define D 100
 # define UP_ARROW 65362
-# define LEFT_ARROW 65361
 # define DOWN_ARROW 65364
+
+# define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
 
 # define SIZE_BLOCK 64
+# define COEFF 10
 
 void	start_game(t_data *data);
+void	move_player(t_game	*game, int move);
+void	turn_camera(t_game	*game, int move);
+void	reload_display(t_game *game);
+double	abs_value(double nb);
 
 #endif
