@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:55:20 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 09:29:39 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/19 09:32:18 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ typedef struct s_data
 
 char	**early_parsing(int argc, char **argv);
 void	print_tab(char **map);
+void	print_error(char *message);
 
 #endif

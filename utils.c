@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:04:37 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 09:06:09 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:27:34 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,10 @@ void	print_tab(char **map)
 		printf("\n");
 		i++;
 	}
+}
+
+void	print_error(char *message)
+{
+	ft_fdprintf(2, "%s", message);
+	exit(EXIT_FAILURE);
 }
