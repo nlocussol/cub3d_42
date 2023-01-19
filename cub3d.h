@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:55:20 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 09:39:12 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:15:22 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CUB3D_H
 
 # include "sources/includes.h"
-
 
 void	print_tab(char **map);
 void	print_error(char *message);

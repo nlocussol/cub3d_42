@@ -6,16 +6,11 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:03:15 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 09:41:20 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:14:53 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	init_data(t_data *data)
-{
-	data->map = NULL;
-}
 
 int	main(int argc, char **argv)
 {

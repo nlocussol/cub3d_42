@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:20:37 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 09:41:45 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:51:38 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,20 @@
 typedef struct s_data
 {
 	char	**map;
-	//direction start
-	//faces of wall
+	char	*text_no;
+	char	*text_so;
+	char	*text_we;
+	char	*text_ea;
+	char	**text_f;
+	char	**text_c;
+	char	orientation;
 }	t_data;
 
+void	pars_map(t_data *data);
+void	open_texture(t_data *data, char *texture);
+void	free_data(t_data *data);
+void	find_texture(t_data *data);
+void	init_data(t_data *data);
 int		early_parsing(int argc, char **argv, t_data *data);
 
 #endif

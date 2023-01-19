@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:28:31 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/18 20:23:51 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/19 11:41:29 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int			ft_len_tab(char **tab);
 int			check_extension(char *str, char *extension);
 void		ft_free_array(char **str);
 char		**ft_split_multiple_arg(char *str, char *charset);

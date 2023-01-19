@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:58:05 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 09:38:17 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:49:16 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	early_parsing(int argc, char **argv, t_data *data)
 		data->map[i][ft_strlen(data->map[i]) - 1] = '\0';
 		i++;
 	}
+	find_texture(data);
 	print_tab(data->map);
 	return (0);
 }
