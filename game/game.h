@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 22:46:27 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/20 16:32:15 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_game
 # define D 100
 # define UP_ARROW 65362
 # define DOWN_ARROW 65364
+# define FOV 100
 
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
@@ -55,5 +56,6 @@ void	move_player(t_game	*game, int move);
 void	turn_camera(t_game	*game, int move);
 void	reload_display(t_game *game);
 double	abs_value(double nb);
+double	radian_value(double degree);
 
 #endif

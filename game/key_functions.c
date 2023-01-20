@@ -6,16 +6,34 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 22:33:52 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/20 16:36:16 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	move_player(t_game	*game, int move)
+void	move_player(t_game	*game, int keycode)
 {
-	game->player->x += move * abs_value(cos(game->player->orientation * M_PI / 180));
-	game->player->y += move * abs_value(sin(game->player->orientation * M_PI / 180));
+	if (keycode == W)
+	{
+		game->player->x += (cos(radian_value(game->player->orientation)));
+		game->player->y += (sin(radian_value(game->player->orientation)));
+	}
+	else if (keycode == S)
+	{
+		game->player->x -= (cos(radian_value(game->player->orientation)));
+		game->player->y -= (sin(radian_value(game->player->orientation)));
+	}
+	else if (keycode == A)
+	{
+		game->player->x += (sin(radian_value(game->player->orientation)));
+		game->player->y += (cos(radian_value(game->player->orientation)));
+	}
+	else if (keycode == D)
+	{
+		game->player->x -= (sin(radian_value(game->player->orientation)));
+		game->player->y -= (cos(radian_value(game->player->orientation)));
+	}
 }
 
 void	turn_camera(t_game	*game, int move)
