@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/20 16:32:15 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/22 12:13:35 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 # define GAME_H
 
 # include "../cub3d.h"
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_img;
 
 typedef struct s_player
 {
@@ -29,7 +38,9 @@ typedef struct s_game
 	void		*mlx;
 	void		*window;
 	char		**map;
+	t_img		*screen_img;
 	t_player	*player;
+	t_data		*data;
 }	t_game;
 
 # define WIDTH_SCREEN 1920

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/20 16:43:36 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/22 12:34:25 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,33 @@ double	radian_value(double degree)
 	return (degree * M_PI / 180);
 }
 
-void	draw_line(t_game *game, int x, double drawStart, double drawEnd, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
+	char	*dst;
+
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	draw_line(t_game *game, int x, int drawStart, int drawEnd, int color)
+{
+	int	i;
+
+	i = 0;
+	while (i < drawStart)
+	{
+		my_mlx_pixel_put(game->screen_img, x, i, game->data->hex_c);
+		i++;
+	}
 	while (drawStart < drawEnd)
 	{
-		mlx_pixel_put(game->mlx, game->window, x, drawStart, color);
+		my_mlx_pixel_put(game->screen_img, x, drawStart, color);
 		drawStart++;
+	}
+	while (drawEnd < HEIGHT_SCREEN)
+	{
+		my_mlx_pixel_put(game->screen_img, x, drawEnd, game->data->hex_f);
+		drawEnd++;
 	}
 }
 
@@ -99,7 +120,7 @@ void	reload_display(t_game *game)
 			stepY = 1;
 			sideDistY = (mapY + 1.0 - posY) * deltaDistY;
 		}
-		
+
 		hit = 0;
 		while (hit == 0)
 		{
@@ -131,9 +152,10 @@ void	reload_display(t_game *game)
 			drawStart = 0;
 		drawEnd = lineHeight / 2 + HEIGHT_SCREEN / 2;
 		if (drawEnd	>= HEIGHT_SCREEN)
-			drawEnd= HEIGHT_SCREEN - 1;
+			drawEnd = HEIGHT_SCREEN - 1;
 		
 		draw_line(game, x, drawStart, drawEnd, 0xFFFFFF);
 		x++;
 	}
+	mlx_put_image_to_window(game->mlx, game->window, game->screen_img->img, 0, 0);
 }

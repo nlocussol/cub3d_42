@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/20 16:37:44 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/22 12:13:53 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ void	initialize_game(t_game	*game, t_data *data)
 	game->player->y = (double)5 * SIZE_BLOCK + SIZE_BLOCK / 2;
 	game->player->orientation = 180;
 	game->player->direction = 'N';
+	game->screen_img = malloc(sizeof(t_img));
+	game->screen_img->img = mlx_new_image(game->mlx, WIDTH_SCREEN, HEIGHT_SCREEN);
+	game->screen_img->addr = mlx_get_data_addr(game->screen_img->img, &game->screen_img->bits_per_pixel, &game->screen_img->line_length, &game->screen_img->endian);
+	game->data = data;
 	/*                              */
 }
 

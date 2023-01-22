@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:51:42 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 16:26:39 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/22 12:15:46 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	pars_rgb_color(t_data *data)
 		}
 		i++;
 	}
+	data->hex_f = (ft_atoi(data->text_f[0]) << 16) + (ft_atoi(data->text_f[1]) << 8) + ft_atoi(data->text_f[2]);
+	data->hex_c = (ft_atoi(data->text_c[0]) << 16) + (ft_atoi(data->text_c[1]) << 8) + ft_atoi(data->text_c[2]);
 }
 
 void	pars_texture(t_data *data)
@@ -88,6 +90,11 @@ void	check_texture(t_data *data, char *line)
 		data->text_f = ft_split(&line[2], ',');
 	else if (ft_strncmp(line, "C ", 2) == 0 || ft_strncmp(line, "C\t", 2) == 0)
 		data->text_c = ft_split(&line[2], ',');
+	else
+	{
+		free_data(data);
+		print_error("Error\nBad data, you can only put: NO, SO, WE, EA, F, C\n");
+	}
 }
 
 void	find_texture(t_data *data)
