@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:51:42 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/22 12:15:46 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/23 14:31:16 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ void	pars_rgb_color(t_data *data)
 	i = 0;
 	while (i != 3)
 	{
-		if (ft_atoi(data->text_f[i]) < 0 || ft_atoi(data->text_f[i]) > 256
-			|| ft_atoi(data->text_c[i]) < 0 || ft_atoi(data->text_c[i]) > 256)
+		if (ft_strlen(data->text_f[i]) > 7 || ft_strlen(data->text_c[i]) > 7
+			|| ft_atoi(data->text_f[i]) < 0 || ft_atoi(data->text_f[i]) > 255
+			|| ft_atoi(data->text_c[i]) < 0 || ft_atoi(data->text_c[i]) > 255)
 		{
 			free_data(data);
 			print_error("Error\nRGB colors can only be between 0 and 256\n");

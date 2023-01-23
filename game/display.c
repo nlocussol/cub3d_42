@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/22 12:34:25 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/23 14:33:08 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	reload_display(t_game *game)
 		if (drawEnd	>= HEIGHT_SCREEN)
 			drawEnd = HEIGHT_SCREEN - 1;
 		
-		draw_line(game, x, drawStart, drawEnd, 0xFFFFFF);
+		draw_line(game, x, drawStart, drawEnd, 0xeb3434);
 		x++;
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->screen_img->img, 0, 0);
