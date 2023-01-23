@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/23 14:33:08 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/23 18:07:40 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	draw_line(t_game *game, int x, int drawStart, int drawEnd, int color)
+void	draw_line(t_game *game, int x, int drawStart, int drawEnd, int	side, int stepX, int stepY)
 {
 	int	i;
 
@@ -45,7 +45,20 @@ void	draw_line(t_game *game, int x, int drawStart, int drawEnd, int color)
 	}
 	while (drawStart < drawEnd)
 	{
-		my_mlx_pixel_put(game->screen_img, x, drawStart, color);
+		if (side == 0)
+		{
+			if (stepX == 1)
+				my_mlx_pixel_put(game->screen_img, x, drawStart, 0xFF0000);
+			else
+				my_mlx_pixel_put(game->screen_img, x, drawStart, 0x00FF00);
+		}
+		else if (side == 1)
+		{
+			if (stepY == 1)
+				my_mlx_pixel_put(game->screen_img, x, drawStart, 0x0000FF);
+			else
+				my_mlx_pixel_put(game->screen_img, x, drawStart, 0xFF0091);
+		}
 		drawStart++;
 	}
 	while (drawEnd < HEIGHT_SCREEN)
@@ -61,8 +74,8 @@ void	reload_display(t_game *game)
 	double	posY = game->player->y / SIZE_BLOCK;
 	double	dirX = cos(radian_value(game->player->orientation));
 	double	dirY = sin(radian_value(game->player->orientation));
-	double	planeX = 0;
-	double	planeY = 0.66;
+	double	planeX = cos(radian_value(game->player->orientation + 90));
+	double	planeY = sin(radian_value(game->player->orientation + 90));
 	double	cameraX;
 	double	rayDirX;
 	double	rayDirY;
@@ -154,7 +167,7 @@ void	reload_display(t_game *game)
 		if (drawEnd	>= HEIGHT_SCREEN)
 			drawEnd = HEIGHT_SCREEN - 1;
 		
-		draw_line(game, x, drawStart, drawEnd, 0xeb3434);
+		draw_line(game, x, drawStart, drawEnd, side, stepX, stepY);
 		x++;
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->screen_img->img, 0, 0);

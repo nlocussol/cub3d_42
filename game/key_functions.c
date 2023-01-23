@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/20 16:36:16 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/23 18:23:18 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ void	move_player(t_game	*game, int keycode)
 {
 	if (keycode == W)
 	{
-		game->player->x += (cos(radian_value(game->player->orientation)));
-		game->player->y += (sin(radian_value(game->player->orientation)));
+		game->player->x += 10 * (cos(radian_value(game->player->orientation)));
+		game->player->y += 10 * (sin(radian_value(game->player->orientation)));
 	}
 	else if (keycode == S)
 	{
-		game->player->x -= (cos(radian_value(game->player->orientation)));
-		game->player->y -= (sin(radian_value(game->player->orientation)));
-	}
-	else if (keycode == A)
-	{
-		game->player->x += (sin(radian_value(game->player->orientation)));
-		game->player->y += (cos(radian_value(game->player->orientation)));
+		game->player->x -= 10 * (cos(radian_value(game->player->orientation)));
+		game->player->y -= 10 * (sin(radian_value(game->player->orientation)));
 	}
 	else if (keycode == D)
 	{
-		game->player->x -= (sin(radian_value(game->player->orientation)));
-		game->player->y -= (cos(radian_value(game->player->orientation)));
+		game->player->x -= 10 * (sin(radian_value(game->player->orientation)));
+		game->player->y += 10 * (cos(radian_value(game->player->orientation)));
+	}
+	else if (keycode == A)
+	{
+		game->player->x += 10 * (sin(radian_value(game->player->orientation)));
+		game->player->y -= 10 * (cos(radian_value(game->player->orientation)));
 	}
 }
 

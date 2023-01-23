@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/01/19 17:25:55 by averdon          ###   ########.fr        #
+#    Updated: 2023/01/23 19:26:24 by averdon          ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -20,6 +20,7 @@ SRCS		?= main.c \
 			   game/start_game.c \
 			   game/key_functions.c \
 			   game/display.c \
+			   game/parse_image.c
 
 OBJS		?= ${SRCS:.c=.o}
 

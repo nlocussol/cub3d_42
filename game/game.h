@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/22 12:13:35 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/23 19:27:06 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void	turn_camera(t_game	*game, int move);
 void	reload_display(t_game *game);
 double	abs_value(double nb);
 double	radian_value(double degree);
+void	parse_image(t_game *game);
 
 #endif
