@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/23 19:27:21 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/24 10:34:03 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void	find_player_place(t_game *game, int *x, int *y)
 void	calculate_player_orientation(t_game *game)
 {
 	if (game->map[(int)game->player->x / SIZE_BLOCK][(int)game->player->y / SIZE_BLOCK] == 'E')
-		game->player->orientation = 0;
-	else if (game->map[(int)game->player->x / SIZE_BLOCK][(int)game->player->y / SIZE_BLOCK] == 'N')
-		game->player->orientation = 90;
-	else if (game->map[(int)game->player->x / SIZE_BLOCK][(int)game->player->y / SIZE_BLOCK] == 'W')
-		game->player->orientation = 180;
-	else if (game->map[(int)game->player->x / SIZE_BLOCK][(int)game->player->y / SIZE_BLOCK] == 'S')
 		game->player->orientation = 270;
+	else if (game->map[(int)game->player->x / SIZE_BLOCK][(int)game->player->y / SIZE_BLOCK] == 'N')
+		game->player->orientation = 180;
+	else if (game->map[(int)game->player->x / SIZE_BLOCK][(int)game->player->y / SIZE_BLOCK] == 'W')
+		game->player->orientation = 90;
+	else if (game->map[(int)game->player->x / SIZE_BLOCK][(int)game->player->y / SIZE_BLOCK] == 'S')
+		game->player->orientation = 0;
 }
 
 void	initialize_game(t_game	*game, t_data *data)

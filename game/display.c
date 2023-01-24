@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/23 18:07:40 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/24 13:22:02 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ double	radian_value(double degree)
 	return (degree * M_PI / 180);
 }
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+void	my_mlx_pixel_put(t_game *game, t_img *img, int x, int y, int color)
 {
 	char	*dst;
-
+	(void)game;
+	(void)color;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	//*(unsigned int*)dst = game->images[0][x][y];
 	*(unsigned int*)dst = color;
+	
 }
 
 void	draw_line(t_game *game, int x, int drawStart, int drawEnd, int	side, int stepX, int stepY)
@@ -40,7 +43,7 @@ void	draw_line(t_game *game, int x, int drawStart, int drawEnd, int	side, int st
 	i = 0;
 	while (i < drawStart)
 	{
-		my_mlx_pixel_put(game->screen_img, x, i, game->data->hex_c);
+		my_mlx_pixel_put(game, game->screen_img, x, i, game->data->hex_c);
 		i++;
 	}
 	while (drawStart < drawEnd)
@@ -48,22 +51,22 @@ void	draw_line(t_game *game, int x, int drawStart, int drawEnd, int	side, int st
 		if (side == 0)
 		{
 			if (stepX == 1)
-				my_mlx_pixel_put(game->screen_img, x, drawStart, 0xFF0000);
+				my_mlx_pixel_put(game, game->screen_img, x, drawStart, 0xFF0000);//Sud
 			else
-				my_mlx_pixel_put(game->screen_img, x, drawStart, 0x00FF00);
+				my_mlx_pixel_put(game, game->screen_img, x, drawStart, 0x00FF00);//Nord
 		}
 		else if (side == 1)
 		{
 			if (stepY == 1)
-				my_mlx_pixel_put(game->screen_img, x, drawStart, 0x0000FF);
+				my_mlx_pixel_put(game, game->screen_img, x, drawStart, 0x0000FF);//Ouest
 			else
-				my_mlx_pixel_put(game->screen_img, x, drawStart, 0xFF0091);
+				my_mlx_pixel_put(game, game->screen_img, x, drawStart, 0xFF0091);//Est
 		}
 		drawStart++;
 	}
 	while (drawEnd < HEIGHT_SCREEN)
 	{
-		my_mlx_pixel_put(game->screen_img, x, drawEnd, game->data->hex_f);
+		my_mlx_pixel_put(game, game->screen_img, x, drawEnd, game->data->hex_f);
 		drawEnd++;
 	}
 }
