@@ -1,0 +1,49 @@
+Error
+Usage: ./cub3D <map.cub>
+Error
+Bad data, you can only put: NO, SO, WE, EA, F, C
+./tester.sh: line 2: 162024 Segmentation fault      (core dumped) ./cub3D $FILE
+Error
+Bad texture path or extension (only .xpm)
+Error
+The map does not have all the data
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad data, you can only put: NO, SO, WE, EA, F, C
+Error
+Bad data, you can only put: NO, SO, WE, EA, F, C
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad texture path or extension (only .xpm)
+Error
+Bad data, you can only put: NO, SO, WE, EA, F, C
+Error
+Usage: ./cub3D <map.cub>
+Error
+Usage: ./cub3D <map.cub>
+Error
+Bad texture path or extension (only .xpm)

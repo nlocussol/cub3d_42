@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:58:05 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 10:49:16 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:09:59 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	early_parsing(int argc, char **argv, t_data *data)
 	if (fd < 0)
 		print_error("Error\nThe file cannot be opened\n");
 	str = get_next_line(fd);
+	if (!str)
+		print_error("Error\nThe file is empty\n");
 	while (str)
 	{
 		data->map = append_to_tab(data->map, str);
