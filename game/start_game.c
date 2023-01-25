@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/24 20:40:08 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/25 13:17:40 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	start_game(t_data *data)
 {
 	t_game	game;
 
+	printf("%s\n%s\n%s\n%s\n", data->text_no, data->text_ea, data->text_so, data->text_we);
 	initialize_game(&game, data);
 	parse_image(&game);
 	reload_display(&game);

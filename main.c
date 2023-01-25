@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:03:15 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 10:14:53 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/25 13:17:09 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	main(int argc, char **argv)
 	if (argc != 2 || check_extension(argv[1], ".cub") == 1)
 		print_error("Error\nUsage: ./cub3D <map.cub>\n");
 	if (early_parsing(argc, argv, &data) != 1)
+	{
 		start_game(&data);
+	}
 	else
 		return (1);
 	return (0);

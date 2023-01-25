@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:54:29 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/19 16:29:28 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/25 13:11:26 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,14 @@ and can own only one character position (N, S, E, W)");
 				pars_empty(data, i, j);
 			else if (ft_strchr("NSEW", data->map[i][j]) != NULL)
 			{
-				if (data->orientation != 0)
+				if (data->orientation != 0 || !ft_strchr("01", data->map[i - 1][j])
+					|| !ft_strchr("01", data->map[i + 1][j])
+					|| !ft_strchr("01", data->map[i][j - 1])
+					|| !ft_strchr("01", data->map[i][j + 1]))
 				{
 					free_data(data);
 					print_error("Error\n\
-There cannot be several positions of the character\n");
+Multilple or bad position of the player !\n");
 				}
 				data->orientation = data->map[i][j];
 			}
