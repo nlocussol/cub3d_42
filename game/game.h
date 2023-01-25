@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/24 13:25:55 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/24 16:03:20 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_game
 	void		*window;
 	char		**map;
 	t_img		*screen_img;
+	unsigned int **images[4];
 	t_player	*player;
 	t_data		*data;
 }	t_game;
