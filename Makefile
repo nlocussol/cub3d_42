@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/01/26 13:07:15 by nlocusso         ###   ########.fr        #
+#    Updated: 2023/01/26 13:17:56 by nlocusso         ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -74,5 +74,9 @@ fclean :	clear clean cleaning
 			@printf '\033[0;92;1mCleaning finished\n\033[0m'
 
 re :		fclean all
+
+norm :
+	@norminette sources/libft
+	@norminette ${SRCS}
 
 .PHONY : all clean fclean re clear compiling cleaning
