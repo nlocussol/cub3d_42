@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/24 16:03:20 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/25 18:32:50 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,13 @@ typedef struct s_game
 	char		**map;
 	t_img		*screen_img;
 	unsigned int **images[4];
+	char	*text_no;
+	char	*text_so;
+	char	*text_we;
+	char	*text_ea;
+	int		hex_f;
+	int		hex_c;
 	t_player	*player;
-	t_data		*data;
 }	t_game;
 
 # define WIDTH_SCREEN 1920
@@ -70,5 +75,6 @@ void	reload_display(t_game *game);
 double	abs_value(double nb);
 double	radian_value(double degree);
 void	parse_image(t_game *game);
+void	create_border(t_game *game);
 
 #endif

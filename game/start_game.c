@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/25 13:17:40 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/26 10:21:22 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,21 @@ int	close_window(t_game *game)
 
 int	key_hook(int keycode, t_game *game)
 {
-	(void)game;
+	double	old_x;
+	double	old_y;
+
+	old_x = game->player->x;
+	old_y = game->player->y;
 	if (keycode == ECHAP)
 		close_window(game);
 	else if (keycode == W ||keycode == A ||keycode == S ||keycode == D)
 		move_player(game, keycode);
 	else if (keycode == LEFT_ARROW)
-		turn_camera(game, -1);
+		turn_camera(game, -3);
 	else if (keycode == RIGHT_ARROW)
-		turn_camera(game, 1);
-	mlx_clear_window(game->mlx, game->window);
-	reload_display(game);
+		turn_camera(game, 3);
+	if (old_x != game->player->x || old_y != game->player->y)
+		reload_display(game);
 	return (0);
 }
 
@@ -55,11 +59,11 @@ void	find_player_place(t_game *game, int *x, int *y)
 void	calculate_player_orientation(t_game *game)
 {
 	if (game->map[(int)game->player->x / SIZE_BLOCK][(int)game->player->y / SIZE_BLOCK] == 'E')
-		game->player->orientation = 270;
+		game->player->orientation = 90;
 	else if (game->map[(int)game->player->x / SIZE_BLOCK][(int)game->player->y / SIZE_BLOCK] == 'N')
 		game->player->orientation = 180;
 	else if (game->map[(int)game->player->x / SIZE_BLOCK][(int)game->player->y / SIZE_BLOCK] == 'W')
-		game->player->orientation = 90;
+		game->player->orientation = 270;
 	else if (game->map[(int)game->player->x / SIZE_BLOCK][(int)game->player->y / SIZE_BLOCK] == 'S')
 		game->player->orientation = 0;
 }
@@ -72,6 +76,12 @@ void	initialize_game(t_game	*game, t_data *data)
 	game->mlx = mlx_init();
 	game->window = mlx_new_window(game->mlx, WIDTH_SCREEN, HEIGHT_SCREEN, TITLE);
 	game->map = data->map;
+	game->text_ea = data->text_ea;
+	game->text_no = data->text_no;
+	game->text_so = data->text_so;
+	game->text_we = data->text_we;
+	game->hex_c = data->hex_c;
+	game->hex_f = data->hex_f;
 	find_player_place(game, &x, &y);
 	game->player->x = (double)x * SIZE_BLOCK + SIZE_BLOCK / 2;
 	game->player->y = (double)y * SIZE_BLOCK + SIZE_BLOCK / 2;
@@ -80,16 +90,15 @@ void	initialize_game(t_game	*game, t_data *data)
 	game->screen_img = malloc(sizeof(t_img));
 	game->screen_img->img = mlx_new_image(game->mlx, WIDTH_SCREEN, HEIGHT_SCREEN);
 	game->screen_img->addr = mlx_get_data_addr(game->screen_img->img, &game->screen_img->bits_per_pixel, &game->screen_img->line_length, &game->screen_img->endian);
-	game->data = data;
 }
 
 void	start_game(t_data *data)
 {
 	t_game	game;
 
-	printf("%s\n%s\n%s\n%s\n", data->text_no, data->text_ea, data->text_so, data->text_we);
 	initialize_game(&game, data);
 	parse_image(&game);
+	create_border(&game);
 	reload_display(&game);
 	mlx_hook(game.window, KeyPress, KeyPressMask, key_hook, &game);
 	mlx_hook(game.window, DestroyNotify, StructureNotifyMask, close_window, &game);

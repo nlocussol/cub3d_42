@@ -6,12 +6,11 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/25 12:57:05 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/25 19:33:39 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <math.h>
 
 double	abs_value(double nb)
 {
@@ -29,7 +28,7 @@ void	my_mlx_pixel_put(t_game *game, t_img *img, int x, int y, int color)
 {
 	char	*dst;
 	(void)game;
-	(void)color;
+	
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 	
@@ -59,7 +58,7 @@ void	draw_line(t_game *game, int x, int drawStart, int drawEnd, int	side, int st
 	i = 0;
 	while (i < drawStart)
 	{
-		my_mlx_pixel_put(game, game->screen_img, x, i, game->data->hex_c);
+		my_mlx_pixel_put(game, game->screen_img, x, i, game->hex_c);
 		i++;
 	}
 	while (drawStart < drawEnd)
@@ -85,7 +84,7 @@ void	draw_line(t_game *game, int x, int drawStart, int drawEnd, int	side, int st
 	}
 	while (drawEnd < HEIGHT_SCREEN)
 	{
-		my_mlx_pixel_put(game, game->screen_img, x, drawEnd, game->data->hex_f);
+		my_mlx_pixel_put(game, game->screen_img, x, drawEnd, game->hex_f);
 		drawEnd++;
 	}
 }
@@ -172,16 +171,10 @@ void	reload_display(t_game *game)
 				mapY += stepY;
 				side = 1;
 			}
-			if (mapX < 0 || mapY < 0 || mapX >= ft_len_tab(game->map) || mapY >= (int)ft_strlen(game->map[0]))
-			{
-				side = -1;
-				hit = -1;
-				break ;
-			}
 			if (!ft_strchr("0WESN ", game->map[mapX][mapY]))
 				hit = 1;
 		}
-		if (side != -1)
+		if (game->map[mapX][mapY] == '1')
 		{
 			if (side == 0)
 				perpWallDist = (sideDistX - deltaDistX);
@@ -195,7 +188,6 @@ void	reload_display(t_game *game)
 			drawEnd = lineHeight / 2 + HEIGHT_SCREEN / 2;
 			if (drawEnd	>= HEIGHT_SCREEN)
 				drawEnd = HEIGHT_SCREEN - 1;
-			
 			draw_line(game, x, drawStart, drawEnd, side, stepX, stepY, posX, posY, rayDirX, rayDirY, perpWallDist, lineHeight);
 		}
 		else
@@ -203,7 +195,7 @@ void	reload_display(t_game *game)
 			i = 0;
 			while (i < HEIGHT_SCREEN)
 			{
-				my_mlx_pixel_put(game, game->screen_img, x, i, 0);//Nord
+				my_mlx_pixel_put(game, game->screen_img, x, i, 0);
 				i++;
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/25 13:19:35 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/25 16:16:49 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,10 @@ void	parse_image(t_game *game)
 {
 	char	*name_sprite[4];
 	int	i;
-
-	name_sprite[0] = game->data->text_no;
-	name_sprite[1] = game->data->text_ea;
-	name_sprite[2] = game->data->text_so;
-	name_sprite[3] = game->data->text_we;
-	ft_fdprintf(1, "%s\n%s\n%s\n%s\n", game->data->text_no, game->data->text_ea, game->data->text_so, game->data->text_we);
-	/*name_sprite[0] = "textures/north_text.xpm";
-	name_sprite[1] = "textures/south_text.xpm";
-	name_sprite[2] = "textures/west_text.xpm";
-	name_sprite[3] = "textures/east_text.xpm";*/
+	name_sprite[0] = game->text_no;
+	name_sprite[1] = game->text_ea;
+	name_sprite[2] = game->text_so;
+	name_sprite[3] = game->text_we;
 	t_img		*img;
 	int			width;
 	int			length;
