@@ -6,43 +6,11 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:51:42 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 11:16:56 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:07:52 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	pars_rgb_color(t_data *data)
-{
-	char	*tmp;
-	int		i;
-
-	if (ft_len_tab(data->text_f) != 3 || ft_len_tab(data->text_c) != 3)
-	{
-		free_data(data);
-		print_error("Error\nBad RGB color\n");
-	}
-	tmp = ft_strtrim(data->text_f[0], " \t");
-	free(data->text_f[0]);
-	data->text_f[0] = tmp;
-	tmp = ft_strtrim(data->text_c[0], " \t");
-	free(data->text_c[0]);
-	data->text_c[0] = tmp;
-	i = 0;
-	while (i != 3)
-	{
-		if (ft_strlen(data->text_f[i]) > 7 || ft_strlen(data->text_c[i]) > 7
-			|| ft_atoi(data->text_f[i]) < 0 || ft_atoi(data->text_f[i]) > 255
-			|| ft_atoi(data->text_c[i]) < 0 || ft_atoi(data->text_c[i]) > 255)
-		{
-			free_data(data);
-			print_error("Error\nRGB colors can only be between 0 and 256\n");
-		}
-		i++;
-	}
-	data->hex_f = (ft_atoi(data->text_f[0]) << 16) + (ft_atoi(data->text_f[1]) << 8) + ft_atoi(data->text_f[2]);
-	data->hex_c = (ft_atoi(data->text_c[0]) << 16) + (ft_atoi(data->text_c[1]) << 8) + ft_atoi(data->text_c[2]);
-}
 
 void	pars_texture(t_data *data)
 {
@@ -77,19 +45,23 @@ int	check_all_data(t_data *data)
 
 void	check_texture(t_data *data, char *line)
 {
-	if (line && !line[0])
-		return ;
-	else if ((ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "NO\t", 3) == 0) && !data->text_no)
+	if ((ft_strncmp(line, "NO ", 3) == 0
+			|| ft_strncmp(line, "NO\t", 3) == 0) && !data->text_no)
 		data->text_no = ft_strdup(&line[3]);
-	else if ((ft_strncmp(line, "SO ", 3) == 0 || ft_strncmp(line, "SO\t", 3) == 0) && !data->text_so)
+	else if ((ft_strncmp(line, "SO ", 3) == 0
+			|| ft_strncmp(line, "SO\t", 3) == 0) && !data->text_so)
 		data->text_so = ft_strdup(&line[3]);
-	else if ((ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "WE\t", 3) == 0) && !data->text_we)
+	else if ((ft_strncmp(line, "WE ", 3) == 0
+			|| ft_strncmp(line, "WE\t", 3) == 0) && !data->text_we)
 		data->text_we = ft_strdup(&line[3]);
-	else if ((ft_strncmp(line, "EA ", 3) == 0 || ft_strncmp(line, "EA\t", 3) == 0) && !data->text_ea)
+	else if ((ft_strncmp(line, "EA ", 3) == 0
+			|| ft_strncmp(line, "EA\t", 3) == 0) && !data->text_ea)
 		data->text_ea = ft_strdup(&line[3]);
-	else if ((ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "F\t", 2) == 0) && !data->text_f)
+	else if ((ft_strncmp(line, "F ", 2) == 0
+			|| ft_strncmp(line, "F\t", 2) == 0) && !data->text_f)
 		data->text_f = ft_split(&line[2], ',');
-	else if ((ft_strncmp(line, "C ", 2) == 0 || ft_strncmp(line, "C\t", 2) == 0) && !data->text_c)
+	else if ((!ft_strncmp(line, "C ", 2)
+			|| !ft_strncmp(line, "C\t", 2)) && !data->text_c)
 		data->text_c = ft_split(&line[2], ',');
 	else
 	{
@@ -99,18 +71,17 @@ void	check_texture(t_data *data, char *line)
 	}
 }
 
-void	find_texture(t_data *data)
+int	fill_data(t_data *data)
 {
 	int		i;
 	char	*tmp;
-	char	**new_map;
 
 	i = 0;
-	new_map = NULL;
 	while (data->map[i])
 	{
 		tmp = ft_strtrim(data->map[i], " \t");
-		check_texture(data, tmp);
+		if (tmp && tmp[0])
+			check_texture(data, tmp);
 		free(tmp);
 		i++;
 		if (check_all_data(data) == 1)
@@ -121,6 +92,16 @@ void	find_texture(t_data *data)
 		free_data(data);
 		print_error("Error\nThe map does not have all the data\n");
 	}
+	return (i);
+}
+
+void	find_texture(t_data *data)
+{
+	char	**new_map;
+	int		i;
+
+	new_map = NULL;
+	i = fill_data(data);
 	pars_texture(data);
 	while (!ft_strchr(data->map[i], '1') && !ft_strchr(data->map[i], '0'))
 		i++;

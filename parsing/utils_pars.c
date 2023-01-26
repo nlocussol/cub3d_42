@@ -6,11 +6,17 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:14:19 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 11:17:08 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:05:26 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	print_error(char *message)
+{
+	ft_fdprintf(2, "%s", message);
+	exit(EXIT_FAILURE);
+}
 
 void	open_texture(t_data *data, char *texture)
 {
