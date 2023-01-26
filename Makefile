@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/01/26 13:17:56 by nlocusso         ###   ########.fr        #
+#    Updated: 2023/01/26 16:30:43 by averdon          ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -18,8 +18,12 @@ SRCS		?= main.c \
 			   parsing/pars_map.c \
 			   parsing/pars_rgb.c \
 			   game/start_game.c \
+			   game/initialize_game.c \
+			   game/game_utils.c \
 			   game/key_functions.c \
 			   game/display.c \
+			   game/calculate_display.c \
+			   game/draw_display.c \
 			   game/parse_image.c \
 			   game/create_border.c
 
