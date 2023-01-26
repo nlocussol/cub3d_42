@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 17:39:51 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 18:16:51 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,13 @@ int	key_hook(int keycode, t_game *game)
 		turn_camera(game, -3);
 	else if (keycode == RIGHT_ARROW)
 		turn_camera(game, 3);
-	if (old_x != game->player->x || old_y != game->player->y
-		|| old_orientation != game->player->orientation)
-		display_screen(game);
+	else if (keycode == TAB)
+	{
+		if (game->minimap == 0)
+			game->minimap = 1;
+		else
+			game->minimap = 0;
+	}
+	display_screen(game);
 	return (0);
 }

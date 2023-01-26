@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 16:29:54 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 18:14:12 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	display_screen(t_game *game)
 		display_rayon(game, x, &raycast);
 		x++;
 	}
+	if (game->minimap == 1)
+		open_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->window,
 		game->screen_img->img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 18:04:21 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 18:12:55 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ typedef struct s_game
 	char			*text_ea;
 	int				hex_f;
 	int				hex_c;
+	int				x_map;
+	int				y_map;
+	int				minimap;
 	t_player		*player;
 }	t_game;
 
@@ -82,6 +85,7 @@ typedef struct s_game
 # define HEIGHT_SCREEN 1080
 # define TITLE "Game"
 
+# define TAB 65289
 # define ECHAP 65307
 # define W 119
 # define A 97
@@ -111,6 +115,7 @@ void	move_player(t_game	*game, int move);
 void	turn_camera(t_game	*game, int move);
 int		move_camera(void *arg);
 
+void	open_minimap(t_game *game);
 void	display_screen(t_game *game);
 void	draw_line(t_game *game, int x, t_raycast *raycast);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);

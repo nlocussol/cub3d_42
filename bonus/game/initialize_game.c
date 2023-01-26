@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:25:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 17:22:26 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 18:11:09 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	initialize_player(t_game *game)
 void	initialize_game(t_game	*game, t_data *data)
 {
 	game->mlx = mlx_init();
+	game->minimap = 0;
 	game->window = mlx_new_window(game->mlx,
 			WIDTH_SCREEN, HEIGHT_SCREEN, TITLE);
 	game->map = data->map;
