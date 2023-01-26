@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 18:12:55 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/26 20:25:00 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,25 @@ typedef struct s_player
 	int		speed;
 	char	direction;
 }	t_player;
+
+typedef struct s_game
+{
+	void			*mlx;
+	void			*window;
+	char			**map;
+	t_img			*screen_img;
+	unsigned int	**images[4];
+	char			*text_no;
+	char			*text_so;
+	char			*text_we;
+	char			*text_ea;
+	int				hex_f;
+	int				hex_c;
+	int				x_map;
+	int				y_map;
+	int				minimap;
+	t_player		*player;
+}	t_game;
 
 typedef struct s_raycast
 {
@@ -62,25 +81,6 @@ typedef struct s_raycast
 
 }	t_raycast;
 
-typedef struct s_game
-{
-	void			*mlx;
-	void			*window;
-	char			**map;
-	t_img			*screen_img;
-	unsigned int	**images[4];
-	char			*text_no;
-	char			*text_so;
-	char			*text_we;
-	char			*text_ea;
-	int				hex_f;
-	int				hex_c;
-	int				x_map;
-	int				y_map;
-	int				minimap;
-	t_player		*player;
-}	t_game;
-
 # define WIDTH_SCREEN 1920
 # define HEIGHT_SCREEN 1080
 # define TITLE "Game"
@@ -91,6 +91,7 @@ typedef struct s_game
 # define A 97
 # define S 115
 # define D 100
+# define E 101
 
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
@@ -114,6 +115,7 @@ int		key_hook(int keycode, t_game *game);
 void	move_player(t_game	*game, int move);
 void	turn_camera(t_game	*game, int move);
 int		move_camera(void *arg);
+void	interact(t_game *game);
 
 void	open_minimap(t_game *game);
 void	display_screen(t_game *game);
@@ -121,5 +123,6 @@ void	draw_line(t_game *game, int x, t_raycast *raycast);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	calculate_delta_and_dist(int x, t_raycast *raycast);
 void	calculate_dist_perp_wall(t_raycast *raycast);
+void	detect_wall(t_game *game, t_raycast *raycast);
 
 #endif

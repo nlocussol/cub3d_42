@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:36:40 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 18:56:32 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/26 20:44:48 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ void	open_minimap(t_game *game)
 	int	value_x;
 	int	value_y;
 
-	x = game->player->x / SIZE_BLOCK - 5;
-	game->x_map = 880;
-	if (x <= 0)
+	if (WIDTH_SCREEN < (16 * 11 + 10) || HEIGHT_SCREEN < (16 * 11 + 10))
+		return ;
+	x = (int)(game->player->x / SIZE_BLOCK) - 5;
+	game->x_map = WIDTH_SCREEN - (16 * 11 + 10);
+	if (x < 0)
 	{
 		value_x = 6 - x;
 		x = 0;
@@ -61,9 +63,9 @@ void	open_minimap(t_game *game)
 		value_x = 6;
 	while (x < (int)(game->player->x / SIZE_BLOCK + value_x) && game->map[x])
 	{
-		game->y_map = 460;
-		y = game->player->y / SIZE_BLOCK - 5;
-		if (y <= 0)
+		game->y_map = 10;
+		y = (int)(game->player->y / SIZE_BLOCK) - 5;
+		if (y < 0)
 		{
 			value_y = 6 - y;
 			y = 0;

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 18:16:51 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/26 20:20:45 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int	key_hook(int keycode, t_game *game)
 		else
 			game->minimap = 0;
 	}
+	else if (keycode == E)
+		interact(game);
 	display_screen(game);
 	return (0);
 }
