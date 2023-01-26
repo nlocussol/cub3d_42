@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/25 16:16:49 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 13:01:11 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	parse_image(t_game *game)
 		img = ft_calloc(1, sizeof(t_img));
 		img->img = mlx_xpm_file_to_image(game->mlx, name_sprite[i], &width, &length);
 		img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
-		image = ft_calloc(256, sizeof(unsigned int *));
+		image = ft_calloc(256 + 1, sizeof(unsigned int *));
 		y = 0;
 		while (y < length)
 		{
 			x = 0;
-			image[y] = ft_calloc(256, sizeof(unsigned int));
+			image[y] = ft_calloc(256 + 1, sizeof(unsigned int));
 			while (x < width)
 			{
 
@@ -54,6 +54,8 @@ void	parse_image(t_game *game)
 			}
 			y++;
 		}
+		mlx_destroy_image(game->mlx, img->img);
+		free(img);
 		game->images[i] = image;
 		i++;
 	}
