@@ -1,0 +1,10 @@
+
+NO ./assets/N.xpm
+SO ./assets/S.xpm
+WE ./assets/W.xpm
+EA ./assets/E.xpm
+
+F 200,100,0
+C 0,0,255
+
+
