@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 10:21:22 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 10:25:22 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ int	key_hook(int keycode, t_game *game)
 {
 	double	old_x;
 	double	old_y;
+	int		old_orientation;
 
 	old_x = game->player->x;
 	old_y = game->player->y;
+	old_orientation = game->player->orientation;
 	if (keycode == ECHAP)
 		close_window(game);
 	else if (keycode == W ||keycode == A ||keycode == S ||keycode == D)
@@ -35,7 +37,8 @@ int	key_hook(int keycode, t_game *game)
 		turn_camera(game, -3);
 	else if (keycode == RIGHT_ARROW)
 		turn_camera(game, 3);
-	if (old_x != game->player->x || old_y != game->player->y)
+	if (old_x != game->player->x || old_y != game->player->y
+		|| old_orientation != game->player->orientation )
 		reload_display(game);
 	return (0);
 }
