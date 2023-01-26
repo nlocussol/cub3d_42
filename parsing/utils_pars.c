@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:14:19 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/25 17:19:00 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 11:17:08 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	open_texture(t_data *data, char *texture)
 	fd = open(texture, O_RDONLY);
 	if (fd < 0 || check_extension(texture, ".xpm") == 1)
 	{
+		free(texture);
 		free_data(data);
 		print_error("Error\nBad texture path or extension (only .xpm)\n");
 	}

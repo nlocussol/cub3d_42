@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:51:42 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/23 14:31:16 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:16:56 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,21 @@ void	check_texture(t_data *data, char *line)
 {
 	if (line && !line[0])
 		return ;
-	else if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "NO\t", 3) == 0)
+	else if ((ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "NO\t", 3) == 0) && !data->text_no)
 		data->text_no = ft_strdup(&line[3]);
-	else if (ft_strncmp(line, "SO ", 3) == 0 || ft_strncmp(line, "SO\t", 3) == 0)
+	else if ((ft_strncmp(line, "SO ", 3) == 0 || ft_strncmp(line, "SO\t", 3) == 0) && !data->text_so)
 		data->text_so = ft_strdup(&line[3]);
-	else if (ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "WE\t", 3) == 0)
+	else if ((ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "WE\t", 3) == 0) && !data->text_we)
 		data->text_we = ft_strdup(&line[3]);
-	else if (ft_strncmp(line, "EA ", 3) == 0 || ft_strncmp(line, "EA\t", 3) == 0)
+	else if ((ft_strncmp(line, "EA ", 3) == 0 || ft_strncmp(line, "EA\t", 3) == 0) && !data->text_ea)
 		data->text_ea = ft_strdup(&line[3]);
-	else if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "F\t", 2) == 0)
+	else if ((ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "F\t", 2) == 0) && !data->text_f)
 		data->text_f = ft_split(&line[2], ',');
-	else if (ft_strncmp(line, "C ", 2) == 0 || ft_strncmp(line, "C\t", 2) == 0)
+	else if ((ft_strncmp(line, "C ", 2) == 0 || ft_strncmp(line, "C\t", 2) == 0) && !data->text_c)
 		data->text_c = ft_split(&line[2], ',');
 	else
 	{
+		free(line);
 		free_data(data);
 		print_error("Error\nBad data, you can only put: NO, SO, WE, EA, F, C\n");
 	}
