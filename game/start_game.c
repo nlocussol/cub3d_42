@@ -6,17 +6,45 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 10:41:01 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 11:21:35 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "game.h"
+
+void	destroy_images(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	(void)game;
+	while (i < 4)
+	{
+		//mlx_destroy_image(game->mlx, game->images[i]);
+		i++;
+	}
+}
+
+void	free_all(t_game *game)
+{
+	mlx_loop_end(game->mlx);
+	free(game->player);
+	free(game->screen_img);
+	free(game->text_no);
+	free(game->text_so);
+	free(game->text_we);
+	free(game->text_ea);
+	destroy_images(game);
+	mlx_destroy_window(game->mlx, game->window);
+	mlx_destroy_display(game->mlx);
+	free_tab(game->map);
+	free(game->mlx);
+}
 
 int	close_window(t_game *game)
 {
-	(void)game;
 	ft_fdprintf(1, "Exit Program\n");
+	free_all(game);
 	exit (0);
 }
 
@@ -87,13 +115,18 @@ void	initialize_game(t_game	*game, t_data *data)
 	game->hex_c = data->hex_c;
 	game->hex_f = data->hex_f;
 	find_player_place(game, &x, &y);
+	game->player = ft_calloc(1, sizeof(t_player));
+	if (!game->player)
+		return ;
 	game->player->x = (double)x * SIZE_BLOCK + SIZE_BLOCK / 2;
 	game->player->y = (double)y * SIZE_BLOCK + SIZE_BLOCK / 2;
 	calculate_player_orientation(game);
 	game->player->direction = game->map[x][y];
-	game->screen_img = malloc(sizeof(t_img));
+	game->screen_img = ft_calloc(1, sizeof(t_img));
 	game->screen_img->img = mlx_new_image(game->mlx, WIDTH_SCREEN, HEIGHT_SCREEN);
 	game->screen_img->addr = mlx_get_data_addr(game->screen_img->img, &game->screen_img->bits_per_pixel, &game->screen_img->line_length, &game->screen_img->endian);
+	free_tab(data->text_c);
+	free_tab(data->text_f);
 }
 
 void	start_game(t_data *data)

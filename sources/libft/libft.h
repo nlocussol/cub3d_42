@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:28:31 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 11:41:29 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/26 10:58:51 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,5 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char		*ft_strdup_supress_quotes(const char *s);
 int			skip_quotes(char *command);
 char		**append_to_tab(char **tab, char *new_elt);
+void		free_tab(char **tab);
 #endif
