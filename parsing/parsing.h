@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:20:37 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/25 16:14:30 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 13:06:50 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct s_data
 	char	orientation;
 }	t_data;
 
+void	check_rgb_value(t_data *data);
+void	pars_rgb_color(t_data *data);
+void	print_error(char *message);
 void	check_data(t_data *data);
 void	pars_map(t_data *data);
 void	open_texture(t_data *data, char *texture);

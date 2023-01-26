@@ -6,17 +6,28 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:58:05 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/25 17:09:59 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:13:26 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+void	put_eol(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->map[i])
+	{
+		data->map[i][ft_strlen(data->map[i]) - 1] = '\0';
+		i++;
+	}
+}
+
 int	early_parsing(int argc, char **argv, t_data *data)
 {
 	char	*str;
 	int		fd;
-	int		i;
 
 	(void)argc;
 	fd = open(argv[1], O_RDONLY);
@@ -33,13 +44,7 @@ int	early_parsing(int argc, char **argv, t_data *data)
 			return (1);
 		str = get_next_line(fd);
 	}
-	i = 0;
-	while (data->map[i])
-	{
-		data->map[i][ft_strlen(data->map[i]) - 1] = '\0';
-		i++;
-	}
+	put_eol(data);
 	find_texture(data);
-	print_tab(data->map);
 	return (0);
 }

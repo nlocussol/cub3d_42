@@ -6,17 +6,17 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/01/25 18:33:04 by averdon          ###   ########.fr        #
+#    Updated: 2023/01/26 13:07:15 by nlocusso         ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS		?= main.c \
-			   utils.c \
 			   parsing/early_parsing.c \
 			   parsing/utils_pars.c \
 			   parsing/pars_texture.c \
 			   parsing/pars_map.c \
+			   parsing/pars_rgb.c \
 			   game/start_game.c \
 			   game/key_functions.c \
 			   game/display.c \

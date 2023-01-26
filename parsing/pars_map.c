@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:54:29 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/25 13:11:26 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:10:56 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,32 @@ void	pars_empty(t_data *data, int i, int j)
 	}
 }
 
+void	map_error(t_data *data, int i, int j)
+{
+	if (ft_strchr("NSEW01 ", data->map[i][j]) == NULL)
+	{
+		free_data(data);
+		print_error("Error\nThe map can only be composed of '01' \
+and can own only one character position (N, S, E, W)");
+	}
+	else if (data->map[i][j] == '0')
+		pars_empty(data, i, j);
+	else if (ft_strchr("NSEW", data->map[i][j]) != NULL)
+	{
+		if (data->orientation != 0
+			|| !ft_strchr("01", data->map[i - 1][j])
+			|| !ft_strchr("01", data->map[i + 1][j])
+			|| !ft_strchr("01", data->map[i][j - 1])
+			|| !ft_strchr("01", data->map[i][j + 1]))
+		{
+			free_data(data);
+			print_error("Error\n\
+Multilple or bad position of the player !\n");
+		}
+		data->orientation = data->map[i][j];
+	}
+}
+
 void	pars_map(t_data *data)
 {
 	int	i;
@@ -52,27 +78,7 @@ void	pars_map(t_data *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (ft_strchr("NSEW01 ", data->map[i][j]) == NULL)
-			{
-				free_data(data);
-				print_error("Error\nThe map can only be composed of '01' \
-and can own only one character position (N, S, E, W)");
-			}
-			else if (data->map[i][j] == '0')
-				pars_empty(data, i, j);
-			else if (ft_strchr("NSEW", data->map[i][j]) != NULL)
-			{
-				if (data->orientation != 0 || !ft_strchr("01", data->map[i - 1][j])
-					|| !ft_strchr("01", data->map[i + 1][j])
-					|| !ft_strchr("01", data->map[i][j - 1])
-					|| !ft_strchr("01", data->map[i][j + 1]))
-				{
-					free_data(data);
-					print_error("Error\n\
-Multilple or bad position of the player !\n");
-				}
-				data->orientation = data->map[i][j];
-			}
+			map_error(data, i, j);
 			j++;
 		}
 		i++;
