@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 16:35:17 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 18:04:21 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_game
 
 # define SIZE_BLOCK 64
 # define COEFF 10
+# define CAMERA_SPEED 25
 
 void	start_game(t_data *data);
 void	initialize_game(t_game	*game, t_data *data);
@@ -108,6 +109,7 @@ double	radian_value(double degree);
 int		key_hook(int keycode, t_game *game);
 void	move_player(t_game	*game, int move);
 void	turn_camera(t_game	*game, int move);
+int		move_camera(void *arg);
 
 void	display_screen(t_game *game);
 void	draw_line(t_game *game, int x, t_raycast *raycast);
