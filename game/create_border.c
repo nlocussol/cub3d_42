@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:58:50 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/25 19:29:00 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 13:04:15 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	create_border(t_game *game)
 		return ;
 	}
 	j = 0;
-	ft_fdprintf(1, "\n\n");
 	while (j < length + 2)
 	{
 		new_map[0][j] = '2';
@@ -88,11 +87,6 @@ void	create_border(t_game *game)
 		new_map[i][j] = '2';
 		j++;
 	}
-	i = 0;
-	while (new_map[i])
-	{
-		ft_fdprintf(1, "%s\n", new_map[i]);
-		i++;
-	}
+	free_tab(game->map);
 	game->map = new_map;
 }

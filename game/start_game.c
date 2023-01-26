@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 11:21:35 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 12:59:04 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 void	destroy_images(t_game *game)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	(void)game;
 	while (i < 4)
 	{
-		//mlx_destroy_image(game->mlx, game->images[i]);
+		j = 0;
+		while (game->images[i][j])
+		{
+			free(game->images[i][j]);
+			j++;
+		}
+		free(game->images[i]);
 		i++;
 	}
 }
@@ -29,12 +35,13 @@ void	free_all(t_game *game)
 {
 	mlx_loop_end(game->mlx);
 	free(game->player);
+	destroy_images(game);
+	mlx_destroy_image(game->mlx, game->screen_img->img);
 	free(game->screen_img);
 	free(game->text_no);
 	free(game->text_so);
 	free(game->text_we);
 	free(game->text_ea);
-	destroy_images(game);
 	mlx_destroy_window(game->mlx, game->window);
 	mlx_destroy_display(game->mlx);
 	free_tab(game->map);
