@@ -89,16 +89,16 @@ LIBRARY = ft_fdprintf/libftfdprintf.a
 all: 		${NAME}
 
 .c.o:		${OBJS}
-			@(${COMPILER} ${CFLAGS} -c $< -o ${<:.c=.o} || (clear; printf "\033[0;31;1mcompilation failed\n\033[0m"; ${COMPILER} ${CFLAGS} -c $< -o ${<:.c=.o} ; exit 1))
+			@(${COMPILER} ${CFLAGS} -c $< -o ${<:.c=.o} || (clear -x; printf "\033[0;31;1mcompilation failed\n\033[0m"; ${COMPILER} ${CFLAGS} -c $< -o ${<:.c=.o} ; exit 1))
 	
 ${NAME}:	clear compiling ${OBJS}
 			@make -C ft_fdprintf
 			@ar rcs ${NAME} ${OBJS} ${LIBRARY}
-			@clear
+			@clear -x
 			@printf '\033[0;92;1mcompilation finished\n\033[0m'
 
 clear:
-			@clear
+			@clear -x
 
 compiling:
 			@printf "\033[93;1;5mcompiling ...\n\033[0m"
@@ -109,13 +109,13 @@ cleaning:
 clean: 		clear cleaning
 			${RM} ${OBJS} 
 			@make -C ft_fdprintf clean
-			@clear
+			@clear -x
 			@printf '\033[0;92;1mcleaning finished\n\033[0m'
 
 fclean: 	clear clean cleaning
 			${RM} ${NAME}
 			@make -C ft_fdprintf fclean
-			@clear
+			@clear -x
 			@printf '\033[0;92;1mcleaning finished\n\033[0m'
 
 re: 		fclean all

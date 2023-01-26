@@ -19,15 +19,15 @@ CFLAGS 	= -Wall -Werror -Wextra -g
 all: 		${NAME}
 
 .c.o:		${OBJS}
-			@(${COMPILER} ${CFLAGS} -c $< -o ${<:.c=.o} || (clear; printf "\033[0;31;1mcompilation failed\n\033[0m"; ${COMPILER} ${CFLAGS} -c $< -o ${<:.c=.o} ; exit 1))
+			@(${COMPILER} ${CFLAGS} -c $< -o ${<:.c=.o} || (clear -x; printf "\033[0;31;1mcompilation failed\n\033[0m"; ${COMPILER} ${CFLAGS} -c $< -o ${<:.c=.o} ; exit 1))
 	
 ${NAME}:	clear compiling ${OBJS}
 			@ar rcs ${NAME} ${OBJS}
-			@clear
+			@clear -x
 			@printf '\033[0;92;1mcompilation finished\n\033[0m'
 
 clear:
-			@clear
+			@clear -x
 
 compiling:
 			@printf "\033[93;1;5mcompiling ...\n\033[0m"
@@ -37,12 +37,12 @@ cleaning:
 
 clean:		clear cleaning 
 			${RM} ${OBJS} 
-			@clear
+			@clear -x
 			@printf '\033[0;92;1mcleaning finished\n\033[0m'
 
 fclean: 	clear clean cleaning
 			${RM} ${NAME}
-			@clear
+			@clear -x
 			@printf '\033[0;92;1mcleaning finished\n\033[0m'
 
 re: 		fclean all
