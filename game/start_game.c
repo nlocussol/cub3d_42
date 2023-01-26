@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 10:25:22 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 10:41:01 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	key_hook(int keycode, t_game *game)
 	else if (keycode == RIGHT_ARROW)
 		turn_camera(game, 3);
 	if (old_x != game->player->x || old_y != game->player->y
-		|| old_orientation != game->player->orientation )
+		|| old_orientation != game->player->orientation)
 		reload_display(game);
 	return (0);
 }
@@ -79,6 +79,7 @@ void	initialize_game(t_game	*game, t_data *data)
 	game->mlx = mlx_init();
 	game->window = mlx_new_window(game->mlx, WIDTH_SCREEN, HEIGHT_SCREEN, TITLE);
 	game->map = data->map;
+	create_border(game);
 	game->text_ea = data->text_ea;
 	game->text_no = data->text_no;
 	game->text_so = data->text_so;
@@ -101,7 +102,6 @@ void	start_game(t_data *data)
 
 	initialize_game(&game, data);
 	parse_image(&game);
-	create_border(&game);
 	reload_display(&game);
 	mlx_hook(game.window, KeyPress, KeyPressMask, key_hook, &game);
 	mlx_hook(game.window, DestroyNotify, StructureNotifyMask, close_window, &game);

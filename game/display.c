@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/25 19:33:39 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/26 10:52:17 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,8 @@ void	reload_display(t_game *game)
 				perpWallDist = (sideDistX - deltaDistX);
 			else
 				perpWallDist = (sideDistY - deltaDistY);	
-		
+			if (perpWallDist == 0)
+				perpWallDist = INFINITY;
 			lineHeight = HEIGHT_SCREEN / perpWallDist;
 			drawStart = -lineHeight / 2 + HEIGHT_SCREEN / 2;
 			if (drawStart < 0)
