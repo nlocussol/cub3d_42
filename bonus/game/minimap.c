@@ -6,42 +6,24 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:36:40 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/27 15:39:17 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/27 16:32:52 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "game.h"
-#include <math.h>
 
-double	calculate_coeff(double a_x, double a_y, double b_x, double b_y)
-{
-	double	coeff;
-
-	coeff = (b_y - a_y) / (b_x - a_x);
-	return (coeff);
-}
 void	put_one_block(t_game *game, int color)
 {
 	int	x;
 	int	y;
-	double	coeff_orientation_player;
-	double	coeff_orientation_rayon;
 
-	coeff_orientation_player = calculate_coeff(game->player->x, game->player->y,
-			cos(radian_value(game->player->x)), sin(radian_value(game->player->y)));
 	x = game->x_map;
 	while (x < game->x_map + 16)
 	{
 		y = game->y_map;
 		while (y < game->y_map + 16)
 		{
-			coeff_orientation_rayon = calculate_coeff(game->x_map, game->y_map, x, y);
-			if (color == 0xFFFFFF
-				&& coeff_orientation_player == coeff_orientation_rayon)
-				my_mlx_pixel_put(game->screen_img, y, x, 0xFF5656);
-			else
-				my_mlx_pixel_put(game->screen_img, y, x, color);
+			my_mlx_pixel_put(game->screen_img, y, x, color);
 			y++;
 		}
 		x++;
