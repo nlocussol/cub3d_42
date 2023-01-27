@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:14:19 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 13:05:26 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:22:48 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	init_data(t_data *data)
 	data->text_so = NULL;
 	data->text_we = NULL;
 	data->text_ea = NULL;
+	data->text_door = NULL;
 	data->orientation = 0;
 }

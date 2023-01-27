@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:51:42 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 16:45:21 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:24:59 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	pars_texture(t_data *data)
 	tmp = ft_strtrim(data->text_ea, " \t");
 	open_texture(data, tmp);
 	free(data->text_ea);
+	tmp = ft_strtrim(data->text_door, " \t");
+	open_texture(data, tmp);
+	free(data->text_door);
 	data->text_ea = tmp;
 	pars_rgb_color(data);
 }
@@ -38,7 +41,7 @@ void	pars_texture(t_data *data)
 int	check_all_data(t_data *data)
 {
 	if (data->text_no && data->text_so && data->text_we && data->text_ea
-		&& data->text_f && data->text_c)
+		&& data->text_f && data->text_c && data->text_door)
 		return (1);
 	return (0);
 }
@@ -48,6 +51,9 @@ void	check_texture(t_data *data, char *line)
 	if ((ft_strncmp(line, "NO ", 3) == 0
 			|| ft_strncmp(line, "NO\t", 3) == 0) && !data->text_no)
 		data->text_no = ft_strdup(&line[3]);
+	else if ((ft_strncmp(line, "D ", 2) == 0
+			|| ft_strncmp(line, "D\t", 2) == 0) && !data->text_door)
+		data->text_door = ft_strdup(&line[3]);
 	else if ((ft_strncmp(line, "SO ", 3) == 0
 			|| ft_strncmp(line, "SO\t", 3) == 0) && !data->text_so)
 		data->text_so = ft_strdup(&line[3]);
@@ -67,7 +73,7 @@ void	check_texture(t_data *data, char *line)
 	{
 		free(line);
 		free_data(data);
-		print_error("Error\nBad data, you can only put: NO, SO, WE, EA, F, C\n");
+		print_error("Error\nBad data, you can only put: NO, SO, WE, EA, F, C, D\n");
 	}
 }
 

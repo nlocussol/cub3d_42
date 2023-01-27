@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:36:40 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 20:44:48 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/27 10:00:20 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	put_pixel_color(t_game *game, int x, int y)
 	else if (game->map[x][y] == '0')
 		put_one_block(game, 0xFFFFFF);
 	else
-		put_one_block(game, 0x51A5F0);
+		put_one_block(game, 0);
 	if (x == (int)(game->player->x / SIZE_BLOCK)
 		&& y == (int)(game->player->y / SIZE_BLOCK))
-		put_one_block(game, 0xF90101);
+		put_one_block(game, 0xFF0101);
 }
 
 void	open_minimap(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:20:37 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 13:06:50 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:22:35 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_data
 	char	*text_so;
 	char	*text_we;
 	char	*text_ea;
+	char	*text_door;
 	char	**text_f;
 	int		hex_f;
 	char	**text_c;
