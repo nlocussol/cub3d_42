@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/27 11:11:55 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/27 11:17:08 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	detect_wall(t_game *game, t_raycast *raycast)
 			raycast->map_y += raycast->step_y;
 			raycast->side = 1;
 		}
-		if (!ft_strchr("0WESN d", game->map[raycast->map_x][raycast->map_y]))
+		if (!ft_strchr("0WESN ", game->map[raycast->map_x][raycast->map_y]))
 			raycast->hit = 1;
 	}
 }
@@ -49,6 +49,11 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast)
 		if (raycast->draw_end >= HEIGHT_SCREEN)
 			raycast->draw_end = HEIGHT_SCREEN - 1;
 		draw_line(game, x, raycast);
+	}
+	else if (ft_strchr("d", game->map[raycast->map_x][raycast->map_y]))
+	{
+		detect_wall(game, raycast);
+		display_rayon(game, x, raycast);
 	}
 	else
 	{
