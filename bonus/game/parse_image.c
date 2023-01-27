@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/27 10:54:32 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:59:49 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	parse_image(t_game *game)
 
 	name_sprite[0] = game->text_so;
 	name_sprite[1] = game->text_no;
-	name_sprite[2] = game->text_we;
-	name_sprite[3] = game->text_ea;
+	name_sprite[2] = game->text_ea;
+	name_sprite[3] = game->text_we;
 	name_sprite[4] = game->text_do;
 	i = 0;
 	while (i < 5)

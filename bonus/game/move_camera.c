@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:35:02 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 18:05:20 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:56:39 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	move_camera(void *arg)
 
 	game = (t_game *)arg;
 	mlx_mouse_get_pos(game->mlx, game->window, &x, &y);
-	movement = (x - old_x) / CAMERA_SPEED;
+	movement = (old_x - x) / CAMERA_SPEED_REVERSE;
 	game->player->orientation = (game->player->orientation + movement) % 360;
 	if (game->player->orientation < 0)
 		game->player->orientation = 360 + game->player->orientation;
