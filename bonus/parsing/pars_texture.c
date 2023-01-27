@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:51:42 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/27 10:51:21 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:53:52 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	check_texture(t_data *data, char *line)
 	{
 		free(line);
 		free_data(data);
-		print_error("Error\nBad data, you can only put: NO, SO, WE, EA, F, C, D\n");
+		print_error("Error\nBad data,\
+ you can only put: NO, SO, WE, EA, F, C, D\n");
 	}
 }
 
