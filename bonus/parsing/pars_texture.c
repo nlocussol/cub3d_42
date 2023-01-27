@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:51:42 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/27 10:24:59 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:51:21 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ void	pars_texture(t_data *data)
 	tmp = ft_strtrim(data->text_ea, " \t");
 	open_texture(data, tmp);
 	free(data->text_ea);
+	data->text_ea = tmp;
 	tmp = ft_strtrim(data->text_door, " \t");
 	open_texture(data, tmp);
 	free(data->text_door);
-	data->text_ea = tmp;
+	data->text_door = tmp;
 	pars_rgb_color(data);
 }
 
@@ -53,7 +54,7 @@ void	check_texture(t_data *data, char *line)
 		data->text_no = ft_strdup(&line[3]);
 	else if ((ft_strncmp(line, "D ", 2) == 0
 			|| ft_strncmp(line, "D\t", 2) == 0) && !data->text_door)
-		data->text_door = ft_strdup(&line[3]);
+		data->text_door = ft_strdup(&line[2]);
 	else if ((ft_strncmp(line, "SO ", 3) == 0
 			|| ft_strncmp(line, "SO\t", 3) == 0) && !data->text_so)
 		data->text_so = ft_strdup(&line[3]);
