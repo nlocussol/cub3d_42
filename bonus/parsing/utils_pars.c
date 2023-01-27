@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:14:19 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/27 10:22:48 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:20:36 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	free_data(t_data *data)
 	free(data->text_so);
 	free(data->text_we);
 	free(data->text_ea);
+	free(data->text_door);
 }
 
 void	init_data(t_data *data)

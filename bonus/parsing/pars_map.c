@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:54:29 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 18:58:20 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:23:17 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,19 @@ void	check_data(t_data *data)
 	{
 		free_data(data);
 		print_error("Error\nA player position is missing\n");
+	}
+}
+
+void	pars_door(t_data *data, int i, int j)
+{
+	if (data->map[i][j - 1] == '1' && data->map[i][j + 1] == '1')
+		return ;
+	else if (data->map[i - 1][j] == '1' && data->map[i + 1][j] == '1')
+		return ;
+	else
+	{
+		free_data(data);
+		print_error("Error\nThe door is not between 2 walls\n");
 	}
 }
 
@@ -51,6 +64,8 @@ and can own only one character position (N, S, E, W)");
 	}
 	else if (data->map[i][j] == '0')
 		pars_empty(data, i, j);
+	else if (data->map[i][j] == 'D')
+		pars_door(data, i, j);
 	else if (ft_strchr("NSEW", data->map[i][j]) != NULL)
 	{
 		if (data->orientation != 0
