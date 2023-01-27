@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 16:25:17 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/27 14:10:53 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,15 @@ void	move_player(t_game	*game, int keycode)
 		game->player->x -= game->player->speed * (cos(tmp));
 		game->player->y -= game->player->speed * (sin(tmp));
 	}
-	else if (keycode == D && !hit_map_border_left_right(game, 1, sin, cos))
-	{
-		game->player->x -= game->player->speed * (sin(tmp));
-		game->player->y += game->player->speed * (cos(tmp));
-	}
-	else if (keycode == A && !hit_map_border_left_right(game, -1, sin, cos))
+	else if (keycode == D && !hit_map_border_left_right(game, -1, sin, cos))
 	{
 		game->player->x += game->player->speed * (sin(tmp));
 		game->player->y -= game->player->speed * (cos(tmp));
+	}
+	else if (keycode == A && !hit_map_border_left_right(game, 1, sin, cos))
+	{
+		game->player->x -= game->player->speed * (sin(tmp));
+		game->player->y += game->player->speed * (cos(tmp));
 	}
 }
 
@@ -95,9 +95,9 @@ int	key_hook(int keycode, t_game *game)
 	else if (keycode == W || keycode == A || keycode == S || keycode == D)
 		move_player(game, keycode);
 	else if (keycode == LEFT_ARROW)
-		turn_camera(game, -3);
-	else if (keycode == RIGHT_ARROW)
 		turn_camera(game, 3);
+	else if (keycode == RIGHT_ARROW)
+		turn_camera(game, -3);
 	if (old_x != game->player->x || old_y != game->player->y
 		|| old_orientation != game->player->orientation)
 		display_screen(game);
