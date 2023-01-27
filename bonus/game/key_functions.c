@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 20:20:45 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/27 10:59:05 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	hit_wall_forward_backward(t_game *game, int coeff,
 	y = (function_y(radian_value(game->player->orientation)));
 	y = y * coeff * game->player->speed;
 	y = (game->player->y + y) / SIZE_BLOCK;
-	if (game->map[(int)x][(int)y] == '1')
+	if (ft_strchr("1D", game->map[(int)x][(int)y]))
 		return (1);
 	return (0);
 }
@@ -41,7 +41,7 @@ int	hit_wall_left_right(t_game *game, int coeff,
 	y = (function_y(radian_value(game->player->orientation)));
 	y = y * coeff * game->player->speed;
 	y = (game->player->y + y) / SIZE_BLOCK;
-	if (game->map[(int)x][(int)y] == '1')
+	if (ft_strchr("1D", game->map[(int)x][(int)y]))
 		return (1);
 	return (0);
 }

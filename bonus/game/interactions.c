@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 20:28:57 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/27 10:57:15 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void	interact(t_game *game)
 	{
 		calculate_dist_perp_wall(&raycast);
 		if ((int)raycast.dist_perp_wall <= 1)
-			ft_fdprintf(1, "interact\n");
+			game->map[raycast.map_x][raycast.map_y] = 'd';
+	}
+	else if (game->map[raycast.map_x][raycast.map_y] == 'd')
+	{
+		calculate_dist_perp_wall(&raycast);
+		if ((int)raycast.dist_perp_wall <= 1)
+			game->map[raycast.map_x][raycast.map_y] = 'D';
 	}
 }

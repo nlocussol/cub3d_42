@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:25:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 18:11:09 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:53:20 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	initialize_game(t_game	*game, t_data *data)
 	game->text_no = data->text_no;
 	game->text_so = data->text_so;
 	game->text_we = data->text_we;
+	game->text_do = data->text_door;
 	game->hex_c = data->hex_c;
 	game->hex_f = data->hex_f;
 	initialize_player(game);

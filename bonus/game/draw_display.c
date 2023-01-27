@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:29:09 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 16:29:44 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/27 10:49:11 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,25 @@ unsigned int	color_to_draw(t_game *game, t_raycast *raycast,
 	unsigned int	color;
 
 	color = 0;
-	if (raycast->side == 0)
+	if (game->map[raycast->map_x][raycast->map_y] == '1')
 	{
-		if (raycast->step_x == 1)
-			color = game->images[0][tex_y][tex_x];
-		else
-			color = game->images[1][tex_y][tex_x];
+		if (raycast->side == 0)
+		{
+			if (raycast->step_x == 1)
+				color = game->images[0][tex_y][tex_x];
+			else
+				color = game->images[1][tex_y][tex_x];
+		}
+		else if (raycast->side == 1)
+		{
+			if (raycast->step_y == 1)
+				color = game->images[2][tex_y][tex_x];
+			else
+				color = game->images[3][tex_y][tex_x];
+		}
 	}
-	else if (raycast->side == 1)
-	{
-		if (raycast->step_y == 1)
-			color = game->images[2][tex_y][tex_x];
-		else
-			color = game->images[3][tex_y][tex_x];
-	}
+	else
+		color = game->images[4][tex_y][tex_x];
 	return (color);
 }
 
