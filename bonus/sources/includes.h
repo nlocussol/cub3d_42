@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 23:32:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/19 11:21:11 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/27 16:50:19 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <X11/X.h>
 # include <math.h>
+# include <stdbool.h>
 
 # include "libft/libft.h"
 # include "minilibx/mlx.h"

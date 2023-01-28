@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/27 13:56:12 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 14:58:59 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ typedef struct s_game
 	char			*text_do;
 	int				hex_f;
 	int				hex_c;
-	int				x_map;
-	int				y_map;
+	int				x_minimap;
+	int				y_minimap;
 	int				minimap;
 	t_player		*player;
 }	t_game;
