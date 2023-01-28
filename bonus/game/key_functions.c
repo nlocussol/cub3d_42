@@ -6,11 +6,12 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/27 14:10:00 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 16:44:55 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "game.h"
 
 int	hit_wall_forward_backward(t_game *game, int coeff,
 		double function_x(double), double function_y(double))
@@ -83,13 +84,6 @@ void	turn_camera(t_game	*game, int move)
 
 int	key_hook(int keycode, t_game *game)
 {
-	double	old_x;
-	double	old_y;
-	int		old_orientation;
-
-	old_x = game->player->x;
-	old_y = game->player->y;
-	old_orientation = game->player->orientation;
 	if (keycode == ECHAP)
 		close_window(game);
 	else if (keycode == W || keycode == A || keycode == S || keycode == D)
@@ -108,5 +102,48 @@ int	key_hook(int keycode, t_game *game)
 	else if (keycode == E)
 		interact(game);
 	display_screen(game);
+	return (0);
+}
+
+int	key_pressed(int keycode, t_game *game)
+{
+	if (keycode == W)
+		game->movements[0] = 1;
+	else if (keycode == A)
+		game->movements[1] = 1;
+	else if (keycode == S)
+		game->movements[2] = 1;
+	else if (keycode == D)
+		game->movements[3] = 1;
+	else
+		key_hook(keycode, game);
+	return (0);
+}
+
+int	key_released(int keycode, t_game *game)
+{
+	if (keycode == W)
+		game->movements[0] = 0;
+	else if (keycode == A)
+		game->movements[1] = 0;
+	else if (keycode == S)
+		game->movements[2] = 0;
+	else if (keycode == D)
+		game->movements[3] = 0;
+	return (0);
+}
+
+int	launch_movements(t_game *game)
+{
+	if (game->movements[0] == 1)
+		key_hook(W, game);
+	if (game->movements[1] == 1)
+		key_hook(A, game);
+	if (game->movements[2] == 1)
+		key_hook(S, game);
+	if (game->movements[3] == 1)
+		key_hook(D, game);
+	move_camera(game);
+	usleep(1000);
 	return (0);
 }

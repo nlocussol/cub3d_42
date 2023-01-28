@@ -6,11 +6,11 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/27 13:59:49 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 16:34:44 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 unsigned int	calculate_color(int x, int y, t_img img)
 {

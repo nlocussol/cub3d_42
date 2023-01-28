@@ -6,11 +6,11 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:27:50 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 16:28:52 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 16:34:18 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	calculate_dist_perp_wall(t_raycast *raycast)
 {

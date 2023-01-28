@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/27 10:51:38 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/01/28 16:45:25 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ void	start_game(t_data *data)
 	mlx_mouse_move(game.mlx, game.window, 0, HEIGHT_SCREEN / 2);
 	display_screen(&game);
 	mlx_mouse_hide(game.mlx, game.window);
-	mlx_loop_hook(game.mlx, move_camera, &game);
-	mlx_hook(game.window, KeyPress, KeyPressMask, key_hook, &game);
+	mlx_loop_hook(game.mlx, launch_movements, &game);
+	mlx_hook(game.window, KeyRelease, KeyReleaseMask, key_released, &game);
+	mlx_hook(game.window, KeyPress, KeyPressMask, key_pressed, &game);
 	mlx_hook(game.window, DestroyNotify, StructureNotifyMask,
 		close_window, &game);
 	mlx_loop(game.mlx);

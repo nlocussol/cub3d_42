@@ -6,11 +6,11 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:36:40 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/28 14:59:53 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 16:34:44 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	put_one_block(t_game *game, int color)
 {
@@ -63,12 +63,14 @@ void	put_cursor(t_game *game, int x, int y)
 		game->x_minimap = x_minimap;
 		game->y_minimap = y_minimap + 16;
 	}
-	else if (game->player->orientation >= 135 && game->player->orientation <= 225)
+	else if (game->player->orientation >= 135
+		&& game->player->orientation <= 225)
 	{
 		game->x_minimap = x_minimap - 16;
 		game->y_minimap = y_minimap;
 	}
-	else if (game->player->orientation >= 225 && game->player->orientation <= 315)
+	else if (game->player->orientation >= 225
+		&& game->player->orientation <= 315)
 	{
 		game->x_minimap = x_minimap;
 		game->y_minimap = y_minimap - 16;
@@ -79,7 +81,6 @@ void	put_cursor(t_game *game, int x, int y)
 		game->y_minimap = y_minimap;
 	}
 	put_one_block(game, 0x00ffd8);
-
 }
 
 void	open_minimap(t_game *game)

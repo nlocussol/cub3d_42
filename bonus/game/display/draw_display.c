@@ -6,11 +6,11 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:29:09 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/27 10:49:11 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 16:34:45 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 14:58:59 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 16:41:17 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_game
 	int				x_minimap;
 	int				y_minimap;
 	int				minimap;
+	int				movements[4];
 	t_player		*player;
 }	t_game;
 
@@ -112,18 +113,13 @@ int		close_window(t_game *game);
 double	abs_value(double nb);
 double	radian_value(double degree);
 
+int		launch_movements(t_game *game);
+int		key_pressed(int keycode, t_game *game);
+int		key_released(int keycode, t_game *game);
 int		key_hook(int keycode, t_game *game);
 void	move_player(t_game	*game, int move);
 void	turn_camera(t_game	*game, int move);
 int		move_camera(void *arg);
 void	interact(t_game *game);
-
-void	open_minimap(t_game *game);
-void	display_screen(t_game *game);
-void	draw_line(t_game *game, int x, t_raycast *raycast);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	calculate_delta_and_dist(int x, t_raycast *raycast);
-void	calculate_dist_perp_wall(t_raycast *raycast);
-void	detect_wall(t_game *game, t_raycast *raycast);
 
 #endif
