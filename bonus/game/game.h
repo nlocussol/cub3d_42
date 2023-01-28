@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 16:41:17 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 17:32:55 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ typedef struct s_raycast
 # define RIGHT_ARROW 65363
 
 # define SIZE_BLOCK 64
-# define COEFF 10
 # define CAMERA_SPEED_REVERSE 25
+# define HIT_BOX_WALL 10
 
 void	start_game(t_data *data);
 void	initialize_game(t_game	*game, t_data *data);

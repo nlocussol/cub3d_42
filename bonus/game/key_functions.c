@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 16:44:55 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 17:32:21 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	hit_wall_forward_backward(t_game *game, int coeff,
 	double	y;
 
 	x = (function_x(radian_value(game->player->orientation)));
-	x = x * coeff * game->player->speed;
+	x = coeff * (x * game->player->speed - HIT_BOX_WALL);
 	x = (game->player->x + x) / SIZE_BLOCK;
 	y = (function_y(radian_value(game->player->orientation)));
-	y = y * coeff * game->player->speed;
+	y = coeff * (y * game->player->speed - HIT_BOX_WALL);
 	y = (game->player->y + y) / SIZE_BLOCK;
 	if (ft_strchr("1D", game->map[(int)x][(int)y]))
 		return (1);
@@ -37,10 +37,10 @@ int	hit_wall_left_right(t_game *game, int coeff,
 	double	y;
 
 	x = (function_x(radian_value(game->player->orientation)));
-	x = x * coeff * game->player->speed;
+	x = coeff * (x * game->player->speed + HIT_BOX_WALL);
 	x = (game->player->x - x) / SIZE_BLOCK;
 	y = (function_y(radian_value(game->player->orientation)));
-	y = y * coeff * game->player->speed;
+	y = coeff * (y * game->player->speed - HIT_BOX_WALL);
 	y = (game->player->y + y) / SIZE_BLOCK;
 	if (ft_strchr("1D", game->map[(int)x][(int)y]))
 		return (1);
@@ -101,7 +101,6 @@ int	key_hook(int keycode, t_game *game)
 	}
 	else if (keycode == E)
 		interact(game);
-	display_screen(game);
 	return (0);
 }
 
@@ -144,6 +143,5 @@ int	launch_movements(t_game *game)
 	if (game->movements[3] == 1)
 		key_hook(D, game);
 	move_camera(game);
-	usleep(1000);
 	return (0);
 }
