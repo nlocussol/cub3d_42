@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:36:40 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/28 16:34:44 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/29 12:16:39 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,93 @@ void	put_one_block(t_game *game, int color)
 	}
 }
 
+/*
 void	put_arrow(t_game *game, int color, int mode)
 {
 	int	x;
 	int	y;
 	int	j;
 
-	(void)mode;
-	j = 0;
-	x = game->x_minimap;
-	while (x < game->x_minimap + 16)
+	if (mode == 3)
 	{
-		y = game->y_minimap + j;
-		while (y < game->y_minimap + 16 - j)
+		j = 0;
+		x = game->x_minimap;
+		while (x < game->x_minimap + 16)
 		{
-			my_mlx_pixel_put(game->screen_img, y, x, color);
+			y = game->y_minimap + j;
+			while (y < game->y_minimap + 16 - j)
+			{
+				my_mlx_pixel_put(game->screen_img, y, x, color);
+				y++;
+			}
+			x++;
+			if (x % 2 != 0)
+				j += 1;
+		}
+	}
+}
+*/
+
+void	put_arrow(t_game *game, int color, int mode)
+{
+	int	x;
+	int	y;
+
+	if (mode == 1)
+	{
+		x = game->x_minimap;
+		while (x < game->x_minimap + 16)
+		{
+			y = game->y_minimap + ((x - game->x_minimap) / 2);
+			while (y < game->y_minimap + 16 - (x - game->x_minimap) / 2)
+			{
+				my_mlx_pixel_put(game->screen_img, y, x, color);
+				y++;
+			}
+			x++;
+		}
+	}
+	else if (mode == 2)
+	{
+		y = game->y_minimap;
+		while (y < game->y_minimap + 16)
+		{
+			x = game->x_minimap + ((y - game->y_minimap) / 2);
+			while (x < game->x_minimap + 16 - (y - game->y_minimap) / 2)
+			{
+				my_mlx_pixel_put(game->screen_img, y, x, color);
+				x++;
+			}
 			y++;
 		}
-		x++;
-		if (x % 2 != 0)
-			j += 1;
+	}
+	else if (mode == 3)
+	{
+		x = game->x_minimap;
+		while (x < game->x_minimap + 16)
+		{
+			y = game->y_minimap + ((game->x_minimap + 16 - x) / 2);
+			while (y < game->y_minimap + 16 - (game->x_minimap + 16 - x) / 2)
+			{
+				my_mlx_pixel_put(game->screen_img, y, x, color);
+				y++;
+			}
+			x++;
+		}
+	}
+	else if (mode == 4)
+	{
+		y = game->y_minimap;
+		while (y < game->y_minimap + 16)
+		{
+			x = game->x_minimap + ((game->y_minimap + 16 - y) / 2);
+			while (x < game->x_minimap + 16 - (game->y_minimap + 16 - y) / 2)
+			{
+				my_mlx_pixel_put(game->screen_img, y, x, color);
+				x++;
+			}
+			y++;
+		}
 	}
 }
 
