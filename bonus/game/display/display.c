@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 17:25:15 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 19:32:25 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast)
 	{
 		calculate_dist_perp_wall(raycast);
 		raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
-		raycast->draw_start = -raycast->line_height / 2 + HEIGHT_SCREEN / 2;
+		raycast->draw_start = -raycast->line_height / 2 + game->mouse_height;
 		if (raycast->draw_start < 0)
 			raycast->draw_start = 0;
-		raycast->draw_end = raycast->line_height / 2 + HEIGHT_SCREEN / 2;
+		raycast->draw_end = raycast->line_height / 2 + game->mouse_height;
 		if (raycast->draw_end >= HEIGHT_SCREEN)
 			raycast->draw_end = HEIGHT_SCREEN - 1;
 		draw_line(game, x, raycast);

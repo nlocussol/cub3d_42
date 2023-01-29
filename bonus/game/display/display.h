@@ -6,15 +6,15 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:31:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 16:32:49 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 18:51:45 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISPLAY_H
 
-# include "../game.h"
-
 # define DISPLAY_H
+
+# include "../game.h"
 
 void	open_minimap(t_game *game);
 void	display_screen(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:35:02 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/27 13:56:39 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 19:37:18 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	move_camera(void *arg)
 {
 	t_game		*game;
 	static int	old_x;
+	static int	old_y;
 	int			x;
 	int			y;
 	int			movement;
@@ -26,7 +27,6 @@ int	move_camera(void *arg)
 	game->player->orientation = (game->player->orientation + movement) % 360;
 	if (game->player->orientation < 0)
 		game->player->orientation = 360 + game->player->orientation;
-	display_screen(game);
 	if (x <= 0)
 	{
 		x = WIDTH_SCREEN - 2;
@@ -38,5 +38,23 @@ int	move_camera(void *arg)
 		mlx_mouse_move(game->mlx, game->window, x, y);
 	}
 	old_x = x;
+	/*
+	movement = (old_y - y) / CAMERA_SPEED_REVERSE;
+	game->mouse_height = (game->mouse_height + movement);
+	if (game->mouse_height < 0)
+		game->mouse_height = 360 + game->mouse_height;
+	if (y <= 10)
+	{
+		y = HEIGHT_SCREEN * 9 / 10 - 2;
+		mlx_mouse_move(game->mlx, game->window, x, y);
+	}
+	else if (y >= HEIGHT_SCREEN * 9 / 10)
+	{
+		y = 11;
+		mlx_mouse_move(game->mlx, game->window, x, y);
+	}
+	old_y = y;
+	*/
+	display_screen(game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:25:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 16:50:12 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 19:32:43 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,5 @@ void	initialize_game(t_game	*game, t_data *data)
 	game->movements[1] = 0;
 	game->movements[2] = 0;
 	game->movements[3] = 0;
+	game->mouse_height = HEIGHT_SCREEN / 2;
 }

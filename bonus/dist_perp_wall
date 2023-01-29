@@ -1,0 +1,81 @@
+game/display/calculate_display.c:	if (raycast->side == 0)
+game/display/calculate_display.c:		raycast->dist_perp_wall = raycast->side_dist_x;
+game/display/calculate_display.c:		raycast->dist_perp_wall -= raycast->delta_dist_x;
+game/display/calculate_display.c:		raycast->dist_perp_wall = raycast->side_dist_y;
+game/display/calculate_display.c:		raycast->dist_perp_wall -= raycast->delta_dist_y;
+game/display/calculate_display.c:	if (raycast->dist_perp_wall == 0)
+game/display/calculate_display.c:		raycast->dist_perp_wall = INFINITY;
+game/display/calculate_display.c:	if (raycast->ray_dir_x < 0)
+game/display/calculate_display.c:		raycast->step_x = -1;
+game/display/calculate_display.c:		raycast->side_dist_x = raycast->pos_x - raycast->map_x;
+game/display/calculate_display.c:		raycast->side_dist_x *= raycast->delta_dist_x;
+game/display/calculate_display.c:		raycast->step_x = 1;
+game/display/calculate_display.c:		raycast->side_dist_x = raycast->map_x + 1.0 - raycast->pos_x;
+game/display/calculate_display.c:		raycast->side_dist_x *= raycast->delta_dist_x;
+game/display/calculate_display.c:	if (raycast->ray_dir_y < 0)
+game/display/calculate_display.c:		raycast->step_y = -1;
+game/display/calculate_display.c:		raycast->side_dist_y = raycast->pos_y - raycast->map_y;
+game/display/calculate_display.c:		raycast->side_dist_y *= raycast->delta_dist_y;
+game/display/calculate_display.c:		raycast->step_y = 1;
+game/display/calculate_display.c:		raycast->side_dist_y = raycast->map_y + 1.0 - raycast->pos_y;
+game/display/calculate_display.c:		raycast->side_dist_y *= raycast->delta_dist_y;
+game/display/calculate_display.c:	raycast->camera_x = 2 * x / (double)(WIDTH_SCREEN) - 1;
+game/display/calculate_display.c:	raycast->ray_dir_x = raycast->dir_x + raycast->plane_x * raycast->camera_x;
+game/display/calculate_display.c:	raycast->ray_dir_y = raycast->dir_y + raycast->plane_y * raycast->camera_x;
+game/display/calculate_display.c:	raycast->map_x = raycast->pos_x;
+game/display/calculate_display.c:	raycast->map_y = raycast->pos_y;
+game/display/calculate_display.c:	if (raycast->ray_dir_x == 0)
+game/display/calculate_display.c:		raycast->delta_dist_x = INFINITY;
+game/display/calculate_display.c:		raycast->delta_dist_x = abs_value(1 / raycast->ray_dir_x);
+game/display/calculate_display.c:	if (raycast->ray_dir_y == 0)
+game/display/calculate_display.c:		raycast->delta_dist_y = INFINITY;
+game/display/calculate_display.c:		raycast->delta_dist_y = abs_value(1 / raycast->ray_dir_y);
+game/display/display.c:	raycast->hit = 0;
+game/display/display.c:	while (raycast->hit == 0)
+game/display/display.c:		if (raycast->side_dist_x < raycast->side_dist_y)
+game/display/display.c:			raycast->side_dist_x += raycast->delta_dist_x;
+game/display/display.c:			raycast->map_x += raycast->step_x;
+game/display/display.c:			raycast->side = 0;
+game/display/display.c:			raycast->side_dist_y += raycast->delta_dist_y;
+game/display/display.c:			raycast->map_y += raycast->step_y;
+game/display/display.c:			raycast->side = 1;
+game/display/display.c:		if (!ft_strchr("0WESN ", game->map[raycast->map_x][raycast->map_y]))
+game/display/display.c:			raycast->hit = 1;
+game/display/display.c:	if (game->map[raycast->map_x][raycast->map_y] == '1')
+game/display/display.c:		raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
+game/display/display.c:		raycast->draw_start = -raycast->line_height / 2 + HEIGHT_SCREEN / 2;
+game/display/display.c:		if (raycast->draw_start < 0)
+game/display/display.c:			raycast->draw_start = 0;
+game/display/display.c:		raycast->draw_end = raycast->line_height / 2 + HEIGHT_SCREEN / 2;
+game/display/display.c:		if (raycast->draw_end >= HEIGHT_SCREEN)
+game/display/display.c:			raycast->draw_end = HEIGHT_SCREEN - 1;
+game/display/display.c:	else if (game->map[raycast->map_x][raycast->map_y] == 'D')
+game/display/display.c:	if (game->map[raycast->map_x][raycast->map_y] == 'D')
+game/display/display.c:		raycast->line_height = HEIGHT_SCREEN / (raycast->dist_perp_wall + 0.5);
+game/display/display.c:		raycast->draw_start = -raycast->line_height / 2 + HEIGHT_SCREEN / 2;
+game/display/display.c:		if (raycast->draw_start < 0)
+game/display/display.c:			raycast->draw_start = 0;
+game/display/display.c:		raycast->draw_end = raycast->line_height / 2 + HEIGHT_SCREEN / 2;
+game/display/display.c:		if (raycast->draw_end >= HEIGHT_SCREEN)
+game/display/display.c:			raycast->draw_end = HEIGHT_SCREEN - 1;
+game/display/display.c:	else if (game->map[raycast->map_x][raycast->map_y] == 'd')
+game/display/draw_display.c:	if (game->map[raycast->map_x][raycast->map_y] == '1')
+game/display/draw_display.c:		if (raycast->side == 0)
+game/display/draw_display.c:			if (raycast->step_x == 1)
+game/display/draw_display.c:		else if (raycast->side == 1)
+game/display/draw_display.c:			if (raycast->step_y == 1)
+game/display/draw_display.c:	step = 1.0 * 256 / raycast->line_height;
+game/display/draw_display.c:	if ((raycast->side == 0 && raycast->ray_dir_x > 0)
+game/display/draw_display.c:		|| (raycast->side == 1 && raycast->ray_dir_y < 0))
+game/display/draw_display.c:	tex_pos = raycast->draw_start - HEIGHT_SCREEN / 2;
+game/display/draw_display.c:	tex_pos += raycast->line_height / 2;
+game/display/draw_display.c:	while (raycast->draw_start < raycast->draw_end)
+game/display/draw_display.c:		my_mlx_pixel_put(game->screen_img, x, raycast->draw_start,
+game/display/draw_display.c:		raycast->draw_start++;
+game/display/draw_display.c:	if (raycast->side == 0)
+game/display/draw_display.c:		wall_x = raycast->pos_y + raycast->dist_perp_wall * raycast->ray_dir_y;
+game/display/draw_display.c:		wall_x = raycast->pos_x + raycast->dist_perp_wall * raycast->ray_dir_x;
+game/display/draw_display.c:	while (i < raycast->draw_start)
+game/display/draw_display.c:	while (raycast->draw_end < HEIGHT_SCREEN)
+game/display/draw_display.c:		my_mlx_pixel_put(game->screen_img, x, raycast->draw_end, game->hex_f);
+game/display/draw_display.c:		raycast->draw_end++;

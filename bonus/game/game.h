@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 17:32:55 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/28 19:26:05 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_game
 	int				y_minimap;
 	int				minimap;
 	int				movements[4];
+	int				mouse_height;
 	t_player		*player;
 }	t_game;
 
