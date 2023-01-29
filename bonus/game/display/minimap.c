@@ -30,6 +30,29 @@ void	put_one_block(t_game *game, int color)
 	}
 }
 
+void	put_arrow(t_game *game, int color, int mode)
+{
+	int	x;
+	int	y;
+	int	j;
+
+	(void)mode;
+	j = 0;
+	x = game->x_minimap;
+	while (x < game->x_minimap + 16)
+	{
+		y = game->y_minimap + j;
+		while (y < game->y_minimap + 16 - j)
+		{
+			my_mlx_pixel_put(game->screen_img, y, x, color);
+			y++;
+		}
+		x++;
+		if (x % 2 != 0)
+			j += 1;
+	}
+}
+
 void	put_pixel_color(t_game *game, int x, int y)
 {
 	if (x == (int)(game->player->x / SIZE_BLOCK)
@@ -62,25 +85,28 @@ void	put_cursor(t_game *game, int x, int y)
 	{
 		game->x_minimap = x_minimap;
 		game->y_minimap = y_minimap + 16;
+		put_arrow(game, 0x00ffd8, 2);
 	}
 	else if (game->player->orientation >= 135
 		&& game->player->orientation <= 225)
 	{
 		game->x_minimap = x_minimap - 16;
 		game->y_minimap = y_minimap;
+		put_arrow(game, 0x00ffd8, 3);
 	}
 	else if (game->player->orientation >= 225
 		&& game->player->orientation <= 315)
 	{
 		game->x_minimap = x_minimap;
 		game->y_minimap = y_minimap - 16;
+		put_arrow(game, 0x00ffd8, 4);
 	}
 	else
 	{
 		game->x_minimap = x_minimap + 16;
 		game->y_minimap = y_minimap;
+		put_arrow(game, 0x00ffd8, 1);
 	}
-	put_one_block(game, 0x00ffd8);
 }
 
 void	open_minimap(t_game *game)
