@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:35:02 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 19:37:18 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/29 11:32:34 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	move_camera(void *arg)
 {
 	t_game		*game;
 	static int	old_x;
-	static int	old_y;
+	//static int	old_y;
 	int			x;
 	int			y;
 	int			movement;
