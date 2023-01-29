@@ -6,11 +6,12 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:35:02 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/29 11:32:34 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/29 16:00:53 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "game.h"
 
 int	move_camera(void *arg)
 {
@@ -55,6 +56,5 @@ int	move_camera(void *arg)
 	}
 	old_y = y;
 	*/
-	display_screen(game);
 	return (0);
 }

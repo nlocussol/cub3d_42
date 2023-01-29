@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:25:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 19:32:43 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/29 15:27:21 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	initialize_player(t_game *game)
 	game->player->y = (double)y * SIZE_BLOCK + SIZE_BLOCK / 2;
 	calculate_player_orientation(game);
 	game->player->direction = game->map[x][y];
-	game->player->speed = 5;
+	game->player->speed = 7;
 }
 
 void	initialize_game(t_game	*game, t_data *data)

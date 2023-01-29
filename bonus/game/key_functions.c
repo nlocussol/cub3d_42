@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 19:22:33 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/29 15:23:15 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,5 +143,6 @@ int	launch_movements(t_game *game)
 	if (game->movements[3] == 1)
 		key_hook(D, game);
 	move_camera(game);
+	display_screen(game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:36:40 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/29 12:16:39 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/29 14:16:31 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,93 +30,71 @@ void	put_one_block(t_game *game, int color)
 	}
 }
 
-/*
-void	put_arrow(t_game *game, int color, int mode)
+int	calculate_arrow(int	a, int b, int mode)
+{
+	if (mode == 1)
+		return ((a - b) / 2);
+	else
+		return ((b - a + 16) / 2);
+}
+
+void	put_arrow(t_game *game, int	i_minimap, int	j_minimap, int mode)
 {
 	int	x;
 	int	y;
-	int	j;
 
-	if (mode == 3)
+	x = i_minimap;
+	while (x < i_minimap + 16)
 	{
-		j = 0;
-		x = game->x_minimap;
-		while (x < game->x_minimap + 16)
+		y = j_minimap + calculate_arrow(x, i_minimap, mode);
+		while (y < j_minimap + 16 - calculate_arrow(x, i_minimap, mode))
 		{
-			y = game->y_minimap + j;
-			while (y < game->y_minimap + 16 - j)
-			{
-				my_mlx_pixel_put(game->screen_img, y, x, color);
-				y++;
-			}
-			x++;
-			if (x % 2 != 0)
-				j += 1;
+			if (game->y_minimap == j_minimap)
+				my_mlx_pixel_put(game->screen_img, y, x, 0x00ffd8);
+			else
+				my_mlx_pixel_put(game->screen_img, x, y, 0x00ffd8);
+			y++;
 		}
+		x++;
 	}
 }
-*/
 
-void	put_arrow(t_game *game, int color, int mode)
+void	put_cursor(t_game *game, int x, int y)
 {
-	int	x;
-	int	y;
+	static int	x_minimap;
+	static int	y_minimap;
 
-	if (mode == 1)
+	if (!game)
 	{
-		x = game->x_minimap;
-		while (x < game->x_minimap + 16)
-		{
-			y = game->y_minimap + ((x - game->x_minimap) / 2);
-			while (y < game->y_minimap + 16 - (x - game->x_minimap) / 2)
-			{
-				my_mlx_pixel_put(game->screen_img, y, x, color);
-				y++;
-			}
-			x++;
-		}
+		x_minimap = x;
+		y_minimap = y;
+		return ;
 	}
-	else if (mode == 2)
+	if (game->player->orientation >= 45 && game->player->orientation <= 135)
 	{
-		y = game->y_minimap;
-		while (y < game->y_minimap + 16)
-		{
-			x = game->x_minimap + ((y - game->y_minimap) / 2);
-			while (x < game->x_minimap + 16 - (y - game->y_minimap) / 2)
-			{
-				my_mlx_pixel_put(game->screen_img, y, x, color);
-				x++;
-			}
-			y++;
-		}
+		game->x_minimap = x_minimap;
+		game->y_minimap = y_minimap + 16;
+		put_arrow(game, game->y_minimap, game->x_minimap, 1);
 	}
-	else if (mode == 3)
+	else if (game->player->orientation >= 135
+		&& game->player->orientation <= 225)
 	{
-		x = game->x_minimap;
-		while (x < game->x_minimap + 16)
-		{
-			y = game->y_minimap + ((game->x_minimap + 16 - x) / 2);
-			while (y < game->y_minimap + 16 - (game->x_minimap + 16 - x) / 2)
-			{
-				my_mlx_pixel_put(game->screen_img, y, x, color);
-				y++;
-			}
-			x++;
-		}
+		game->x_minimap = x_minimap - 16;
+		game->y_minimap = y_minimap;
+		put_arrow(game, game->x_minimap, game->y_minimap, 0);
 	}
-	else if (mode == 4)
+	else if (game->player->orientation >= 225
+		&& game->player->orientation <= 315)
 	{
-		y = game->y_minimap;
-		while (y < game->y_minimap + 16)
-		{
-			x = game->x_minimap + ((game->y_minimap + 16 - y) / 2);
-			while (x < game->x_minimap + 16 - (game->y_minimap + 16 - y) / 2)
-			{
-				my_mlx_pixel_put(game->screen_img, y, x, color);
-				x++;
-			}
-			y++;
-		}
+		game->x_minimap = x_minimap;
+		game->y_minimap = y_minimap - 16;
+		put_arrow(game, game->y_minimap, game->x_minimap, 0);
+	}
+	else
+	{
+		game->x_minimap = x_minimap + 16;
+		game->y_minimap = y_minimap;
+		put_arrow(game, game->x_minimap, game->y_minimap, 1);
 	}
 }
 
@@ -136,46 +114,6 @@ void	put_pixel_color(t_game *game, int x, int y)
 	else
 		put_one_block(game, 0);
 }
-
-void	put_cursor(t_game *game, int x, int y)
-{
-	static int	x_minimap;
-	static int	y_minimap;
-
-	if (!game)
-	{
-		x_minimap = x;
-		y_minimap = y;
-		return ;
-	}
-	if (game->player->orientation >= 45 && game->player->orientation <= 135)
-	{
-		game->x_minimap = x_minimap;
-		game->y_minimap = y_minimap + 16;
-		put_arrow(game, 0x00ffd8, 2);
-	}
-	else if (game->player->orientation >= 135
-		&& game->player->orientation <= 225)
-	{
-		game->x_minimap = x_minimap - 16;
-		game->y_minimap = y_minimap;
-		put_arrow(game, 0x00ffd8, 3);
-	}
-	else if (game->player->orientation >= 225
-		&& game->player->orientation <= 315)
-	{
-		game->x_minimap = x_minimap;
-		game->y_minimap = y_minimap - 16;
-		put_arrow(game, 0x00ffd8, 4);
-	}
-	else
-	{
-		game->x_minimap = x_minimap + 16;
-		game->y_minimap = y_minimap;
-		put_arrow(game, 0x00ffd8, 1);
-	}
-}
-
 void	open_minimap(t_game *game)
 {
 	int	x;
