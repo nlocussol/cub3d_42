@@ -25,6 +25,7 @@ SRCS		?= main.c \
 			   game/display/calculate_display.c \
 			   game/display/draw_display.c \
 			   game/display/parse_image.c \
+			   game/display/inventory_bar.c \
 			   game/display/minimap.c \
 			   game/move_camera.c \
 			   game/interactions.c
