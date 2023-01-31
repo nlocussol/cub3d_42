@@ -6,13 +6,14 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:35:02 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/29 16:00:53 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:49:23 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #include "game.h"
 
+//comments are to move the camera up and down
 int	move_camera(void *arg)
 {
 	t_game		*game;

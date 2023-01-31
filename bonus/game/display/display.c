@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 15:22:59 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:38:40 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,6 @@ void	display_screen(t_game *game, long time)
 	t_raycast	raycast;
 	int			x;
 
-	if (game->anim_start)
-		return ;
 	raycast.pos_x = game->player->x / SIZE_BLOCK;
 	raycast.pos_y = game->player->y / SIZE_BLOCK;
 	raycast.dir_x = cos(radian_value(game->player->orientation));

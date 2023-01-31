@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 13:18:17 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:36:58 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,5 @@ int	launch_movements(t_game *game)
 		key_hook(D, game);
 	move_camera(game);
 	display_screen(game, -1);
-	printf("%ld key functions\n", calculate_time() - game->time_start);
 	return (0);
 }
