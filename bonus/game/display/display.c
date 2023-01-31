@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include "display.h"
 
 void	detect_wall(t_game *game, t_raycast *raycast)
 {
@@ -181,8 +182,10 @@ void	display_screen(t_game *game, long time)
 		}
 		x++;
 	}
+	game_bar(game);
 	if (game->minimap == 1)
 		open_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->window,
 		game->screen_img->img, 0, 0);
+	nb_game_bar(game);
 }

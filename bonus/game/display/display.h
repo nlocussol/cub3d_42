@@ -16,6 +16,8 @@
 
 # include "../game.h"
 
+void	nb_game_bar(t_game *game);
+void	game_bar(t_game *game);
 void	open_minimap(t_game *game);
 void	display_screen(t_game *game, long time);
 void	draw_line(t_game *game, int x, t_raycast *raycast);
