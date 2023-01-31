@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 15:14:51 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:19:17 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, long time)
 		last_draw_end = raycast->draw_end;
 		draw_line(game, x, raycast);
 		/*
+		 *
 		if (game->map[raycast->map_x][raycast->map_y] == 'D')
 		{
 			copy_raycast(raycast, &raycast_copy);
