@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 15:19:17 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:22:59 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	copy_raycast(t_raycast *raycast, t_raycast *raycast_copy)
 void	display_rayon(t_game *game, int x, t_raycast *raycast, long time)
 {
 	int			i;
-	int			last_draw_end;
+	//int			last_draw_end;
 	//t_raycast	raycast_copy;
 
 	if (ft_strchr("1D", game->map[raycast->map_x][raycast->map_y]))
@@ -84,7 +84,7 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, long time)
 		raycast->draw_end = raycast->line_height / 2 + game->mouse_height;
 		if (raycast->draw_end >= HEIGHT_SCREEN)
 			raycast->draw_end = HEIGHT_SCREEN - 1;
-		last_draw_end = raycast->draw_end;
+		//last_draw_end = raycast->draw_end;
 		draw_line(game, x, raycast);
 		/*
 		 *
@@ -144,6 +144,8 @@ void	display_screen(t_game *game, long time)
 	t_raycast	raycast;
 	int			x;
 
+	if (game->anim_start)
+		return ;
 	raycast.pos_x = game->player->x / SIZE_BLOCK;
 	raycast.pos_y = game->player->y / SIZE_BLOCK;
 	raycast.dir_x = cos(radian_value(game->player->orientation));

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/30 18:36:22 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:20:54 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_game
 	int				mouse_height;
 	long			time_start;
 	t_player		*player;
+	bool			anim_start;
 }	t_game;
 
 typedef struct s_raycast

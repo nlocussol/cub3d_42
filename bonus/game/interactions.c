@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 15:07:08 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:22:06 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	interact(t_game *game)
 		return ;
 	if (game->map[raycast.map_x][raycast.map_y] == 'D')
 	{
+		game->anim_start = true;
 		time_start_anim = calculate_time();
 		actual_time = time_start_anim;
 		int	x = 0;
@@ -57,6 +58,7 @@ void	interact(t_game *game)
 			usleep(1000);
 		}
 		game->map[raycast.map_x][raycast.map_y] = 'd';
+		game->anim_start = false;
 	}
 	else if (game->map[raycast.map_x][raycast.map_y] == 'd')
 	{
