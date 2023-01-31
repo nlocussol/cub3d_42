@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 13:22:47 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 15:14:51 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,28 +76,16 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, long time)
 			raycast->dist_perp_wall += 0.5;
 		}
 		*/
-		if (game->map[raycast->map_x][raycast->map_y] == 'D' && time != -1)
-		{
-			i = 0;
-			while (i < HEIGHT_SCREEN)
-			{
-				my_mlx_pixel_put(game->screen_img, x, i, 0);
-				i++;
-			}
-		}
-		else
-		{
-			calculate_dist_perp_wall(raycast);
-			raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
-			raycast->draw_start = -raycast->line_height / 2 + game->mouse_height;
-			if (raycast->draw_start < 0)
-				raycast->draw_start = 0;
-			raycast->draw_end = raycast->line_height / 2 + game->mouse_height;
-			if (raycast->draw_end >= HEIGHT_SCREEN)
-				raycast->draw_end = HEIGHT_SCREEN - 1;
-			last_draw_end = raycast->draw_end;
-			draw_line(game, x, raycast);
-		}
+		calculate_dist_perp_wall(raycast);
+		raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
+		raycast->draw_start = -raycast->line_height / 2 + game->mouse_height;
+		if (raycast->draw_start < 0)
+			raycast->draw_start = 0;
+		raycast->draw_end = raycast->line_height / 2 + game->mouse_height;
+		if (raycast->draw_end >= HEIGHT_SCREEN)
+			raycast->draw_end = HEIGHT_SCREEN - 1;
+		last_draw_end = raycast->draw_end;
+		draw_line(game, x, raycast);
 		/*
 		if (game->map[raycast->map_x][raycast->map_y] == 'D')
 		{
