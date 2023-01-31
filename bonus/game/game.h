@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 19:26:05 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/30 18:36:22 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_game
 	int				minimap;
 	int				movements[4];
 	int				mouse_height;
+	long			time_start;
 	t_player		*player;
 }	t_game;
 
@@ -107,6 +108,7 @@ void	start_game(t_data *data);
 void	initialize_game(t_game	*game, t_data *data);
 void	parse_image(t_game *game);
 void	create_border(t_game *game);
+long	calculate_time(void);
 
 void	destroy_images(t_game *game);
 void	free_all(t_game *game);

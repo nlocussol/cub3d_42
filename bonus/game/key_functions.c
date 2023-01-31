@@ -6,12 +6,11 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/29 15:23:15 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 13:12:23 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "game.h"
 
 int	hit_wall_forward_backward(t_game *game, int coeff,
 		double function_x(double), double function_y(double))
@@ -132,6 +131,15 @@ int	key_released(int keycode, t_game *game)
 	return (0);
 }
 
+long	calculate_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+
 int	launch_movements(t_game *game)
 {
 	if (game->movements[0] == 1)
@@ -143,6 +151,7 @@ int	launch_movements(t_game *game)
 	if (game->movements[3] == 1)
 		key_hook(D, game);
 	move_camera(game);
-	display_screen(game);
+	display_screen(game, -1);
+	printf("key functions\n");
 	return (0);
 }

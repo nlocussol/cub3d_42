@@ -6,15 +6,18 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/29 14:26:27 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 13:11:51 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "display/display.h"
+#include "game.h"
 
 void	interact(t_game *game)
 {
 	t_raycast	raycast;
+	long		time;
 
 	raycast.pos_x = game->player->x / SIZE_BLOCK;
 	raycast.pos_y = game->player->y / SIZE_BLOCK;
@@ -28,9 +31,19 @@ void	interact(t_game *game)
 	if (raycast.dist_perp_wall > (double)1)
 		return ;
 	if (game->map[raycast.map_x][raycast.map_y] == 'D')
+	{
+		time = calculate_time();
+		while (calculate_time() - time < 2000)
+		{
+			display_screen(game, 1);
+			printf("%ld interact\n", calculate_time() - time);
+		}
 		game->map[raycast.map_x][raycast.map_y] = 'd';
+	}
 	else if (game->map[raycast.map_x][raycast.map_y] == 'd')
+	{
 		game->map[raycast.map_x][raycast.map_y] = 'D';
+	}
 	/*
 	else if (game->map[raycast.map_x][raycast.map_y] == '1')
 		add_graffiti(game);
