@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:29:09 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 15:48:14 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 17:30:27 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ unsigned int	color_to_draw(t_game *game, t_raycast *raycast,
 		if (game->anim_start ==  false)
 			color = game->images[4][tex_y][tex_x];
 		else
-			color = 0;
+			color = 0xFFB900;
 	}
 	return (color);
 }

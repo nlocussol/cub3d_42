@@ -6,17 +6,16 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 15:43:20 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 19:00:36 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "game.h"
 
 void	interact(t_game *game)
 {
 	t_raycast	raycast;
-	long		time_start_anim;
-	long		actual_time;
 
 	raycast.pos_x = game->player->x / SIZE_BLOCK;
 	raycast.pos_y = game->player->y / SIZE_BLOCK;
@@ -32,20 +31,11 @@ void	interact(t_game *game)
 	if (game->map[raycast.map_x][raycast.map_y] == 'D')
 	{
 		game->anim_start = true;
-		time_start_anim = calculate_time();
-		actual_time = time_start_anim;
-		while (actual_time - time_start_anim < 2000)
-		{
-			actual_time = calculate_time();
-			display_screen(game, 1);
-		}
-		game->map[raycast.map_x][raycast.map_y] = 'd';
-		game->anim_start = false;
+		game->map[raycast.map_x][raycast.map_y] = 'O';
+		game->time_start_anim = calculate_time();
 	}
 	else if (game->map[raycast.map_x][raycast.map_y] == 'd')
-	{
 		game->map[raycast.map_x][raycast.map_y] = 'D';
-	}
 	/*
 	else if (game->map[raycast.map_x][raycast.map_y] == '1')
 		add_graffiti(game);

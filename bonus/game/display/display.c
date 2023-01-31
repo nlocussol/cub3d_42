@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 15:38:40 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 19:03:48 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ void	copy_raycast(t_raycast *raycast, t_raycast *raycast_copy)
 	raycast_copy->line_height = raycast->line_height;
 }
 
+//comments are to make a door look thinner than the wall 
 void	display_rayon(t_game *game, int x, t_raycast *raycast, long time)
 {
 	int			i;
 	//int			last_draw_end;
 	//t_raycast	raycast_copy;
 
-	if (ft_strchr("1D", game->map[raycast->map_x][raycast->map_y]))
+	if (ft_strchr("1DO", game->map[raycast->map_x][raycast->map_y]))
 	{
 		/*
 		if (game->map[raycast->map_x][raycast->map_y] == 'D')
@@ -76,16 +77,26 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, long time)
 			raycast->dist_perp_wall += 0.5;
 		}
 		*/
-		calculate_dist_perp_wall(raycast);
-		raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
-		raycast->draw_start = -raycast->line_height / 2 + game->mouse_height;
-		if (raycast->draw_start < 0)
-			raycast->draw_start = 0;
-		raycast->draw_end = raycast->line_height / 2 + game->mouse_height;
-		if (raycast->draw_end >= HEIGHT_SCREEN)
-			raycast->draw_end = HEIGHT_SCREEN - 1;
-		//last_draw_end = raycast->draw_end;
-		draw_line(game, x, raycast);
+		if (game->map[raycast->map_x][raycast->map_y] == 'O'
+			&& calculate_time() - game->time_start_anim >= 2000)
+		{
+			game->anim_start = false;
+			game->map[raycast->map_x][raycast->map_y] = 'd';
+			display_rayon(game, x, raycast, time);
+		}
+		else
+		{
+			calculate_dist_perp_wall(raycast);
+			raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
+			raycast->draw_start = -raycast->line_height / 2 + game->mouse_height;
+			if (raycast->draw_start < 0)
+				raycast->draw_start = 0;
+			raycast->draw_end = raycast->line_height / 2 + game->mouse_height;
+			if (raycast->draw_end >= HEIGHT_SCREEN)
+				raycast->draw_end = HEIGHT_SCREEN - 1;
+			//last_draw_end = raycast->draw_end;
+			draw_line(game, x, raycast);
+		}
 		/*
 		 *
 		if (game->map[raycast->map_x][raycast->map_y] == 'D')
@@ -127,6 +138,9 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, long time)
 	{
 		detect_wall(game, raycast);
 		display_rayon(game, x, raycast, time);
+	}
+	else if (game->map[raycast->map_x][raycast->map_y] == 'O')
+	{
 	}
 	else
 	{
