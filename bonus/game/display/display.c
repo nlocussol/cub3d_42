@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 13:12:50 by averdon          ###   ########.fr       */
+/*   Updated: 2023/01/31 13:22:47 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,22 +164,9 @@ void	display_screen(t_game *game, long time)
 	x = 0;
 	while (x < WIDTH_SCREEN)
 	{
-		int			i;
-		if (time != -1)
-		{
-			i = 0;
-			while (i < HEIGHT_SCREEN)
-			{
-				my_mlx_pixel_put(game->screen_img, WIDTH_SCREEN - x, i, 0);
-				i++;
-			}
-		}
-		else
-		{
-			calculate_delta_and_dist(x, &raycast);
-			detect_wall(game, &raycast);
-			display_rayon(game, WIDTH_SCREEN - x, &raycast, time);
-		}
+		calculate_delta_and_dist(x, &raycast);
+		detect_wall(game, &raycast);
+		display_rayon(game, WIDTH_SCREEN - x, &raycast, time);
 		x++;
 	}
 	game_bar(game);
