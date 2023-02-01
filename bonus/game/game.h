@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 19:01:20 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/01 18:01:29 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ typedef struct s_player
 	int		speed;
 	char	direction;
 }	t_player;
+
+typedef struct s_anim
+{
+	int		x;
+	int		y;
+	long	time_anim_start;
+}	t_anim;
 
 typedef struct s_game
 {
