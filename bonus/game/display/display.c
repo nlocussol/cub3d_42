@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 19:03:48 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/01 13:27:59 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,19 @@ void	copy_raycast(t_raycast *raycast, t_raycast *raycast_copy)
 }
 
 //comments are to make a door look thinner than the wall 
-void	display_rayon(t_game *game, int x, t_raycast *raycast, long time)
+void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 {
 	int			i;
+	double			wall_x;
+	static long		time;
 	//int			last_draw_end;
 	//t_raycast	raycast_copy;
 
+	if (mode == 1)
+	{
+		time = calculate_time();
+		return ;
+	}
 	if (ft_strchr("1DO", game->map[raycast->map_x][raycast->map_y]))
 	{
 		/*
@@ -78,15 +85,29 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, long time)
 		}
 		*/
 		if (game->map[raycast->map_x][raycast->map_y] == 'O'
-			&& calculate_time() - game->time_start_anim >= 2000)
+			&& time - game->time_start_anim >= 2000)
 		{
 			game->anim_start = false;
 			game->map[raycast->map_x][raycast->map_y] = 'd';
-			display_rayon(game, x, raycast, time);
+			display_rayon(game, x, raycast, mode);
 		}
 		else
 		{
 			calculate_dist_perp_wall(raycast);
+			if (game->map[raycast->map_x][raycast->map_y] == 'O')
+			{
+				if (raycast->side == 0)
+					wall_x = raycast->pos_y + raycast->dist_perp_wall * raycast->ray_dir_y;
+				else
+					wall_x = raycast->pos_x + raycast->dist_perp_wall * raycast->ray_dir_x;
+				wall_x -= floor(wall_x);
+				if (wall_x < (double)((time - game->time_start_anim)) / 2000)
+				{
+					detect_wall(game, raycast);
+					display_rayon(game, x, raycast, mode);
+					return ;
+				}
+			}
 			raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
 			raycast->draw_start = -raycast->line_height / 2 + game->mouse_height;
 			if (raycast->draw_start < 0)
@@ -137,7 +158,7 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, long time)
 	else if (ft_strchr("d", game->map[raycast->map_x][raycast->map_y]))
 	{
 		detect_wall(game, raycast);
-		display_rayon(game, x, raycast, time);
+		display_rayon(game, x, raycast, mode);
 	}
 	else if (game->map[raycast->map_x][raycast->map_y] == 'O')
 	{
@@ -158,6 +179,7 @@ void	display_screen(t_game *game, long time)
 	t_raycast	raycast;
 	int			x;
 
+	(void)time;
 	raycast.pos_x = game->player->x / SIZE_BLOCK;
 	raycast.pos_y = game->player->y / SIZE_BLOCK;
 	raycast.dir_x = cos(radian_value(game->player->orientation));
@@ -165,11 +187,12 @@ void	display_screen(t_game *game, long time)
 	raycast.plane_x = cos(radian_value(game->player->orientation + 90));
 	raycast.plane_y = sin(radian_value(game->player->orientation + 90));
 	x = 0;
+	display_rayon(game, WIDTH_SCREEN - x, &raycast, 1);
 	while (x < WIDTH_SCREEN)
 	{
 		calculate_delta_and_dist(x, &raycast);
 		detect_wall(game, &raycast);
-		display_rayon(game, WIDTH_SCREEN - x, &raycast, time);
+		display_rayon(game, WIDTH_SCREEN - x, &raycast, -1);
 		x++;
 	}
 	game_bar(game);
