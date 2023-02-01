@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 19:00:36 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/01 17:44:41 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ void	interact(t_game *game)
 		game->time_start_anim = calculate_time();
 	}
 	else if (game->map[raycast.map_x][raycast.map_y] == 'd')
-		game->map[raycast.map_x][raycast.map_y] = 'D';
+	{
+		game->anim_start = true;
+		game->map[raycast.map_x][raycast.map_y] = 'o';
+		game->time_start_anim = calculate_time();
+	}
 	/*
 	else if (game->map[raycast.map_x][raycast.map_y] == '1')
 		add_graffiti(game);

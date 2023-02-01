@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/01 13:27:59 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/01 17:58:09 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 		time = calculate_time();
 		return ;
 	}
-	if (ft_strchr("1DO", game->map[raycast->map_x][raycast->map_y]))
+	if (ft_strchr("1DOo", game->map[raycast->map_x][raycast->map_y]))
 	{
 		/*
 		if (game->map[raycast->map_x][raycast->map_y] == 'D')
@@ -91,17 +91,27 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 			game->map[raycast->map_x][raycast->map_y] = 'd';
 			display_rayon(game, x, raycast, mode);
 		}
+		else if (game->map[raycast->map_x][raycast->map_y] == 'o'
+			&& time - game->time_start_anim >= 2000)
+		{
+			game->anim_start = false;
+			game->map[raycast->map_x][raycast->map_y] = 'D';
+			display_rayon(game, x, raycast, mode);
+		}
 		else
 		{
 			calculate_dist_perp_wall(raycast);
-			if (game->map[raycast->map_x][raycast->map_y] == 'O')
+			if (ft_strchr("oO", game->map[raycast->map_x][raycast->map_y]))
 			{
 				if (raycast->side == 0)
 					wall_x = raycast->pos_y + raycast->dist_perp_wall * raycast->ray_dir_y;
 				else
 					wall_x = raycast->pos_x + raycast->dist_perp_wall * raycast->ray_dir_x;
-				wall_x -= floor(wall_x);
-				if (wall_x < (double)((time - game->time_start_anim)) / 2000)
+				wall_x = wall_x - floor(wall_x);
+				if ((game->map[raycast->map_x][raycast->map_y] == 'O'
+					&& wall_x < (double)((time - game->time_start_anim)) / 2000)
+				|| (game->map[raycast->map_x][raycast->map_y] == 'o'
+					&& wall_x < 1 - (double)((time - game->time_start_anim)) / 2000))
 				{
 					detect_wall(game, raycast);
 					display_rayon(game, x, raycast, mode);
