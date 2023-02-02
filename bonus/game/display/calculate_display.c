@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:27:50 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 18:00:32 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:40:52 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	calculate_dist_perp_wall(t_game *game, t_raycast *raycast)
 	}
 	if (raycast->dist_perp_wall == 0)
 		raycast->dist_perp_wall = INFINITY;
-	printf("%lf\n", raycast->dist_perp_wall);
 }
 
 void	calculate_delta_and_dist_next(t_raycast *raycast)

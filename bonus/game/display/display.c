@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 18:30:50 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:36:51 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,18 +142,12 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 					else if (raycast_copy.draw_end == last_draw_end)
 					{
 						double                  wall_x;
-						int                             tex_x;
-						calculate_dist_perp_wall(game, &raycast_copy);
 						if (raycast_copy.side == 0)
 								wall_x = raycast_copy.pos_y + raycast_copy.dist_perp_wall * raycast_copy.ray_dir_y;
 						else
 								wall_x = raycast_copy.pos_x + raycast_copy.dist_perp_wall * raycast_copy.ray_dir_x;
 						wall_x -= floor(wall_x);
-						tex_x = (int)(wall_x * (double)(256));
-						if ((raycast_copy.side == 0 && raycast_copy.ray_dir_x > 0)
-								|| (raycast_copy.side == 1 && raycast_copy.ray_dir_y < 0))
-								tex_x = 256 - tex_x - 1;
-						if (wall_x < 0.5)
+						if (wall_x > 0.5)
 								display_rayon(game, x, &raycast_copy, mode);
 			}
 				}
