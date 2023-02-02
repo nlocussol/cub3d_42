@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 09:39:20 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 10:16:29 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ typedef struct s_game
 	int				mouse_height;
 	long			time_start;
 	t_player		*player;
-	bool			anim_start;
-	long			time_start_anim;
 	t_double_list	*lst_anim;
 }	t_game;
 
@@ -135,4 +133,6 @@ void	turn_camera(t_game	*game, int move);
 int		move_camera(void *arg);
 void	interact(t_game *game);
 
+t_anim	*find_square(t_game *game, int x, int y);
+void	suppress_node(t_game *game, int x, int y);
 #endif

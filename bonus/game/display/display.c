@@ -6,12 +6,11 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/01 17:58:09 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 10:56:53 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-#include "display.h"
 
 void	detect_wall(t_game *game, t_raycast *raycast)
 {
@@ -85,16 +84,16 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 		}
 		*/
 		if (game->map[raycast->map_x][raycast->map_y] == 'O'
-			&& time - game->time_start_anim >= 2000)
+			&& time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start >= 2000)
 		{
-			game->anim_start = false;
+			suppress_node(game, raycast->map_x, raycast->map_y);
 			game->map[raycast->map_x][raycast->map_y] = 'd';
 			display_rayon(game, x, raycast, mode);
 		}
 		else if (game->map[raycast->map_x][raycast->map_y] == 'o'
-			&& time - game->time_start_anim >= 2000)
+			&& time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start >= 2000)
 		{
-			game->anim_start = false;
+			suppress_node(game, raycast->map_x, raycast->map_y);
 			game->map[raycast->map_x][raycast->map_y] = 'D';
 			display_rayon(game, x, raycast, mode);
 		}
@@ -109,9 +108,9 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 					wall_x = raycast->pos_x + raycast->dist_perp_wall * raycast->ray_dir_x;
 				wall_x = wall_x - floor(wall_x);
 				if ((game->map[raycast->map_x][raycast->map_y] == 'O'
-					&& wall_x < (double)((time - game->time_start_anim)) / 2000)
+					&& wall_x < (double)(time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start) / 2000)
 				|| (game->map[raycast->map_x][raycast->map_y] == 'o'
-					&& wall_x < 1 - (double)((time - game->time_start_anim)) / 2000))
+					&& wall_x < 1 - (double)(time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start) / 2000))
 				{
 					detect_wall(game, raycast);
 					display_rayon(game, x, raycast, mode);

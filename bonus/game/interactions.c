@@ -6,16 +6,15 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 09:42:03 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 10:50:09 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "game.h"
 
 void	interact(t_game *game)
 {
-	t_anim			new_anim;
+	t_anim			*new_anim;
 	t_double_list	*new_elt;
 	t_raycast		raycast;
 
@@ -32,19 +31,21 @@ void	interact(t_game *game)
 		return ;
 	if (game->map[raycast.map_x][raycast.map_y] == 'D')
 	{
-		new_anim.x = raycast.map_x;
-		new_anim.y = raycast.map_y;
-		new_anim.time_anim_start = calculate_time();
-		new_elt = ft_double_lstnew(&new_anim);
+		new_anim = malloc(sizeof(t_anim));
+		new_anim->x = raycast.map_x;
+		new_anim->y = raycast.map_y;
+		new_anim->time_anim_start = calculate_time();
+		new_elt = ft_double_lstnew(new_anim);
 		ft_double_lstadd_back(&game->lst_anim, new_elt);
 		game->map[raycast.map_x][raycast.map_y] = 'O';
 	}
 	else if (game->map[raycast.map_x][raycast.map_y] == 'd')
 	{
-		new_anim.x = raycast.map_x;
-		new_anim.y = raycast.map_y;
-		new_anim.time_anim_start = calculate_time();
-		new_elt = ft_double_lstnew(&new_anim);
+		new_anim = malloc(sizeof(t_anim));
+		new_anim->x = raycast.map_x;
+		new_anim->y = raycast.map_y;
+		new_anim->time_anim_start = calculate_time();
+		new_elt = ft_double_lstnew(new_anim);
 		ft_double_lstadd_back(&game->lst_anim, new_elt);
 		game->map[raycast.map_x][raycast.map_y] = 'o';
 	}
