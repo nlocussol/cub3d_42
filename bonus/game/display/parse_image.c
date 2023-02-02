@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 16:34:44 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 20:01:29 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ unsigned int	**convert_image(int length, int width, t_img img)
 			image[y][x] = calculate_color(x, y, img);
 			x++;
 		}
+		
 		y++;
 	}
 	return (image);
