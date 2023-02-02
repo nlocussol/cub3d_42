@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 13:28:29 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:30:50 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,12 @@ void	copy_raycast(t_raycast *raycast, t_raycast *raycast_copy)
 //comments are to make a door look thinner than the wall 
 void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 {
-	int			i;
+	int				i;
 	double			wall_x;
 	static long		time;
-	/*
-	int			last_draw_end;
-	t_raycast	raycast_copy;
-	*/
+	int				last_draw_end;
+	t_raycast		raycast_copy;
+
 	if (mode == 1)
 	{
 		time = calculate_time();
@@ -96,7 +95,7 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 		}
 		else
 		{
-			calculate_dist_perp_wall(raycast);
+			calculate_dist_perp_wall(game, raycast);
 			if (ft_strchr("oO", game->map[raycast->map_x][raycast->map_y]))
 			{
 				if (raycast->side == 0)
@@ -116,14 +115,6 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 					return ;
 				}
 			}
-			//------------------------
-					/*
-			if (ft_strchr("DoO", game->map[raycast->map_x][raycast->map_y]))
-			{
-				raycast->dist_perp_wall += 0.5;
-			}
-			*/
-			//------------------------
 			raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
 			raycast->draw_start = -raycast->line_height / 2 + game->mouse_height;
 			if (raycast->draw_start < 0)
@@ -131,10 +122,8 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 			raycast->draw_end = raycast->line_height / 2 + game->mouse_height;
 			if (raycast->draw_end >= HEIGHT_SCREEN)
 				raycast->draw_end = HEIGHT_SCREEN - 1;
-			//last_draw_end = raycast->draw_end;
+			last_draw_end = raycast->draw_end;
 			draw_line(game, x, raycast);
-					/*
-			//------------------------
 			if (ft_strchr("DoO", game->map[raycast->map_x][raycast->map_y]))
 			{
 				copy_raycast(raycast, &raycast_copy);
@@ -143,33 +132,32 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 					((raycast_copy.side == 0 && raycast_copy.map_y == raycast->map_y)
 					||(raycast_copy.side == 1 && raycast_copy.map_x == raycast->map_x)))
 				{
-					//------------------------
-					double			wall_x;
-					int				tex_x;
-					calculate_dist_perp_wall(&raycast_copy);
-					if (raycast_copy.side == 0)
-						wall_x = raycast_copy.pos_y + raycast_copy.dist_perp_wall * raycast_copy.ray_dir_y;
-					else
-						wall_x = raycast_copy.pos_x + raycast_copy.dist_perp_wall * raycast_copy.ray_dir_x;
-					wall_x -= floor(wall_x);
-					tex_x = (int)(wall_x * (double)(256));
-					if ((raycast_copy.side == 0 && raycast_copy.ray_dir_x > 0)
-						|| (raycast_copy.side == 1 && raycast_copy.ray_dir_y < 0))
-						tex_x = 256 - tex_x - 1;
-					if (tex_x < 256 / 2)
-						display_rayon(game, x, &raycast_copy, mode);
-					//------------------------
-					calculate_dist_perp_wall(&raycast_copy);
+					calculate_dist_perp_wall(game, &raycast_copy);
 					raycast_copy.line_height = HEIGHT_SCREEN / raycast_copy.dist_perp_wall;
 					raycast_copy.draw_end = raycast_copy.line_height / 2 + game->mouse_height;
 					if (raycast_copy.draw_end >= HEIGHT_SCREEN)
 						raycast_copy.draw_end = HEIGHT_SCREEN - 1;
 					if (raycast_copy.draw_end > last_draw_end)
 						display_rayon(game, x, &raycast_copy, mode);
+					else if (raycast_copy.draw_end == last_draw_end)
+					{
+						double                  wall_x;
+						int                             tex_x;
+						calculate_dist_perp_wall(game, &raycast_copy);
+						if (raycast_copy.side == 0)
+								wall_x = raycast_copy.pos_y + raycast_copy.dist_perp_wall * raycast_copy.ray_dir_y;
+						else
+								wall_x = raycast_copy.pos_x + raycast_copy.dist_perp_wall * raycast_copy.ray_dir_x;
+						wall_x -= floor(wall_x);
+						tex_x = (int)(wall_x * (double)(256));
+						if ((raycast_copy.side == 0 && raycast_copy.ray_dir_x > 0)
+								|| (raycast_copy.side == 1 && raycast_copy.ray_dir_y < 0))
+								tex_x = 256 - tex_x - 1;
+						if (wall_x < 0.5)
+								display_rayon(game, x, &raycast_copy, mode);
+			}
 				}
 			}
-					*/
-			//------------------------
 		}
 	}
 	else if (ft_strchr("d", game->map[raycast->map_x][raycast->map_y]))

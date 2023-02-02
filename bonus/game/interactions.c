@@ -6,13 +6,13 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 14:38:18 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 17:37:51 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-t_anim *find_square(t_game *game, int x, int y)
+t_anim	*find_square(t_game *game, int x, int y)
 {
 	t_double_list	*buffer;
 
@@ -49,6 +49,7 @@ void	suppress_node(t_game *game, int x, int y)
 		buffer = buffer->next;
 	}
 }
+
 void	interact(t_game *game)
 {
 	t_anim			*new_anim;
@@ -63,7 +64,7 @@ void	interact(t_game *game)
 	raycast.plane_y = sin(radian_value(game->player->orientation + 90));
 	calculate_delta_and_dist(WIDTH_SCREEN / 2, &raycast);
 	detect_wall(game, &raycast);
-	calculate_dist_perp_wall(&raycast);
+	calculate_dist_perp_wall(game, &raycast);
 	if (raycast.dist_perp_wall > (double)1)
 		return ;
 	if (game->map[raycast.map_x][raycast.map_y] == 'D')

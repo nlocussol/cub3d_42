@@ -6,26 +6,31 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:27:50 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/30 14:59:23 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:00:32 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	calculate_dist_perp_wall(t_raycast *raycast)
+void	calculate_dist_perp_wall(t_game *game, t_raycast *raycast)
 {
 	if (raycast->side == 0)
 	{
 		raycast->dist_perp_wall = raycast->side_dist_x;
+		if (ft_strchr("DoO", game->map[raycast->map_x][raycast->map_y]))
+			raycast->dist_perp_wall += raycast->delta_dist_x * 0.5;
 		raycast->dist_perp_wall -= raycast->delta_dist_x;
 	}
 	else
 	{
 		raycast->dist_perp_wall = raycast->side_dist_y;
+		if (ft_strchr("DoO", game->map[raycast->map_x][raycast->map_y]))
+			raycast->dist_perp_wall += raycast->delta_dist_y * 0.5;
 		raycast->dist_perp_wall -= raycast->delta_dist_y;
 	}
 	if (raycast->dist_perp_wall == 0)
 		raycast->dist_perp_wall = INFINITY;
+	printf("%lf\n", raycast->dist_perp_wall);
 }
 
 void	calculate_delta_and_dist_next(t_raycast *raycast)
