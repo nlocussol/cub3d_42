@@ -33,7 +33,7 @@ void	nb_game_bar(t_game *game)
 	while (i != 8)
 	{
 		nb = ft_itoa(i + 1);
-		mlx_string_put(game->mlx, game->window, y + 20, x + 110, 0x2cfb53, nb);
+		mlx_string_put(game->mlx, game->window, y + 20, x + 110, 0xB39797, nb);
 		free(nb);
 		y += 128;
 		i++;
@@ -49,7 +49,7 @@ void	game_bar(t_game *game)
 	y = 448;
 	while (y < 1472)
 	{
-		put_64_block(game, x, y ,0x2cfb53);
+		put_64_block(game, x, y ,0xB39797);
 		y += 128;
 	}
 }

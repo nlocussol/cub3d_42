@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:54:29 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/27 11:23:17 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/02 10:33:34 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ void	check_data(t_data *data)
 
 void	pars_door(t_data *data, int i, int j)
 {
-	if (data->map[i][j - 1] == '1' && data->map[i][j + 1] == '1')
+	if (data->map[i][j - 1] == '1' && data->map[i][j + 1] == '1'
+		&& data->map[i - 1][j] != 'D' && data->map[i + 1][j] != 'D')
 		return ;
-	else if (data->map[i - 1][j] == '1' && data->map[i + 1][j] == '1')
+	else if (data->map[i - 1][j] == '1' && data->map[i + 1][j] == '1'
+		&& data->map[i][j + 1] != 'D' && data->map[i][j - 1] != 'D')
 		return ;
 	else
 	{
