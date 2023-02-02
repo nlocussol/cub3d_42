@@ -6,11 +6,12 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/01 17:59:48 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:33:44 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "game.h"
 
 int	hit_wall_forward_backward(t_game *game, int coeff,
 		double function_x(double), double function_y(double))
@@ -139,9 +140,31 @@ long	calculate_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
+void	check_anim(t_game *game)
+{
+	t_double_list	*buffer;
+	t_anim			*anim;
+	long			time;
 
+	time = calculate_time();
+	buffer = game->lst_anim;
+	while (buffer)
+	{
+		anim = buffer->content;
+		if (ft_strchr("oO", game->map[anim->x][anim->y]) && time - anim->time_anim_start >= 2000)
+		{
+			suppress_node(game, anim->x, anim->y);
+			if (game->map[anim->x][anim->y] == 'o')
+				game->map[anim->x][anim->y] = 'D';
+			else
+				game->map[anim->x][anim->y] = 'd';
+		}
+		buffer = buffer->next;
+	}
+}
 int	launch_movements(t_game *game)
 {
+	
 	if (game->movements[0] == 1)
 		key_hook(W, game);
 	if (game->movements[1] == 1)
@@ -152,5 +175,6 @@ int	launch_movements(t_game *game)
 		key_hook(D, game);
 	move_camera(game);
 	display_screen(game, -1);
+	check_anim(game);
 	return (0);
 }

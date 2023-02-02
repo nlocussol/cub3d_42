@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:29:09 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 10:51:36 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 13:22:14 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,16 @@ void	draw_line(t_game *game, int x, t_raycast *raycast)
 	long			time;
 
 	time = calculate_time();
-	if (ft_strchr("O", game->map[raycast->map_x][raycast->map_y]))
+	if (ft_strchr("O", game->map[raycast->map_x][raycast->map_y])
+		&& find_square(game, raycast->map_x, raycast->map_y))
 	{
 		if (raycast->side == 0)
 			wall_x = raycast->pos_y - (double)((time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start)) / 2000 + raycast->dist_perp_wall * raycast->ray_dir_y;
 		else
 			wall_x = raycast->pos_x - (double)((time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start)) / 2000 + raycast->dist_perp_wall * raycast->ray_dir_x;
 	}
-	else if (ft_strchr("o", game->map[raycast->map_x][raycast->map_y]))
+	else if (ft_strchr("o", game->map[raycast->map_x][raycast->map_y])
+		&& find_square(game, raycast->map_x, raycast->map_y))
 	{
 		if (raycast->side == 0)
 			wall_x = raycast->pos_y - (double)(1 - (time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start)) / 2000 + raycast->dist_perp_wall * raycast->ray_dir_y;

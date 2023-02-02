@@ -6,12 +6,49 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 10:50:09 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:38:18 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+t_anim *find_square(t_game *game, int x, int y)
+{
+	t_double_list	*buffer;
+
+	buffer = game->lst_anim;
+	while (buffer)
+	{
+		if (((t_anim *)(buffer->content))->x == x
+			&& ((t_anim *)(buffer->content))->y == y)
+			return (buffer->content);
+		buffer = buffer->next;
+	}
+	return (NULL);
+}
+
+void	suppress_node(t_game *game, int x, int y)
+{
+	t_double_list	*buffer;
+
+	buffer = game->lst_anim;
+	while (buffer)
+	{
+		if (((t_anim *)(buffer->content))->x == x
+			&& ((t_anim *)(buffer->content))->y == y)
+		{
+			if (buffer->previous)
+				buffer->previous->next = buffer->next;
+			else
+				game->lst_anim = buffer->next;
+			if (buffer->next)
+				buffer->next->previous = buffer->previous;
+			if (!buffer->previous && !buffer->next)
+				game->lst_anim = NULL;
+		}
+		buffer = buffer->next;
+	}
+}
 void	interact(t_game *game)
 {
 	t_anim			*new_anim;
@@ -31,6 +68,8 @@ void	interact(t_game *game)
 		return ;
 	if (game->map[raycast.map_x][raycast.map_y] == 'D')
 	{
+		if (find_square(game, raycast.map_x, raycast.map_y))
+			suppress_node(game, raycast.map_x, raycast.map_y);
 		new_anim = malloc(sizeof(t_anim));
 		new_anim->x = raycast.map_x;
 		new_anim->y = raycast.map_y;
@@ -41,6 +80,8 @@ void	interact(t_game *game)
 	}
 	else if (game->map[raycast.map_x][raycast.map_y] == 'd')
 	{
+		if (find_square(game, raycast.map_x, raycast.map_y))
+			suppress_node(game, raycast.map_x, raycast.map_y);
 		new_anim = malloc(sizeof(t_anim));
 		new_anim->x = raycast.map_x;
 		new_anim->y = raycast.map_y;
