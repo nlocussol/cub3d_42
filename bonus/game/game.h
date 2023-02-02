@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/01 18:01:29 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 09:39:20 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_game
 	t_player		*player;
 	bool			anim_start;
 	long			time_start_anim;
+	t_double_list	*lst_anim;
 }	t_game;
 
 typedef struct s_raycast

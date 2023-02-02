@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/01 17:44:41 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/02 09:42:03 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 void	interact(t_game *game)
 {
-	t_raycast	raycast;
+	t_anim			new_anim;
+	t_double_list	*new_elt;
+	t_raycast		raycast;
 
 	raycast.pos_x = game->player->x / SIZE_BLOCK;
 	raycast.pos_y = game->player->y / SIZE_BLOCK;
@@ -30,15 +32,21 @@ void	interact(t_game *game)
 		return ;
 	if (game->map[raycast.map_x][raycast.map_y] == 'D')
 	{
-		game->anim_start = true;
+		new_anim.x = raycast.map_x;
+		new_anim.y = raycast.map_y;
+		new_anim.time_anim_start = calculate_time();
+		new_elt = ft_double_lstnew(&new_anim);
+		ft_double_lstadd_back(&game->lst_anim, new_elt);
 		game->map[raycast.map_x][raycast.map_y] = 'O';
-		game->time_start_anim = calculate_time();
 	}
 	else if (game->map[raycast.map_x][raycast.map_y] == 'd')
 	{
-		game->anim_start = true;
+		new_anim.x = raycast.map_x;
+		new_anim.y = raycast.map_y;
+		new_anim.time_anim_start = calculate_time();
+		new_elt = ft_double_lstnew(&new_anim);
+		ft_double_lstadd_back(&game->lst_anim, new_elt);
 		game->map[raycast.map_x][raycast.map_y] = 'o';
-		game->time_start_anim = calculate_time();
 	}
 	/*
 	else if (game->map[raycast.map_x][raycast.map_y] == '1')

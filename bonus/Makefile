@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/01/28 16:31:23 by averdon          ###   ########.fr        #
+#    Updated: 2023/02/02 09:49:42 by averdon          ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -21,14 +21,15 @@ SRCS		?= main.c \
 			   game/initialize_game.c \
 			   game/game_utils.c \
 			   game/key_functions.c \
+			   game/anim_utils.c \
+			   game/move_camera.c \
+			   game/interactions.c \
 			   game/display/display.c \
 			   game/display/calculate_display.c \
 			   game/display/draw_display.c \
 			   game/display/parse_image.c \
 			   game/display/inventory_bar.c \
 			   game/display/minimap.c \
-			   game/move_camera.c \
-			   game/interactions.c
 
 OBJS		?= ${SRCS:.c=.o}
 
