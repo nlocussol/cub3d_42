@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 11:10:05 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:34:31 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,21 @@ typedef struct s_anim
 	long	time_anim_start;
 }	t_anim;
 
+typedef struct s_graff
+{
+	int		x;
+	int		y;
+	int		frame;
+	char	direction;
+}	t_graff;
+
 typedef struct s_game
 {
 	void			*mlx;
 	void			*window;
 	char			**map;
 	t_img			*screen_img;
-	unsigned int	**images[5];
+	int				**images[6];
 	char			*text_no;
 	char			*text_so;
 	char			*text_we;
@@ -65,6 +73,7 @@ typedef struct s_game
 	long			time_start;
 	t_player		*player;
 	t_double_list	*lst_anim;
+	t_double_list	*lst_graff;
 }	t_game;
 
 typedef struct s_raycast
@@ -106,6 +115,7 @@ typedef struct s_raycast
 # define S 115
 # define D 100
 # define E 101
+# define G 103
 
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
@@ -133,8 +143,9 @@ int		key_hook(int keycode, t_game *game);
 void	move_player(t_game	*game, int move);
 void	turn_camera(t_game	*game, int move);
 int		move_camera(void *arg);
-void	interact(t_game *game);
+void	interact(t_game *game, int keycode);
 
 t_anim	*find_square(t_game *game, int x, int y);
+t_graff	*find_square_2(t_game *game, t_raycast *raycast);
 void	suppress_node(t_game *game, int x, int y);
 #endif

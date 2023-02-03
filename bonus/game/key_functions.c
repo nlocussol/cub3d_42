@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 18:08:40 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/03 12:45:01 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ int	key_hook(int keycode, t_game *game)
 		else
 			game->minimap = 0;
 	}
-	else if (keycode == E)
-		interact(game);
+	else if (keycode == E || keycode == G)
+		interact(game, keycode);
 	return (0);
 }
 
@@ -164,7 +164,6 @@ void	check_anim(t_game *game)
 }
 int	launch_movements(t_game *game)
 {
-	
 	if (game->movements[0] == 1)
 		key_hook(W, game);
 	if (game->movements[1] == 1)

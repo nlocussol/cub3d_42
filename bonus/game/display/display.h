@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:31:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 12:54:51 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:32:01 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # include "../game.h"
 
-unsigned int	calculate_color(int x, int y, t_img *img);
+int				calculate_color(int x, int y, t_img *img);
 void			nb_game_bar(t_game *game);
 void			game_bar(t_game *game);
 void			open_minimap(t_game *game);

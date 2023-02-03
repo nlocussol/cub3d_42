@@ -6,42 +6,45 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 12:54:33 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:32:52 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-unsigned int	calculate_color(int x, int y, t_img *img)
+int	calculate_color(int x, int y, t_img *img)
 {
 	int				r;
 	int				g;
 	int				b;
+	int				opacity;
 
+	opacity = img->addr[y * img->line_length + x * (img->bits_per_pixel / 8) + 3];
 	r = img->addr[y * img->line_length + x * (img->bits_per_pixel / 8) + 2];
 	g = img->addr[y * img->line_length + x * (img->bits_per_pixel / 8) + 1];
 	b = img->addr[y * img->line_length + x * (img->bits_per_pixel / 8)];
-	return ((r << 16) + (g << 8) + b);
+	if (opacity < 0)
+		return (-1);
+	return ((unsigned int)(r << 16) + (g << 8) + b);
 }
 
-unsigned int	**convert_image(int length, int width, t_img img)
+int	**convert_image(int length, int width, t_img img)
 {
 	int				y;
 	int				x;
-	unsigned int	**image;
+	int				**image;
 
-	image = ft_calloc(256 + 1, sizeof(unsigned int *));
+	image = ft_calloc(256 + 1, sizeof(int *));
 	y = 0;
 	while (y < length)
 	{
 		x = 0;
-		image[y] = ft_calloc(256 + 1, sizeof(unsigned int));
+		image[y] = ft_calloc(256 + 1, sizeof(int));
 		while (x < width)
 		{
 			image[y][x] = calculate_color(x, y, &img);
 			x++;
 		}
-		
 		y++;
 	}
 	return (image);
@@ -49,7 +52,7 @@ unsigned int	**convert_image(int length, int width, t_img img)
 
 void	parse_image(t_game *game)
 {
-	char			*name_sprite[5];
+	char			*name_sprite[6];
 	int				i;
 	t_img			img;
 	int				width;
@@ -60,8 +63,9 @@ void	parse_image(t_game *game)
 	name_sprite[2] = game->text_ea;
 	name_sprite[3] = game->text_we;
 	name_sprite[4] = game->text_do;
+	name_sprite[5] = "assets/circle-xxl.xpm";
 	i = 0;
-	while (i < 5)
+	while (i < 6)
 	{
 		img.img = mlx_xpm_file_to_image(game->mlx, name_sprite[i],
 				&width, &length);

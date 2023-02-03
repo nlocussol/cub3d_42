@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:29:09 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 20:03:43 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/03 13:17:37 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,15 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 unsigned int	color_to_draw(t_game *game, t_raycast *raycast,
 		int tex_x, int tex_y)
 {
-	unsigned int	color;
+	int	color;
 
 	color = 0;
+	if (find_square_2(game, raycast))
+	{
+		color = game->images[5][tex_y][tex_x];
+		if (color >= 0)
+			return (color);
+	}
 	if (game->map[raycast->map_x][raycast->map_y] == '1')
 	{
 		if (raycast->side == 0)
@@ -54,6 +60,7 @@ void	draw_wall(t_game *game, t_raycast *raycast, int x, double wall_x)
 	double			step;
 	int				tex_x;
 	int				tex_y;
+	int				color;
 
 	step = 1.0 * 256 / raycast->line_height;
 	tex_x = (int)(wall_x * (double)(256));
@@ -67,8 +74,9 @@ void	draw_wall(t_game *game, t_raycast *raycast, int x, double wall_x)
 	{
 		tex_y = (int)tex_pos % (256 - 1);
 		tex_pos += step;
-		my_mlx_pixel_put(game->screen_img, x, raycast->draw_start,
-			color_to_draw(game, raycast, tex_x, tex_y));
+		color = color_to_draw(game, raycast, tex_x, tex_y);
+		if (color >= 0)
+			my_mlx_pixel_put(game->screen_img, x, raycast->draw_start, color);
 		raycast->draw_start++;
 	}
 }
