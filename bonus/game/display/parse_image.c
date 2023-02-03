@@ -6,13 +6,13 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 13:32:52 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/03 15:18:11 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int	calculate_color(int x, int y, t_img *img)
+unsigned int	calculate_color(int x, int y, t_img *img)
 {
 	int				r;
 	int				g;
@@ -23,16 +23,14 @@ int	calculate_color(int x, int y, t_img *img)
 	r = img->addr[y * img->line_length + x * (img->bits_per_pixel / 8) + 2];
 	g = img->addr[y * img->line_length + x * (img->bits_per_pixel / 8) + 1];
 	b = img->addr[y * img->line_length + x * (img->bits_per_pixel / 8)];
-	if (opacity < 0)
-		return (-1);
-	return ((unsigned int)(r << 16) + (g << 8) + b);
+	return ((opacity << 24) + (r << 16) + (g << 8) + b);
 }
 
-int	**convert_image(int length, int width, t_img img)
+unsigned int	**convert_image(int length, int width, t_img img)
 {
 	int				y;
 	int				x;
-	int				**image;
+	unsigned int				**image;
 
 	image = ft_calloc(256 + 1, sizeof(int *));
 	y = 0;
