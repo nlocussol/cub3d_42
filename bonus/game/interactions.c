@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 13:22:11 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:37:37 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,25 @@ t_graff	*find_square_2(t_game *game, t_raycast *raycast)
 	buffer = game->lst_graff;
 	while (buffer)
 	{
-		if (((t_graff *)(buffer->content))->x == raycast->map_x
-			&& ((t_graff *)(buffer->content))->y == raycast->map_y
-			&& good_side(raycast, ((t_graff *)(buffer->content))->direction))
+		if (good_side(raycast, ((t_graff *)(buffer->content))->direction)
+		&& ((t_graff *)(buffer->content))->x == raycast->map_x
+		&& ((t_graff *)(buffer->content))->y == raycast->map_y)
 			return (buffer->content);
 		buffer = buffer->next;
 	}
 	return (NULL);
 }
 
-void	suppress_node_2(t_game *game, int x, int y)
+void	suppress_node_2(t_game *game, t_raycast *raycast)
 {
 	t_double_list	*buffer;
 
 	buffer = game->lst_graff;
 	while (buffer)
 	{
-		if (((t_graff *)(buffer->content))->x == x
-			&& ((t_graff *)(buffer->content))->y == y)
+		if (good_side(raycast, ((t_graff *)(buffer->content))->direction)
+		&& ((t_graff *)(buffer->content))->x == raycast->map_x
+		&& ((t_graff *)(buffer->content))->y == raycast->map_y)
 		{
 			if (buffer->previous)
 				buffer->previous->next = buffer->next;
@@ -145,7 +146,7 @@ void	interact(t_game *game, int keycode)
 	}
 	else if (keycode == G && ft_strchr("1D", game->map[raycast.map_x][raycast.map_y]))
 	{
-		if (find_square_2(game, &raycast))
+		if (find_square_2(game, &raycast) || game->nb_graff == 0)
 			return ;
 		new_graff = malloc(sizeof(t_graff));
 		new_graff->x = raycast.map_x;
@@ -167,5 +168,13 @@ void	interact(t_game *game, int keycode)
 		new_graff->frame = 0;
 		new_elt = ft_double_lstnew(new_graff);
 		ft_double_lstadd_back(&game->lst_graff, new_elt);
+		game->nb_graff -= 1;
+	}
+	else if (keycode == H && ft_strchr("1D", game->map[raycast.map_x][raycast.map_y]))
+	{
+		if (!find_square_2(game, &raycast))
+			return ;
+		suppress_node_2(game, &raycast);
+		game->nb_graff += 1;
 	}
 }

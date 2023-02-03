@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/02/02 14:34:57 by averdon          ###   ########.fr        #
+#    Updated: 2023/02/03 16:05:19 by averdon          ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -23,6 +23,7 @@ SRCS		?= main.c \
 			   game/key_functions.c \
 			   game/move_camera.c \
 			   game/interactions.c \
+			   game/song.c \
 			   game/display/display.c \
 			   game/display/calculate_display.c \
 			   game/display/draw_display.c \

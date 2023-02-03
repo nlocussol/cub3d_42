@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   song.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 23:32:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 16:11:41 by averdon          ###   ########.fr       */
+/*   Created: 2023/02/03 15:58:43 by averdon           #+#    #+#             */
+/*   Updated: 2023/02/03 16:20:18 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
+#include "../cub3d.h"
 
-# define INCLUDES_H
+void	play_song(void)
+{
+	int	pid;
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <X11/X.h>
-# include <math.h>
-# include <stdbool.h>
-# include <sys/time.h>
-# include <signal.h>
-
-# include "libft/libft.h"
-# include "minilibx/mlx.h"
-# include "../parsing/parsing.h"
-# include "../game/game.h"
-# include "../game/display/display.h"
-
-#endif
+	pid = fork();
+	if (pid == 0)
+	{
+		system("paplay game/sound.ogg");
+		exit(0);
+	}
+}

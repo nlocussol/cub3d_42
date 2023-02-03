@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 15:16:10 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:35:50 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_game
 	t_player		*player;
 	t_double_list	*lst_anim;
 	t_double_list	*lst_graff;
+	int				nb_graff;
 }	t_game;
 
 typedef struct s_raycast
@@ -116,6 +117,8 @@ typedef struct s_raycast
 # define D 100
 # define E 101
 # define G 103
+# define H 104
+# define Z 122
 
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
@@ -148,4 +151,6 @@ void	interact(t_game *game, int keycode);
 t_anim	*find_square(t_game *game, int x, int y);
 t_graff	*find_square_2(t_game *game, t_raycast *raycast);
 void	suppress_node(t_game *game, int x, int y);
+
+void	play_song(void);
 #endif

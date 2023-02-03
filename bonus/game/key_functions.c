@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 12:45:01 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:38:48 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,10 @@ int	key_hook(int keycode, t_game *game)
 		else
 			game->minimap = 0;
 	}
-	else if (keycode == E || keycode == G)
+	else if (ft_strchr("egh", keycode))
 		interact(game, keycode);
+	else if (keycode == Z)
+		play_song();
 	return (0);
 }
 

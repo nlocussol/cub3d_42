@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:25:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 11:16:56 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:36:56 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ void	initialize_game(t_game	*game, t_data *data)
 	game->lst_anim = NULL;
 	game->lst_graff = NULL;
 	game->time_start = calculate_time();
+	game->nb_graff = 3;
 }

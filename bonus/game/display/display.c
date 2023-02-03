@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 13:19:22 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/03 17:31:44 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	copy_raycast(t_raycast *raycast, t_raycast *raycast_copy)
 	raycast_copy->line_height = raycast->line_height;
 }
 
-//comments are to make a door look thinner than the wall 
 void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 {
 	int				i;
