@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 15:18:11 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:43:34 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ unsigned int	**convert_image(int length, int width, t_img img)
 void	parse_image(t_game *game)
 {
 	char			*name_sprite[6];
+	char			*name_minimap[4];
 	int				i;
 	t_img			img;
 	int				width;
@@ -70,6 +71,21 @@ void	parse_image(t_game *game)
 		img.addr = mlx_get_data_addr(img.img,
 				&img.bits_per_pixel, &img.line_length, &img.endian);
 		game->images[i] = convert_image(length, width, img);
+		mlx_destroy_image(game->mlx, img.img);
+		i++;
+	}
+	name_minimap[0] = "assets/minimap/floor.xpm";
+	name_minimap[1] = "assets/minimap/wall.xpm";
+	name_minimap[2] = "assets/minimap/door.xpm";
+	name_minimap[3] = "assets/minimap/door_open.xpm";
+	i = 0;
+	while (i < 4)
+	{
+		img.img = mlx_xpm_file_to_image(game->mlx, name_minimap[i],
+				&width, &length);
+		img.addr = mlx_get_data_addr(img.img,
+				&img.bits_per_pixel, &img.line_length, &img.endian);
+		game->minimap_img[i] = convert_image(length, width, img);
 		mlx_destroy_image(game->mlx, img.img);
 		i++;
 	}

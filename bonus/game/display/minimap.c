@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:36:40 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/02/03 13:20:10 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/03 17:43:08 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	put_one_block(t_game *game, unsigned int color)
 {
 	int				x;
 	int				y;
-	unsigned int	color_screen;
 
 	x = game->x_minimap;
 	while (x < game->x_minimap + 16)
@@ -24,41 +23,29 @@ void	put_one_block(t_game *game, unsigned int color)
 		y = game->y_minimap;
 		while (y < game->y_minimap + 16)
 		{
-			color_screen = calculate_color(x - game->x_minimap, y - game->y_minimap, game->screen_img);
-			if (color != color_screen)
-				my_mlx_pixel_put(game->screen_img, y, x, color);
+			my_mlx_pixel_put(game->screen_img, y, x, color);
 			y++;
 		}
 		x++;
 	}
 }
 
-void	put_assets(t_game *game, char *image)
+void	put_assets(t_game *game, unsigned int **color)
 {
-	t_img			img;
 	int				x;
 	int				y;
-	unsigned int	color;
-	unsigned int	color_screen;
 
 	x = game->x_minimap;
-	img.img = mlx_xpm_file_to_image(game->mlx, image, &img.height, &img.width);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
 	while (x < game->x_minimap + 16)
 	{
 		y = game->y_minimap;
 		while (y < game->y_minimap + 16)
 		{
-			color = calculate_color(x - game->x_minimap, y - game->y_minimap, &img);
-			color_screen = calculate_color(x - game->x_minimap, y - game->y_minimap, game->screen_img);
-			if (color != color_screen)
-				my_mlx_pixel_put(game->screen_img, y, x, color);
+			my_mlx_pixel_put(game->screen_img, y, x, color[x - game->x_minimap][y - game->y_minimap]);
 			y++;
 		}
 		x++;
 	}
-	mlx_destroy_image(game->mlx, img.img);
 }
 
 int	calculate_arrow(int	a, int b, int mode)
@@ -135,16 +122,42 @@ void	put_pixel_color(t_game *game, int x, int y)
 		&& y == (int)(game->player->y / SIZE_BLOCK))
 		put_one_block(game, 0xFF0101);
 	else if (game->map[x][y] == '1' || game->map[x][y] == '\0')
-		put_assets(game, "assets/minimap/wall.xpm");
+		put_assets(game, game->minimap_img[1]);
 	else if (game->map[x][y] == '0')
-		put_assets(game, "assets/minimap/floor.xpm");
+		put_assets(game, game->minimap_img[0]);
 	else if (ft_strchr("NSEW", game->map[x][y]))
 		put_one_block(game, 0x00FF00);
-	else if (ft_strchr("DdoO", game->map[x][y]))
-		put_one_block(game, 0x0000FF);
+	else if (ft_strchr("D", game->map[x][y]))
+		put_assets(game, game->minimap_img[2]);
+	else if (ft_strchr("doO", game->map[x][y]))
+		put_assets(game, game->minimap_img[3]);
 	else
 		put_one_block(game, 0);
 }
+
+void	trace_circle(t_game *game)
+{
+	int	x;
+	int	y;
+	int	d;
+
+	x = 5 * 16;
+	y = 108;
+	d = 1 - x;
+	while (x > y)
+	{
+		my_mlx_pixel_put(game->screen_img, x, y, 0xF30606);
+		y++;
+		if (d < 0)
+			d = d + 2 * y + 1;
+		else
+		{
+			x--;
+			d = d + (2 * x) - (2 * y) + 1;
+		}
+	}
+}
+
 void	open_minimap(t_game *game)
 {
 	int			x;
@@ -152,9 +165,7 @@ void	open_minimap(t_game *game)
 	int			value_x;
 	int			value_y;
 
-	if (WIDTH_SCREEN < (16 * 11 + 10) || HEIGHT_SCREEN < (16 * 11 + 10))
-		return ;
-	game->x_minimap = 10;
+	game->x_minimap = 20;
 	x = (int)(game->player->x / SIZE_BLOCK) - 5;
 	if (x < 0)
 	{
@@ -165,7 +176,7 @@ void	open_minimap(t_game *game)
 		value_x = 6;
 	while (x < (int)(game->player->x / SIZE_BLOCK + value_x))
 	{
-		game->y_minimap = WIDTH_SCREEN - (16 * 11 + 10);
+		game->y_minimap = 20;
 		y = (int)(game->player->y / SIZE_BLOCK) - 5;
 		if (y < 0)
 		{
@@ -187,4 +198,5 @@ void	open_minimap(t_game *game)
 		game->x_minimap += 16;
 	}
 	put_cursor(game, 0, 0);
+	//trace_circle(game);
 }
