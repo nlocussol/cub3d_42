@@ -1,8 +1,8 @@
-		NO 			TestParsing/assets/north_text.xpm
-		SO 			TestParsing/assets/south_text.xpm
-		WE 			TestParsing/assets/west_text.xpm
-		EA 			TestParsing/assets/east_text.xpm
-		D			TestParsing/assets/door.xpm
+NO 			assets/north_text.xpm
+SO 			assets/south_text.xpm
+WE 			assets/west_text.xpm
+EA 			assets/east_text.xpm
+D			assets/door.xpm
 
 
 

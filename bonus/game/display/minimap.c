@@ -6,16 +6,17 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:36:40 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/29 14:16:31 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/03 13:20:10 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	put_one_block(t_game *game, int color)
+void	put_one_block(t_game *game, unsigned int color)
 {
-	int	x;
-	int	y;
+	int				x;
+	int				y;
+	unsigned int	color_screen;
 
 	x = game->x_minimap;
 	while (x < game->x_minimap + 16)
@@ -23,11 +24,41 @@ void	put_one_block(t_game *game, int color)
 		y = game->y_minimap;
 		while (y < game->y_minimap + 16)
 		{
-			my_mlx_pixel_put(game->screen_img, y, x, color);
+			color_screen = calculate_color(x - game->x_minimap, y - game->y_minimap, game->screen_img);
+			if (color != color_screen)
+				my_mlx_pixel_put(game->screen_img, y, x, color);
 			y++;
 		}
 		x++;
 	}
+}
+
+void	put_assets(t_game *game, char *image)
+{
+	t_img			img;
+	int				x;
+	int				y;
+	unsigned int	color;
+	unsigned int	color_screen;
+
+	x = game->x_minimap;
+	img.img = mlx_xpm_file_to_image(game->mlx, image, &img.height, &img.width);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
+			&img.line_length, &img.endian);
+	while (x < game->x_minimap + 16)
+	{
+		y = game->y_minimap;
+		while (y < game->y_minimap + 16)
+		{
+			color = calculate_color(x - game->x_minimap, y - game->y_minimap, &img);
+			color_screen = calculate_color(x - game->x_minimap, y - game->y_minimap, game->screen_img);
+			if (color != color_screen)
+				my_mlx_pixel_put(game->screen_img, y, x, color);
+			y++;
+		}
+		x++;
+	}
+	mlx_destroy_image(game->mlx, img.img);
 }
 
 int	calculate_arrow(int	a, int b, int mode)
@@ -104,22 +135,22 @@ void	put_pixel_color(t_game *game, int x, int y)
 		&& y == (int)(game->player->y / SIZE_BLOCK))
 		put_one_block(game, 0xFF0101);
 	else if (game->map[x][y] == '1' || game->map[x][y] == '\0')
-		put_one_block(game, 0);
+		put_assets(game, "assets/minimap/wall.xpm");
 	else if (game->map[x][y] == '0')
-		put_one_block(game, 0xFFFFFF);
+		put_assets(game, "assets/minimap/floor.xpm");
 	else if (ft_strchr("NSEW", game->map[x][y]))
 		put_one_block(game, 0x00FF00);
-	else if (ft_strchr("Dd", game->map[x][y]))
+	else if (ft_strchr("DdoO", game->map[x][y]))
 		put_one_block(game, 0x0000FF);
 	else
 		put_one_block(game, 0);
 }
 void	open_minimap(t_game *game)
 {
-	int	x;
-	int	y;
-	int	value_x;
-	int	value_y;
+	int			x;
+	int			y;
+	int			value_x;
+	int			value_y;
 
 	if (WIDTH_SCREEN < (16 * 11 + 10) || HEIGHT_SCREEN < (16 * 11 + 10))
 		return ;

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 10:16:29 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/03 11:10:05 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 typedef struct s_img
 {
 	void	*img;
+	int		height;
+	int		width;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;

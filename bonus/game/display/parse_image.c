@@ -6,21 +6,21 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 20:01:29 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/03 12:54:33 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-unsigned int	calculate_color(int x, int y, t_img img)
+unsigned int	calculate_color(int x, int y, t_img *img)
 {
 	int				r;
 	int				g;
 	int				b;
 
-	r = img.addr[y * img.line_length + x * (img.bits_per_pixel / 8) + 2];
-	g = img.addr[y * img.line_length + x * (img.bits_per_pixel / 8) + 1];
-	b = img.addr[y * img.line_length + x * (img.bits_per_pixel / 8)];
+	r = img->addr[y * img->line_length + x * (img->bits_per_pixel / 8) + 2];
+	g = img->addr[y * img->line_length + x * (img->bits_per_pixel / 8) + 1];
+	b = img->addr[y * img->line_length + x * (img->bits_per_pixel / 8)];
 	return ((r << 16) + (g << 8) + b);
 }
 
@@ -38,7 +38,7 @@ unsigned int	**convert_image(int length, int width, t_img img)
 		image[y] = ft_calloc(256 + 1, sizeof(unsigned int));
 		while (x < width)
 		{
-			image[y][x] = calculate_color(x, y, img);
+			image[y][x] = calculate_color(x, y, &img);
 			x++;
 		}
 		
