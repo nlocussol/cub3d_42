@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 17:43:34 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:33:00 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	parse_image(t_game *game)
 {
 	char			*name_sprite[6];
 	char			*name_minimap[4];
+	char			*name_game_bar[3];
 	int				i;
 	t_img			img;
 	int				width;
@@ -86,6 +87,20 @@ void	parse_image(t_game *game)
 		img.addr = mlx_get_data_addr(img.img,
 				&img.bits_per_pixel, &img.line_length, &img.endian);
 		game->minimap_img[i] = convert_image(length, width, img);
+		mlx_destroy_image(game->mlx, img.img);
+		i++;
+	}
+	name_game_bar[0] = "assets/game_bar/map1.xpm";
+	name_game_bar[1] = "assets/game_bar/map2.xpm";
+	name_game_bar[2] = "assets/game_bar/spraypaint.xpm";
+	i = 0;
+	while (i < 3)
+	{
+		img.img = mlx_xpm_file_to_image(game->mlx, name_game_bar[i],
+				&width, &length);
+		img.addr = mlx_get_data_addr(img.img,
+				&img.bits_per_pixel, &img.line_length, &img.endian);
+		game->bar_img[i] = convert_image(length, width, img);
 		mlx_destroy_image(game->mlx, img.img);
 		i++;
 	}

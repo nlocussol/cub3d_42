@@ -1,6 +1,6 @@
 #include "../../cub3d.h"
 
-void	put_64_block(t_game *game, int x_tmp, int y_tmp, int color)
+void	put_one_case(t_game *game, int x_tmp, int y_tmp, int color)
 {
 	int	x;
 	int	y;
@@ -40,16 +40,50 @@ void	nb_game_bar(t_game *game)
 	}
 }
 
+void	put_map_icone(t_game *game, int x, int y, unsigned int **color)
+{
+	int	x_img;
+	int	y_img;
+
+	x_img = 0;
+	while (x_img != 100)
+	{
+		y_img = 0;
+		while (y_img != 100)
+		{
+			if (color[x_img][y_img] != 0xff000000)
+				my_mlx_pixel_put(game->screen_img, y_img + y, x_img + x, color[x_img][y_img]);
+			y_img++;
+		}
+		x_img++;
+	}
+}
+
 void	game_bar(t_game *game)
 {
-	int		x;
-	int		y;
+	int			x;
+	int			y;
+	int			i;
+	static int	anim = 0;
 
+	anim++;
+	i = 0;
 	x = 864;
 	y = 448;
 	while (y < 1472)
 	{
-		put_64_block(game, x, y ,0xB39797);
+		put_one_case(game, x, y ,0xB39797);
+		if (i == 1 && anim <= 50)
+			put_map_icone(game, x + 10, y + 15, game->bar_img[0]);
+		else if (i == 1 && anim > 50)
+		{
+			if (anim == 100)
+				anim = 0;
+			put_map_icone(game, x + 10, y + 15, game->bar_img[1]);
+		}
+		if (i == 0)
+			put_map_icone(game, x + 10, y + 15, game->bar_img[2]);
 		y += 128;
+		i++;
 	}
 }

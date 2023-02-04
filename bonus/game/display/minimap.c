@@ -6,11 +6,24 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:36:40 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/02/03 17:43:08 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/04 15:43:01 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+void	put_player_map(t_game *game, int x, int y)
+{
+	my_mlx_pixel_put(game->screen_img, y, x, 0xFF0101);
+	my_mlx_pixel_put(game->screen_img, y - 1, x, 0xFF0101);
+	my_mlx_pixel_put(game->screen_img, y + 1, x, 0xFF0101);
+	my_mlx_pixel_put(game->screen_img, y, x - 1, 0xFF0101);
+	my_mlx_pixel_put(game->screen_img, y, x + 1, 0xFF0101);
+	my_mlx_pixel_put(game->screen_img, y - 1, x - 1, 0xFF0101);
+	my_mlx_pixel_put(game->screen_img, y + 1, x + 1, 0xFF0101);
+	my_mlx_pixel_put(game->screen_img, y - 1, x + 1, 0xFF0101);
+	my_mlx_pixel_put(game->screen_img, y + 1, x - 1, 0xFF0101);
+}
 
 void	put_one_block(t_game *game, unsigned int color)
 {
@@ -42,6 +55,13 @@ void	put_assets(t_game *game, unsigned int **color)
 		while (y < game->y_minimap + 16)
 		{
 			my_mlx_pixel_put(game->screen_img, y, x, color[x - game->x_minimap][y - game->y_minimap]);
+		//	printf("\nX player: %d X pixel: %d\n", (int)game->player->x, x);
+		//	printf("Y player: %d Y pixel: %d\n", (int)game->player->y, y);
+			if (x == (int)game->player->x && y == (int)game->player->y)
+			{
+				printf("ok\n");
+				put_player_map(game, x, y);
+			}
 			y++;
 		}
 		x++;
@@ -118,15 +138,10 @@ void	put_cursor(t_game *game, int x, int y)
 
 void	put_pixel_color(t_game *game, int x, int y)
 {
-	if (x == (int)(game->player->x / SIZE_BLOCK)
-		&& y == (int)(game->player->y / SIZE_BLOCK))
-		put_one_block(game, 0xFF0101);
-	else if (game->map[x][y] == '1' || game->map[x][y] == '\0')
+	if (game->map[x][y] == '1' || game->map[x][y] == '\0')
 		put_assets(game, game->minimap_img[1]);
-	else if (game->map[x][y] == '0')
+	else if (ft_strchr("NSEW0", game->map[x][y]))
 		put_assets(game, game->minimap_img[0]);
-	else if (ft_strchr("NSEW", game->map[x][y]))
-		put_one_block(game, 0x00FF00);
 	else if (ft_strchr("D", game->map[x][y]))
 		put_assets(game, game->minimap_img[2]);
 	else if (ft_strchr("doO", game->map[x][y]))
