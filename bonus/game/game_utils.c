@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:24:24 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/28 16:34:06 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/06 15:59:20 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	free_all(t_game *game)
 	mlx_destroy_display(game->mlx);
 	free_tab(game->map);
 	free(game->mlx);
+	free(game);
 }
 
 int	close_window(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/04 16:31:01 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:21:35 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_game
 	t_double_list	*lst_anim;
 	t_double_list	*lst_graff;
 	int				nb_graff;
+	int				bar_index;
 }	t_game;
 
 typedef struct s_raycast
@@ -113,6 +114,8 @@ typedef struct s_raycast
 
 # define TAB 65289
 # define ECHAP 65307
+# define MOUSE_UP 4
+# define MOUSE_DOWN 5
 # define W 119
 # define A 97
 # define S 115
@@ -129,6 +132,7 @@ typedef struct s_raycast
 # define CAMERA_SPEED_REVERSE 25
 # define HIT_BOX_WALL 10
 
+int		mouse_hook(int mouse, t_game *game);
 void	start_game(t_data *data);
 void	initialize_game(t_game	*game, t_data *data);
 void	parse_image(t_game *game);

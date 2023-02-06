@@ -6,12 +6,30 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 17:38:48 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:14:04 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #include "game.h"
+
+int	mouse_hook(int mouse, t_game *game)
+{
+	if (mouse == MOUSE_UP)
+	{
+		printf("%d\n", game->bar_index);
+		game->bar_index--;
+		if (game->bar_index < 1)
+			game->bar_index = 8;
+	}
+	else if (mouse == MOUSE_DOWN)
+	{
+		game->bar_index++;
+		if (game->bar_index > 8)
+			game->bar_index = 1;
+	}
+	return (0);
+}
 
 int	hit_wall_forward_backward(t_game *game, int coeff,
 		double function_x(double), double function_y(double))
@@ -45,6 +63,14 @@ int	hit_wall_left_right(t_game *game, int coeff,
 	if (ft_strchr("1DOo", game->map[(int)x][(int)y]))
 		return (1);
 	return (0);
+}
+
+void	move_bar(t_game *game)
+{
+	if (game->bar_index == 2)
+		game->minimap = 1;
+	else
+		game->minimap = 0;
 }
 
 void	move_player(t_game	*game, int keycode)
@@ -86,19 +112,14 @@ int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == ECHAP)
 		close_window(game);
-	else if (keycode == W || keycode == A || keycode == S || keycode == D)
+	if (game->bar_index != 0)
+		move_bar(game);
+	if (keycode == W || keycode == A || keycode == S || keycode == D)
 		move_player(game, keycode);
 	else if (keycode == LEFT_ARROW)
 		turn_camera(game, 3);
 	else if (keycode == RIGHT_ARROW)
 		turn_camera(game, -3);
-	else if (keycode == TAB)
-	{
-		if (game->minimap == 0)
-			game->minimap = 1;
-		else
-			game->minimap = 0;
-	}
 	else if (ft_strchr("egh", keycode))
 		interact(game, keycode);
 	else if (keycode == Z)
@@ -108,6 +129,8 @@ int	key_hook(int keycode, t_game *game)
 
 int	key_pressed(int keycode, t_game *game)
 {
+	if (keycode >= 49 && keycode <= 57)
+		game->bar_index = keycode - 48;
 	if (keycode == W)
 		game->movements[0] = 1;
 	else if (keycode == A)
@@ -164,6 +187,7 @@ void	check_anim(t_game *game)
 		buffer = buffer->next;
 	}
 }
+
 int	launch_movements(t_game *game)
 {
 	if (game->movements[0] == 1)

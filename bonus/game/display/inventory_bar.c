@@ -20,6 +20,26 @@ void	put_one_case(t_game *game, int x_tmp, int y_tmp, int color)
 	}
 }
 
+void	put_big_case(t_game *game, int x_tmp, int y_tmp, int color)
+{
+	int	x;
+	int	y;
+	
+	x = x_tmp;
+	while (x < x_tmp + 136)
+	{
+		y = y_tmp;
+		while (y < y_tmp + 134)
+		{
+			if ((x >= x_tmp && x < x_tmp + 5) || (y >= y_tmp && y < y_tmp + 5)
+					|| (y > y_tmp + 127 && y < y_tmp + 134) || (x > x_tmp + 131 && x < x_tmp + 136))
+				my_mlx_pixel_put(game->screen_img, y, x, color);
+			y++;
+		}
+		x++;
+	}
+}
+
 void	nb_game_bar(t_game *game)
 {
 	int		i;
@@ -27,7 +47,7 @@ void	nb_game_bar(t_game *game)
 	int		y;
 	char	*nb;
 
-	x = 864;
+	x = 834;
 	y = 448;
 	i = 0;
 	while (i != 8)
@@ -68,11 +88,15 @@ void	game_bar(t_game *game)
 
 	anim++;
 	i = 0;
-	x = 864;
+	x = 834;
 	y = 448;
 	while (y < 1472)
 	{
 		put_one_case(game, x, y ,0xB39797);
+		if (i + 1 == game->bar_index)
+			put_big_case(game, x - 5, y - 5, 0xDFDFDF);
+		if (i == 0)
+			put_map_icone(game, x + 10, y + 15, game->bar_img[2]);
 		if (i == 1 && anim <= 50)
 			put_map_icone(game, x + 10, y + 15, game->bar_img[0]);
 		else if (i == 1 && anim > 50)
@@ -81,8 +105,6 @@ void	game_bar(t_game *game)
 				anim = 0;
 			put_map_icone(game, x + 10, y + 15, game->bar_img[1]);
 		}
-		if (i == 0)
-			put_map_icone(game, x + 10, y + 15, game->bar_img[2]);
 		y += 128;
 		i++;
 	}

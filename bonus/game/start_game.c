@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/31 12:40:34 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:05:03 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 void	start_game(t_data *data)
 {
-	t_game	game;
+	t_game	*game;
 
-	initialize_game(&game, data);
-	parse_image(&game);
-	mlx_mouse_move(game.mlx, game.window, 0, HEIGHT_SCREEN / 2);
-	mlx_mouse_hide(game.mlx, game.window);
-	mlx_loop_hook(game.mlx, launch_movements, &game);
-	mlx_hook(game.window, KeyRelease, KeyReleaseMask, key_released, &game);
-	mlx_hook(game.window, KeyPress, KeyPressMask, key_pressed, &game);
-	mlx_hook(game.window, DestroyNotify, StructureNotifyMask,
-		close_window, &game);
-	mlx_loop(game.mlx);
+	game = malloc(sizeof(t_game));
+	initialize_game(game, data);
+	parse_image(game);
+	mlx_mouse_move(game->mlx, game->window, 0, HEIGHT_SCREEN / 2);
+	mlx_mouse_hide(game->mlx, game->window);
+	mlx_loop_hook(game->mlx, launch_movements, game);
+	//mlx_hook(game->window, ButtonPress, ButtonPressMask, mouse_hook, game);
+	mlx_hook(game->window, KeyRelease, KeyReleaseMask, key_released, game);
+	mlx_hook(game->window, KeyPress, KeyPressMask, key_pressed, game);
+	mlx_hook(game->window, DestroyNotify, StructureNotifyMask,
+		close_window, game);
+	mlx_loop(game->mlx);
 }
