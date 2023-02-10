@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:29:09 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/08 14:09:31 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/10 20:27:48 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,45 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+unsigned int	find_texture_wall(t_game *game, t_raycast *raycast,
+		int tex_x, int tex_y)
+{
+	int	color;
+
+	color = 0;
+	if (raycast->side == 0)
+	{
+		if (raycast->step_x == 1)
+			color = game->images[0][tex_y][tex_x];
+		else
+			color = game->images[1][tex_y][tex_x];
+	}
+	else if (raycast->side == 1)
+	{
+		if (raycast->step_y == 1)
+			color = game->images[2][tex_y][tex_x];
+		else
+			color = game->images[3][tex_y][tex_x];
+	}
+	return (color);
+}
+
 unsigned int	color_to_draw(t_game *game, t_raycast *raycast,
 		int tex_x, int tex_y)
 {
-	int			color;
+	int	color;
+	int	frame;
 
 	color = 0;
 	if (find_square_2(game, raycast))
 	{
-		color = game->images[5 + find_square_2(game, raycast)->frame][tex_y][tex_x];
+		frame = 5 + find_square_2(game, raycast)->frame;
+		color = game->images[frame][tex_y][tex_x];
 		if (color >= 0)
 			return (color);
 	}
 	if (game->map[raycast->map_x][raycast->map_y] == '1')
-	{
-		if (raycast->side == 0)
-		{
-			if (raycast->step_x == 1)
-				color = game->images[0][tex_y][tex_x];
-			else
-				color = game->images[1][tex_y][tex_x];
-		}
-		else if (raycast->side == 1)
-		{
-			if (raycast->step_y == 1)
-				color = game->images[2][tex_y][tex_x];
-			else
-				color = game->images[3][tex_y][tex_x];
-		}
-	}
+		color = find_texture_wall(game, raycast, tex_x, tex_y);
 	else
 		color = game->images[4][tex_y][tex_x];
 	return (color);
@@ -60,7 +70,7 @@ void	draw_wall(t_game *game, t_raycast *raycast, int x, double wall_x)
 	double			step;
 	int				tex_x;
 	int				tex_y;
-	unsigned int				color;
+	unsigned int	color;
 
 	step = 1.0 * 256 / raycast->line_height;
 	tex_x = (int)(wall_x * (double)(256));
@@ -82,42 +92,15 @@ void	draw_wall(t_game *game, t_raycast *raycast, int x, double wall_x)
 
 void	draw_line(t_game *game, int x, t_raycast *raycast)
 {
-	double			wall_x;
-	int				i;
-	long			time;
+	int		i;
 
-	time = calculate_time();
-	if (ft_strchr("O", game->map[raycast->map_x][raycast->map_y])
-		&& find_square(game, raycast->map_x, raycast->map_y))
-	{
-		if (raycast->side == 0)
-			wall_x = raycast->pos_y - (double)((time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start)) / 2000 + raycast->dist_perp_wall * raycast->ray_dir_y;
-		else
-			wall_x = raycast->pos_x - (double)((time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start)) / 2000 + raycast->dist_perp_wall * raycast->ray_dir_x;
-	}
-	else if (ft_strchr("o", game->map[raycast->map_x][raycast->map_y])
-		&& find_square(game, raycast->map_x, raycast->map_y))
-	{
-		if (raycast->side == 0)
-			wall_x = raycast->pos_y - (double)(1 - (time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start)) / 2000 + raycast->dist_perp_wall * raycast->ray_dir_y;
-		else
-			wall_x = raycast->pos_x - (double)(1 - (time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start)) / 2000 + raycast->dist_perp_wall * raycast->ray_dir_x;
-	}
-	else
-	{
-		if (raycast->side == 0)
-			wall_x = raycast->pos_y + raycast->dist_perp_wall * raycast->ray_dir_y;
-		else
-			wall_x = raycast->pos_x + raycast->dist_perp_wall * raycast->ray_dir_x;
-	}
-	wall_x -= floor(wall_x);
 	i = 0;
 	while (i < raycast->draw_start)
 	{
 		my_mlx_pixel_put(game->screen_img, x, i, game->hex_c);
 		i++;
 	}
-	draw_wall(game, raycast, x, wall_x);
+	draw_wall(game, raycast, x, calculate_wall_x(game, raycast, 1));
 	while (raycast->draw_end < HEIGHT_SCREEN)
 	{
 		my_mlx_pixel_put(game->screen_img, x, raycast->draw_end, game->hex_f);

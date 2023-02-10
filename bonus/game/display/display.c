@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/08 09:50:19 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/10 20:57:01 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,111 +61,159 @@ void	copy_raycast(t_raycast *raycast, t_raycast *raycast_copy)
 	raycast_copy->line_height = raycast->line_height;
 }
 
-void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
+bool	wall_should_appear_not_door(t_game *game, t_raycast *raycast, long time)
 {
-	int				i;
-	double			wall_x;
-	static long		time;
-	int				last_draw_end;
-	t_raycast		raycast_copy;
-	bool			redisplayed_rayon;
+	double	percentage_time;
+	double	wall_x;
 
+	if (raycast->side == 0)
+		wall_x = raycast->pos_y + raycast->dist_perp_wall * raycast->ray_dir_y;
+	else
+		wall_x = raycast->pos_x + raycast->dist_perp_wall * raycast->ray_dir_x;
+	wall_x = wall_x - floor(wall_x);
+	if (find_square(game, raycast->map_x, raycast->map_y))
+		percentage_time = (double)(time - find_square(game, raycast->map_x,
+					raycast->map_y)->time_anim_start) / 2000;
+	else
+		percentage_time = (double)0;
+	if ((game->map[raycast->map_x][raycast->map_y] == 'O'
+		&& find_square(game, raycast->map_x, raycast->map_y)
+		&& wall_x < percentage_time)
+	|| (game->map[raycast->map_x][raycast->map_y] == 'o'
+		&& find_square(game, raycast->map_x, raycast->map_y)
+		&& wall_x < (double)(1 - percentage_time)))
+		return (true);
+	else
+		return (false);
+}
+
+bool	replace_animated_door(t_game *game, int x, t_raycast *raycast)
+{
+	if (game->map[raycast->map_x][raycast->map_y] == 'O'
+		&& find_square(game, raycast->map_x, raycast->map_y)
+		&& calculate_time() - find_square(game, raycast->map_x,
+			raycast->map_y)->time_anim_start >= 2000)
+	{
+		suppress_node(game, raycast->map_x, raycast->map_y);
+		game->map[raycast->map_x][raycast->map_y] = 'd';
+		display_rayon(game, x, raycast);
+		return (true);
+	}
+	else if (game->map[raycast->map_x][raycast->map_y] == 'o'
+		&& find_square(game, raycast->map_x, raycast->map_y)
+		&& calculate_time() - find_square(game, raycast->map_x,
+			raycast->map_y)->time_anim_start >= 2000)
+	{
+		suppress_node(game, raycast->map_x, raycast->map_y);
+		game->map[raycast->map_x][raycast->map_y] = 'D';
+		display_rayon(game, x, raycast);
+		return (true);
+	}
+	else
+		return (false);
+}
+
+void	calculate_draw_end(t_game *game, t_raycast *raycast_copy)
+{
+	raycast_copy->line_height = HEIGHT_SCREEN;
+	raycast_copy->line_height /= raycast_copy->dist_perp_wall;
+	raycast_copy->draw_end = raycast_copy->line_height / 2;
+	raycast_copy->draw_end += game->mouse_height;
+	if (raycast_copy->draw_end >= HEIGHT_SCREEN)
+		raycast_copy->draw_end = HEIGHT_SCREEN - 1;
+}
+
+bool	rayon_should_be_redisplay(t_raycast *raycast,
+		t_raycast *raycast_copy, double wall_x, int mode)
+{
 	if (mode == 1)
 	{
-		time = calculate_time();
-		return ;
+		if (raycast_copy->side != raycast->side
+			&& ((raycast_copy->side == 0
+					&& raycast_copy->map_y == raycast->map_y)
+				|| (raycast_copy->side == 1
+					&& raycast_copy->map_x == raycast->map_x)))
+			return (true);
 	}
-	if (ft_strchr("1DOo", game->map[raycast->map_x][raycast->map_y]))
+	else if (mode == 2)
 	{
-		if (game->map[raycast->map_x][raycast->map_y] == 'O'
-			&& find_square(game, raycast->map_x, raycast->map_y)
-			&& time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start >= 2000)
+		if ((raycast->side == 0
+				&& ((raycast->step_x == 1 && wall_x < 0.5)
+					|| (raycast->step_x == -1 && wall_x > 0.5)))
+			|| (raycast->side == 1
+				&& ((raycast->step_y == 1 && wall_x < 0.5)
+					|| (raycast->step_y == -1 && wall_x > 0.5))))
+			return (true);
+	}
+	return (false);
+}
+
+bool	door_should_be_recessed(t_game *game, int x,
+		t_raycast *raycast)
+{
+	t_raycast		raycast_copy;
+	double			wall_x;
+
+	copy_raycast(raycast, &raycast_copy);
+	detect_wall(game, &raycast_copy);
+	if (rayon_should_be_redisplay(raycast, &raycast_copy, 0, 1))
+	{
+		calculate_dist_perp_wall(game, &raycast_copy);
+		calculate_draw_end(game, &raycast_copy);
+		if (raycast_copy.draw_end > raycast->draw_end)
 		{
-			suppress_node(game, raycast->map_x, raycast->map_y);
-			game->map[raycast->map_x][raycast->map_y] = 'd';
-			display_rayon(game, x, raycast, mode);
+			display_rayon(game, x, &raycast_copy);
+			return (true);
 		}
-		else if (game->map[raycast->map_x][raycast->map_y] == 'o'
-			&& find_square(game, raycast->map_x, raycast->map_y)
-			&& time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start >= 2000)
+		else if (raycast_copy.draw_end == raycast->draw_end)
 		{
-			suppress_node(game, raycast->map_x, raycast->map_y);
-			game->map[raycast->map_x][raycast->map_y] = 'D';
-			display_rayon(game, x, raycast, mode);
-		}
-		else
-		{
-			calculate_dist_perp_wall(game, raycast);
-			if (ft_strchr("oO", game->map[raycast->map_x][raycast->map_y]))
+			wall_x = calculate_wall_x(game, &raycast_copy, 0);
+			if (rayon_should_be_redisplay(raycast, &raycast_copy, wall_x, 2))
 			{
-				if (raycast->side == 0)
-					wall_x = raycast->pos_y + raycast->dist_perp_wall * raycast->ray_dir_y;
-				else
-					wall_x = raycast->pos_x + raycast->dist_perp_wall * raycast->ray_dir_x;
-				wall_x = wall_x - floor(wall_x);
-				if ((game->map[raycast->map_x][raycast->map_y] == 'O'
-					&& find_square(game, raycast->map_x, raycast->map_y)
-					&& wall_x < (double)(time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start) / 2000)
-				|| (game->map[raycast->map_x][raycast->map_y] == 'o'
-					&& find_square(game, raycast->map_x, raycast->map_y)
-					&& wall_x < 1 - (double)(time - find_square(game, raycast->map_x, raycast->map_y)->time_anim_start) / 2000))
-				{
-					detect_wall(game, raycast);
-					display_rayon(game, x, raycast, mode);
-					return ;
-				}
+				display_rayon(game, x, &raycast_copy);
+				return (true);
 			}
-			raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
-			raycast->draw_start = -raycast->line_height / 2 + game->mouse_height;
-			if (raycast->draw_start < 0)
-				raycast->draw_start = 0;
-			raycast->draw_end = raycast->line_height / 2 + game->mouse_height;
-			if (raycast->draw_end >= HEIGHT_SCREEN)
-				raycast->draw_end = HEIGHT_SCREEN - 1;
-			last_draw_end = raycast->draw_end;
-			redisplayed_rayon = false;
-			if (ft_strchr("DoO", game->map[raycast->map_x][raycast->map_y]))
-			{
-				copy_raycast(raycast, &raycast_copy);
-				detect_wall(game, &raycast_copy);
-				if (raycast_copy.side != raycast->side &&
-					((raycast_copy.side == 0 && raycast_copy.map_y == raycast->map_y)
-					||(raycast_copy.side == 1 && raycast_copy.map_x == raycast->map_x)))
-				{
-					calculate_dist_perp_wall(game, &raycast_copy);
-					raycast_copy.line_height = HEIGHT_SCREEN / raycast_copy.dist_perp_wall;
-					raycast_copy.draw_end = raycast_copy.line_height / 2 + game->mouse_height;
-					if (raycast_copy.draw_end >= HEIGHT_SCREEN)
-						raycast_copy.draw_end = HEIGHT_SCREEN - 1;
-					if (raycast_copy.draw_end > last_draw_end)
-					{
-						display_rayon(game, x, &raycast_copy, mode);
-						redisplayed_rayon = true;
-					}
-					else if (raycast_copy.draw_end == last_draw_end)
-					{
-						if (raycast_copy.side == 0)
-								wall_x = raycast_copy.pos_y + raycast_copy.dist_perp_wall * raycast_copy.ray_dir_y;
-						else
-								wall_x = raycast_copy.pos_x + raycast_copy.dist_perp_wall * raycast_copy.ray_dir_x;
-						wall_x -= floor(wall_x);
-						if ((raycast->side == 0 && ((raycast->step_x == 1 && wall_x < 0.5) || (raycast->step_x == -1 && wall_x > 0.5)))
-							|| (raycast->side == 1 && ((raycast->step_y == 1 && wall_x < 0.5) || (raycast->step_y == -1 && wall_x > 0.5))))
-						{
-							display_rayon(game, x, &raycast_copy, mode);
-							redisplayed_rayon = true;
-						}
-			}
-				}
-			}
-			if (redisplayed_rayon == false)
-				draw_line(game, x, raycast);
 		}
 	}
+	return (false);
+}
+
+void	rayon_hit_wall_or_door(t_game *game, int x,
+		t_raycast *raycast)
+{
+	calculate_dist_perp_wall(game, raycast);
+	if (ft_strchr("oO", game->map[raycast->map_x][raycast->map_y]))
+	{
+		if (wall_should_appear_not_door(game, raycast, calculate_time()))
+		{
+			detect_wall(game, raycast);
+			display_rayon(game, x, raycast);
+			return ;
+		}
+	}
+	raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
+	raycast->draw_start = -raycast->line_height / 2 + game->mouse_height;
+	if (raycast->draw_start < 0)
+		raycast->draw_start = 0;
+	raycast->draw_end = raycast->line_height / 2 + game->mouse_height;
+	if (raycast->draw_end >= HEIGHT_SCREEN)
+		raycast->draw_end = HEIGHT_SCREEN - 1;
+	if (!ft_strchr("DoO", game->map[raycast->map_x][raycast->map_y])
+			|| !door_should_be_recessed(game, x, raycast))
+		draw_line(game, x, raycast);
+}
+
+void	display_rayon(t_game *game, int x, t_raycast *raycast)
+{
+	int				i;
+
+	if (ft_strchr("1DOo", game->map[raycast->map_x][raycast->map_y])
+		&& !replace_animated_door(game, x, raycast))
+		rayon_hit_wall_or_door(game, x, raycast);
 	else if (ft_strchr("d", game->map[raycast->map_x][raycast->map_y]))
 	{
 		detect_wall(game, raycast);
-		display_rayon(game, x, raycast, mode);
+		display_rayon(game, x, raycast);
 	}
 	else
 	{
@@ -178,12 +226,11 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 	}
 }
 
-void	display_screen(t_game *game, long time)
+void	display_screen(t_game *game)
 {
 	t_raycast	raycast;
 	int			x;
 
-	(void)time;
 	raycast.pos_x = game->player->x / SIZE_BLOCK;
 	raycast.pos_y = game->player->y / SIZE_BLOCK;
 	raycast.dir_x = cos(radian_value(game->player->orientation));
@@ -191,12 +238,11 @@ void	display_screen(t_game *game, long time)
 	raycast.plane_x = cos(radian_value(game->player->orientation + 90));
 	raycast.plane_y = sin(radian_value(game->player->orientation + 90));
 	x = 0;
-	display_rayon(game, WIDTH_SCREEN - x, &raycast, 1);
 	while (x < WIDTH_SCREEN)
 	{
 		calculate_delta_and_dist(x, &raycast);
 		detect_wall(game, &raycast);
-		display_rayon(game, WIDTH_SCREEN - x, &raycast, -1);
+		display_rayon(game, WIDTH_SCREEN - x - 1, &raycast);
 		x++;
 	}
 	game_bar(game);

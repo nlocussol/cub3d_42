@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/09 15:10:16 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/10 17:54:31 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,20 @@ void	suppress_node_2(t_game *game, t_raycast *raycast)
 	}
 }
 
+void	suppress_node_3(t_game *game, t_double_list *buffer)
+{
+	fclose(((t_song *)(buffer->content))->stream);
+	if (buffer->previous)
+		buffer->previous->next = buffer->next;
+	else
+		game->lst_sound = buffer->next;
+	if (buffer->next)
+		buffer->next->previous = buffer->previous;
+	if (!buffer->previous && !buffer->next)
+		game->lst_sound = NULL;
+	ft_double_lstdelone(buffer, del);
+}
+
 void	interact(t_game *game, int keycode)
 {
 	t_anim			*new_anim;
@@ -130,7 +144,7 @@ void	interact(t_game *game, int keycode)
 	{
 		if (find_square(game, raycast.map_x, raycast.map_y))
 			suppress_node(game, raycast.map_x, raycast.map_y);
-		launch_song(DOOR);
+		launch_song(game, DOOR);
 		new_anim = malloc(sizeof(t_anim));
 		new_anim->x = raycast.map_x;
 		new_anim->y = raycast.map_y;
@@ -143,7 +157,7 @@ void	interact(t_game *game, int keycode)
 	{
 		if (find_square(game, raycast.map_x, raycast.map_y))
 			suppress_node(game, raycast.map_x, raycast.map_y);
-		launch_song(DOOR);
+		launch_song(game, DOOR);
 		new_anim = malloc(sizeof(t_anim));
 		new_anim->x = raycast.map_x;
 		new_anim->y = raycast.map_y;
@@ -156,7 +170,7 @@ void	interact(t_game *game, int keycode)
 	{
 		if (game->nb_graff == 0 || find_square_2(game, &raycast))
 			return ;
-		launch_song(SPRAY);
+		launch_song(game, SPRAY);
 		new_graff = malloc(sizeof(t_graff));
 		new_graff->x = raycast.map_x;
 		new_graff->y = raycast.map_y;
@@ -184,7 +198,7 @@ void	interact(t_game *game, int keycode)
 	{
 		if (!find_square_2(game, &raycast))
 			return ;
-		launch_song(SPRAY);
+		launch_song(game, SPRAY);
 		suppress_node_2(game, &raycast);
 		game->nb_graff += 1;
 	}

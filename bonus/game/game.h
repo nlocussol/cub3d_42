@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/09 15:09:34 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/10 19:04:13 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 
 typedef struct s_img
 {
-	void	*img;
-	int		height;
-	int		width;
+	void			*img;
+	int				height;
+	int				width;
 	unsigned char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
 }				t_img;
 
 typedef struct s_player
@@ -52,15 +52,27 @@ typedef struct s_graff
 	char	direction;
 }	t_graff;
 
+typedef struct s_song
+{
+	FILE	*stream;
+	long	start_time;
+	int		type;
+}	t_song;
+
 typedef struct s_game
 {
 	void			*mlx;
 	void			*window;
 	char			**map;
 	t_img			*screen_img;
+	long			time_start;
+	int				mouse_height;
+	int				bar_index;
+	bool			started_gameboy;
+
 	unsigned int	**images[11];
 	unsigned int	**minimap_img[4];
-	unsigned int	**bar_img[4];
+	unsigned int	**bar_img[5];
 	char			*text_no;
 	char			*text_so;
 	char			*text_we;
@@ -68,17 +80,18 @@ typedef struct s_game
 	char			*text_do;
 	int				hex_f;
 	int				hex_c;
+
 	int				x_minimap;
 	int				y_minimap;
 	int				minimap;
-	int				movements[4];
-	int				mouse_height;
-	long			time_start;
+
 	t_player		*player;
+	int				movements[4];
+	int				nb_graff;
+
 	t_double_list	*lst_anim;
 	t_double_list	*lst_graff;
-	int				nb_graff;
-	int				bar_index;
+	t_double_list	*lst_sound;
 }	t_game;
 
 typedef struct s_raycast
@@ -161,6 +174,7 @@ void	interact(t_game *game, int keycode);
 t_anim	*find_square(t_game *game, int x, int y);
 t_graff	*find_square_2(t_game *game, t_raycast *raycast);
 void	suppress_node(t_game *game, int x, int y);
+void	suppress_node_3(t_game *game, t_double_list *buffer);
 
-void	launch_song(int mode);
+void	launch_song(t_game *game, int mode);
 #endif

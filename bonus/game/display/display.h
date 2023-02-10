@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:31:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/08 11:49:40 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/10 20:56:24 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 
 # include "../game.h"
 
-unsigned int				calculate_color(int x, int y, t_img *img);
+unsigned int	calculate_color(int x, int y, t_img *img);
+double			calculate_wall_x(t_game *game, t_raycast *raycast, int mode);
+void			display_rayon(t_game *game, int x, t_raycast *raycast);
 void			nb_game_bar(t_game *game);
 void			game_bar(t_game *game);
 void			open_minimap(t_game *game);
-void			display_screen(t_game *game, long time);
+void			display_screen(t_game *game);
 void			draw_line(t_game *game, int x, t_raycast *raycast);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			calculate_delta_and_dist(int x, t_raycast *raycast);

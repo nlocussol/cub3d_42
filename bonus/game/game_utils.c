@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:24:24 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/09 13:04:29 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/10 17:18:24 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	destroy_images(t_game *game)
 		i++;
 	}
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		j = 0;
 		while (game->bar_img[i][j])
