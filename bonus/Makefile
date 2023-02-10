@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/02/03 16:05:19 by averdon          ###   ########.fr        #
+#    Updated: 2023/02/09 12:23:32 by averdon          ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -43,7 +43,8 @@ CFLAGS		?= -Wall -Wextra -Werror -g
 
 LIBRARY     ?= -Lsources/libft -lft \
 			   -Lsources/libft/ft_fdprintf -lftfdprintf \
-			   -Lsources/minilibx -lmlx -lXext -lX11 -lm
+			   -Lsources/minilibx -lmlx -lXext -lX11 -lm \
+			   -pthread
 
 all :        ${NAME}
 

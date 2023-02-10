@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/06 15:21:35 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:09:34 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_img
 	void	*img;
 	int		height;
 	int		width;
-	char	*addr;
+	unsigned char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -48,6 +48,7 @@ typedef struct s_graff
 	int		x;
 	int		y;
 	int		frame;
+	long	last_frame_changed;
 	char	direction;
 }	t_graff;
 
@@ -57,9 +58,9 @@ typedef struct s_game
 	void			*window;
 	char			**map;
 	t_img			*screen_img;
-	unsigned int	**images[6];
+	unsigned int	**images[11];
 	unsigned int	**minimap_img[4];
-	unsigned int	**bar_img[3];
+	unsigned int	**bar_img[4];
 	char			*text_no;
 	char			*text_so;
 	char			*text_we;
@@ -105,7 +106,6 @@ typedef struct s_raycast
 	int		draw_start;
 	int		draw_end;
 	int		line_height;
-
 }	t_raycast;
 
 # define WIDTH_SCREEN 1920
@@ -125,6 +125,9 @@ typedef struct s_raycast
 # define H 104
 # define Z 122
 
+# define SPRAY 1
+# define DOOR 2
+
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
 
@@ -132,7 +135,7 @@ typedef struct s_raycast
 # define CAMERA_SPEED_REVERSE 25
 # define HIT_BOX_WALL 10
 
-int		mouse_hook(int mouse, t_game *game);
+int		mouse_hook(int mouse, int x, int y, t_game *game);
 void	start_game(t_data *data);
 void	initialize_game(t_game	*game, t_data *data);
 void	parse_image(t_game *game);
@@ -144,6 +147,7 @@ void	free_all(t_game *game);
 int		close_window(t_game *game);
 double	abs_value(double nb);
 double	radian_value(double degree);
+void	del(void *content);
 
 int		launch_movements(t_game *game);
 int		key_pressed(int keycode, t_game *game);
@@ -158,5 +162,5 @@ t_anim	*find_square(t_game *game, int x, int y);
 t_graff	*find_square_2(t_game *game, t_raycast *raycast);
 void	suppress_node(t_game *game, int x, int y);
 
-void	play_song(void);
+void	launch_song(int mode);
 #endif

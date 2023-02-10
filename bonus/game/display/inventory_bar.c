@@ -105,6 +105,8 @@ void	game_bar(t_game *game)
 				anim = 0;
 			put_map_icone(game, x + 10, y + 15, game->bar_img[1]);
 		}
+		if (i == 2)
+			put_map_icone(game, x + 10, y + 15, game->bar_img[3]);
 		y += 128;
 		i++;
 	}

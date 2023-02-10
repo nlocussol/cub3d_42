@@ -1,0 +1,26 @@
+{
+   mlx_mouse_hide
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:mlx_mouse_hide
+   ...
+}
+
+{
+   XrmGetStringDatabase
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:XrmGetStringDatabase
+   ...
+}
+
+{
+   _dl_catch_exception
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_catch_exception
+   ...
+}

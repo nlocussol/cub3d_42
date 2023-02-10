@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/04 16:33:00 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:43:13 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ unsigned int	**convert_image(int length, int width, t_img img)
 {
 	int				y;
 	int				x;
-	unsigned int				**image;
+	unsigned int	**image;
 
-	image = ft_calloc(256 + 1, sizeof(int *));
+	image = ft_calloc(256 + 1, sizeof(unsigned int *));
 	y = 0;
 	while (y < length)
 	{
 		x = 0;
-		image[y] = ft_calloc(256 + 1, sizeof(int));
+		image[y] = ft_calloc(256 + 1, sizeof(unsigned int));
 		while (x < width)
 		{
 			image[y][x] = calculate_color(x, y, &img);
@@ -50,9 +50,9 @@ unsigned int	**convert_image(int length, int width, t_img img)
 
 void	parse_image(t_game *game)
 {
-	char			*name_sprite[6];
+	char			*name_sprite[11];
 	char			*name_minimap[4];
-	char			*name_game_bar[3];
+	char			*name_game_bar[4];
 	int				i;
 	t_img			img;
 	int				width;
@@ -63,13 +63,18 @@ void	parse_image(t_game *game)
 	name_sprite[2] = game->text_ea;
 	name_sprite[3] = game->text_we;
 	name_sprite[4] = game->text_do;
-	name_sprite[5] = "assets/circle-xxl.xpm";
+	name_sprite[5] = "assets/knight_0.xpm";
+	name_sprite[6] = "assets/knight_1.xpm";
+	name_sprite[7] = "assets/knight_2.xpm";
+	name_sprite[8] = "assets/knight_3.xpm";
+	name_sprite[9] = "assets/knight_4.xpm";
+	name_sprite[10] = "assets/knight_5.xpm";
 	i = 0;
-	while (i < 6)
+	while (i < 11)
 	{
 		img.img = mlx_xpm_file_to_image(game->mlx, name_sprite[i],
 				&width, &length);
-		img.addr = mlx_get_data_addr(img.img,
+		img.addr = (unsigned char *)mlx_get_data_addr(img.img,
 				&img.bits_per_pixel, &img.line_length, &img.endian);
 		game->images[i] = convert_image(length, width, img);
 		mlx_destroy_image(game->mlx, img.img);
@@ -84,7 +89,7 @@ void	parse_image(t_game *game)
 	{
 		img.img = mlx_xpm_file_to_image(game->mlx, name_minimap[i],
 				&width, &length);
-		img.addr = mlx_get_data_addr(img.img,
+		img.addr = (unsigned char *)mlx_get_data_addr(img.img,
 				&img.bits_per_pixel, &img.line_length, &img.endian);
 		game->minimap_img[i] = convert_image(length, width, img);
 		mlx_destroy_image(game->mlx, img.img);
@@ -93,12 +98,13 @@ void	parse_image(t_game *game)
 	name_game_bar[0] = "assets/game_bar/map1.xpm";
 	name_game_bar[1] = "assets/game_bar/map2.xpm";
 	name_game_bar[2] = "assets/game_bar/spraypaint.xpm";
+	name_game_bar[3] = "assets/game_bar/card.xpm";
 	i = 0;
-	while (i < 3)
+	while (i < 4)
 	{
 		img.img = mlx_xpm_file_to_image(game->mlx, name_game_bar[i],
 				&width, &length);
-		img.addr = mlx_get_data_addr(img.img,
+		img.addr = (unsigned char *)mlx_get_data_addr(img.img,
 				&img.bits_per_pixel, &img.line_length, &img.endian);
 		game->bar_img[i] = convert_image(length, width, img);
 		mlx_destroy_image(game->mlx, img.img);

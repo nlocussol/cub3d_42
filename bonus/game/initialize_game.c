@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:25:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/06 15:51:24 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:09:09 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	initialize_game(t_game	*game, t_data *data)
 	game->screen_img = ft_calloc(1, sizeof(t_img));
 	game->screen_img->img = mlx_new_image(game->mlx,
 			WIDTH_SCREEN, HEIGHT_SCREEN);
-	game->screen_img->addr = mlx_get_data_addr(game->screen_img->img,
+	game->screen_img->addr = (unsigned char *)mlx_get_data_addr(game->screen_img->img,
 			&game->screen_img->bits_per_pixel, &game->screen_img->line_length,
 			&game->screen_img->endian);
 	free_tab(data->text_c);

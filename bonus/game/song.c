@@ -6,20 +6,16 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:58:43 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 16:20:18 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/09 16:30:03 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	play_song(void)
+void	launch_song(int mode)
 {
-	int	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		system("paplay game/sound.ogg");
-		exit(0);
-	}
+	if (mode == SPRAY)
+		pclose(popen("paplay game/sound_spray.ogg", "r"));
+	else if (mode == DOOR)
+		pclose(popen("paplay game/sound_door.ogg", "r"));
 }

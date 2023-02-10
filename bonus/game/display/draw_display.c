@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:29:09 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 15:17:34 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/08 14:09:31 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
-	char	*dst;
+	unsigned char	*dst;
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
@@ -23,12 +23,12 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 unsigned int	color_to_draw(t_game *game, t_raycast *raycast,
 		int tex_x, int tex_y)
 {
-	int	color;
+	int			color;
 
 	color = 0;
 	if (find_square_2(game, raycast))
 	{
-		color = game->images[5][tex_y][tex_x];
+		color = game->images[5 + find_square_2(game, raycast)->frame][tex_y][tex_x];
 		if (color >= 0)
 			return (color);
 	}

@@ -6,18 +6,19 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/06 16:14:04 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:24:09 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #include "game.h"
 
-int	mouse_hook(int mouse, t_game *game)
+int	mouse_hook(int mouse, int x, int y, t_game *game)
 {
+	(void)x;
+	(void)y;
 	if (mouse == MOUSE_UP)
 	{
-		printf("%d\n", game->bar_index);
 		game->bar_index--;
 		if (game->bar_index < 1)
 			game->bar_index = 8;
@@ -112,8 +113,6 @@ int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == ECHAP)
 		close_window(game);
-	if (game->bar_index != 0)
-		move_bar(game);
 	if (keycode == W || keycode == A || keycode == S || keycode == D)
 		move_player(game, keycode);
 	else if (keycode == LEFT_ARROW)
@@ -122,8 +121,6 @@ int	key_hook(int keycode, t_game *game)
 		turn_camera(game, -3);
 	else if (ft_strchr("egh", keycode))
 		interact(game, keycode);
-	else if (keycode == Z)
-		play_song();
 	return (0);
 }
 
@@ -168,7 +165,9 @@ long	calculate_time(void)
 void	check_anim(t_game *game)
 {
 	t_double_list	*buffer;
+	t_double_list	*next;
 	t_anim			*anim;
+	t_graff			*graff;
 	long			time;
 
 	time = calculate_time();
@@ -176,13 +175,27 @@ void	check_anim(t_game *game)
 	while (buffer)
 	{
 		anim = buffer->content;
+		next = buffer->next;
 		if (ft_strchr("oO", game->map[anim->x][anim->y]) && time - anim->time_anim_start >= 2000)
 		{
-			suppress_node(game, anim->x, anim->y);
 			if (game->map[anim->x][anim->y] == 'o')
 				game->map[anim->x][anim->y] = 'D';
 			else
 				game->map[anim->x][anim->y] = 'd';
+			suppress_node(game, anim->x, anim->y);
+		}
+		buffer = next;
+	}
+	buffer = game->lst_graff;
+	while (buffer)
+	{
+		graff = buffer->content;
+		if (time - graff->last_frame_changed >= 100)
+		{
+			graff->frame += 1;
+			if (graff->frame == 6)
+				graff->frame = 0;
+			graff->last_frame_changed = time;
 		}
 		buffer = buffer->next;
 	}
@@ -198,6 +211,7 @@ int	launch_movements(t_game *game)
 		key_hook(S, game);
 	if (game->movements[3] == 1)
 		key_hook(D, game);
+	move_bar(game);
 	move_camera(game);
 	display_screen(game, -1);
 	check_anim(game);

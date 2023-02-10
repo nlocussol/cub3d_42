@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 23:32:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 16:11:41 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/09 15:07:44 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include <sys/time.h>
 # include <signal.h>
+# include <pthread.h>
 
 # include "libft/libft.h"
 # include "minilibx/mlx.h"

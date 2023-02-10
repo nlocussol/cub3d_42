@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/03 17:31:44 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/08 09:50:19 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 	static long		time;
 	int				last_draw_end;
 	t_raycast		raycast_copy;
+	bool			redisplayed_rayon;
 
 	if (mode == 1)
 	{
@@ -122,7 +123,7 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 			if (raycast->draw_end >= HEIGHT_SCREEN)
 				raycast->draw_end = HEIGHT_SCREEN - 1;
 			last_draw_end = raycast->draw_end;
-			draw_line(game, x, raycast);
+			redisplayed_rayon = false;
 			if (ft_strchr("DoO", game->map[raycast->map_x][raycast->map_y]))
 			{
 				copy_raycast(raycast, &raycast_copy);
@@ -137,27 +138,28 @@ void	display_rayon(t_game *game, int x, t_raycast *raycast, int mode)
 					if (raycast_copy.draw_end >= HEIGHT_SCREEN)
 						raycast_copy.draw_end = HEIGHT_SCREEN - 1;
 					if (raycast_copy.draw_end > last_draw_end)
+					{
 						display_rayon(game, x, &raycast_copy, mode);
+						redisplayed_rayon = true;
+					}
 					else if (raycast_copy.draw_end == last_draw_end)
 					{
-						double                  wall_x;
 						if (raycast_copy.side == 0)
 								wall_x = raycast_copy.pos_y + raycast_copy.dist_perp_wall * raycast_copy.ray_dir_y;
 						else
 								wall_x = raycast_copy.pos_x + raycast_copy.dist_perp_wall * raycast_copy.ray_dir_x;
 						wall_x -= floor(wall_x);
-						if (raycast->side == 0 && raycast->step_x == 1 && wall_x < 0.5)
+						if ((raycast->side == 0 && ((raycast->step_x == 1 && wall_x < 0.5) || (raycast->step_x == -1 && wall_x > 0.5)))
+							|| (raycast->side == 1 && ((raycast->step_y == 1 && wall_x < 0.5) || (raycast->step_y == -1 && wall_x > 0.5))))
+						{
 							display_rayon(game, x, &raycast_copy, mode);
-						
-						else if (raycast->side == 0 && raycast->step_x == -1 && wall_x > 0.5)
-							display_rayon(game, x, &raycast_copy, mode);
-						else if (raycast->side == 1 && raycast->step_y == 1 && wall_x < 0.5)
-							display_rayon(game, x, &raycast_copy, mode);
-						else if (raycast->side == 1 && raycast->step_y == -1 && wall_x > 0.5)
-							display_rayon(game, x, &raycast_copy, mode);
+							redisplayed_rayon = true;
+						}
 			}
 				}
 			}
+			if (redisplayed_rayon == false)
+				draw_line(game, x, raycast);
 		}
 	}
 	else if (ft_strchr("d", game->map[raycast->map_x][raycast->map_y]))
