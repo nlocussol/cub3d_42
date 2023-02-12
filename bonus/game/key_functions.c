@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/10 18:54:54 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/12 14:11:44 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,35 +129,42 @@ int	key_hook(int keycode, t_game *game)
 			turn_camera(game, -3);
 		else if (ft_strchr("egh", keycode))
 			interact(game, keycode);
-	}
-	if (ft_strchr("z", keycode))
-	{
-		if (game->started_gameboy == true)
-		{
-			game->started_gameboy = false;
-			mlx_mouse_move(game->mlx, game->window, mouse_pos_x, mouse_pos_y);
-		}
-		else if (game->started_gameboy == false)
+		else if (ft_strchr("z", keycode))
 		{
 			game->started_gameboy = true;
 			mlx_mouse_get_pos(game->mlx, game->window, &mouse_pos_x, &mouse_pos_y);
 		}
+	}
+	else
+	{
+		if (keycode == ECHAP)
+		{
+			game->started_gameboy = false;
+			mlx_mouse_move(game->mlx, game->window, mouse_pos_x, mouse_pos_y);
+		}
+		else
+			key_hook_so_long(keycode, game->vars);
 	}
 	return (0);
 }
 
 int	key_pressed(int keycode, t_game *game)
 {
-	if (keycode >= 49 && keycode <= 57)
-		game->bar_index = keycode - 48;
-	if (keycode == W)
-		game->movements[0] = 1;
-	else if (keycode == A)
-		game->movements[1] = 1;
-	else if (keycode == S)
-		game->movements[2] = 1;
-	else if (keycode == D)
-		game->movements[3] = 1;
+	if (game->started_gameboy == false)
+	{
+		if (keycode >= 49 && keycode <= 57)
+			game->bar_index = keycode - 48;
+		if (keycode == W)
+			game->movements[0] = 1;
+		else if (keycode == A)
+			game->movements[1] = 1;
+		else if (keycode == S)
+			game->movements[2] = 1;
+		else if (keycode == D)
+			game->movements[3] = 1;
+		else
+			key_hook(keycode, game);
+	}
 	else
 		key_hook(keycode, game);
 	return (0);
@@ -236,6 +243,11 @@ void	check_anim(t_game *game)
 
 int	launch_movements(t_game *game)
 {
+	static bool	first_time;
+	char		*temp2[2];
+	int			width;
+	int 		height;
+
 	if (game->started_gameboy == false)
 	{
 		if (game->movements[0] == 1)
@@ -250,13 +262,20 @@ int	launch_movements(t_game *game)
 		move_camera(game);
 		display_screen(game);
 		check_anim(game);
+		first_time = true;
 	}
 	if (game->started_gameboy == true)
 	{
-		int	width;
-		int height;
-		void *temp = mlx_xpm_file_to_image(game->mlx, "assets/gameboy_screen.xpm", &width, &height);
-		mlx_put_image_to_window(game->mlx, game->window, temp, WIDTH_SCREEN / 2 - 1100 / 2, HEIGHT_SCREEN - 900 - 85);
+		if (first_time == true)
+		{
+			void *temp = mlx_xpm_file_to_image(game->mlx, "assets/gameboy_screen.xpm", &width, &height);
+			mlx_put_image_to_window(game->mlx, game->window, temp, WIDTH_SCREEN / 2 - 1014 / 2, HEIGHT_SCREEN - 869 - 85);
+			temp2[0] = "./so_long";
+			temp2[1] = "so_long/maps/valid_map/maptest3.ber";
+			main_so_long(2, temp2, game);
+			first_time = false;
+		}
+		animation_and_movement(game->vars);
 	}
 	return (0);
 }

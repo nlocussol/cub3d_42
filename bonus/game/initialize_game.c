@@ -6,12 +6,11 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:25:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/10 18:02:43 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/11 17:57:53 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "game.h"
 
 void	find_player_place(t_game *game, int *x, int *y)
 {

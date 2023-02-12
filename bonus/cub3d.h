@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:55:20 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 13:05:53 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:51:24 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define CUB3D_H
 
 # include "sources/includes.h"
+
+int	main_so_long(int argc, char **argv, t_game *game);
 
 #endif

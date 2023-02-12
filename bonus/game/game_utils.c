@@ -6,16 +6,11 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:24:24 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/10 17:18:24 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/11 17:54:42 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	del(void *content)
-{
-	free(content);
-}
 
 void	destroy_images(t_game *game)
 {

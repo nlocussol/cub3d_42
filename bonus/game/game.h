@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/10 19:04:13 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/11 17:54:43 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_game
 	t_double_list	*lst_anim;
 	t_double_list	*lst_graff;
 	t_double_list	*lst_sound;
+	t_vars			*vars;
 }	t_game;
 
 typedef struct s_raycast
@@ -160,7 +161,6 @@ void	free_all(t_game *game);
 int		close_window(t_game *game);
 double	abs_value(double nb);
 double	radian_value(double degree);
-void	del(void *content);
 
 int		launch_movements(t_game *game);
 int		key_pressed(int keycode, t_game *game);
