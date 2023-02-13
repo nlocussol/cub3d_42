@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/02/11 17:31:08 by averdon          ###   ########.fr        #
+#    Updated: 2023/02/13 13:58:48 by averdon          ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -58,6 +58,7 @@ SRCS		?= 	main.c \
 				so_long/game/set_up_game/set_up_var.c \
 				so_long/game/game_utils.c \
 				so_long/game/launch_animation_and_movement.c \
+				so_long/game/calculate_utils.c \
 
 OBJS		?= ${SRCS:.c=.o}
 

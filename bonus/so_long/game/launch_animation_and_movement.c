@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 04:29:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/12 13:17:17 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 11:26:04 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	animations(t_vars *vars)
 	count = 0;
 	mlx_put_image_to_window(vars->mlx, vars->window,
 		vars->player->sprite[vars->player->frame + vars->player->side],
-		vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME, vars->player->y % (SIZE_BLOCK_SL * 10) + Y_LEFT_UP_CORNER_GAME);
+		vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME,
+		vars->player->y % (SIZE_BLOCK_SL * 10) + Y_LEFT_UP_CORNER_GAME);
 	vars->player->frame++;
 	if (vars->player->frame == 6)
 		vars->player->frame = 0;

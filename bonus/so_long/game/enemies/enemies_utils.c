@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:20:48 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/12 13:13:44 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 12:48:44 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	enemy_kill_player(t_vars *vars)
 {
 	mlx_put_image_to_window(vars->mlx, vars->window,
-		vars->array_ptr_sprite[27], 190 + X_LEFT_UP_CORNER_GAME, 125 + Y_LEFT_UP_CORNER_GAME);
+		vars->array_ptr_sprite[27],
+		85 + X_LEFT_UP_CORNER_GAME,
+		70 + Y_LEFT_UP_CORNER_GAME);
 	vars->game_finish = 1;
 	ft_fdprintf(1, "you lose\n");
 }

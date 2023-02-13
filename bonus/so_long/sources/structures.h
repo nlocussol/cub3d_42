@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:46:33 by averdon           #+#    #+#             */
-/*   Updated: 2022/11/17 19:46:56 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 12:49:12 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,20 @@ typedef struct s_tilemap {
 }	t_tilemap;
 
 typedef struct s_vars {
-	void			*mlx;
-	void			*window;
-	t_player_so_long		*player;
-	t_double_list	*map;
-	t_double_list	*map_chunk;
-	t_double_list	*positions_enemies;
-	void			**array_ptr_sprite;
-	int				nb_columns;
-	int				nb_rows;
-	int				nb_collectibles;
-	int				frame_enemy;
-	int				game_finish;
-	int				argc;
-	char			**argv;
+	void				*mlx;
+	void				*window;
+	t_player_so_long	*player;
+	t_double_list		*map;
+	t_double_list		*map_chunk;
+	t_double_list		*positions_enemies;
+	void				**array_ptr_sprite;
+	int					nb_columns;
+	int					nb_rows;
+	int					nb_collectibles;
+	int					frame_enemy;
+	int					game_finish;
+	int					argc;
+	char				**argv;
 }	t_vars;
 
 #endif

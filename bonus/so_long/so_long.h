@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:24:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/12 12:59:09 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 11:27:25 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "../sources/minilibx/mlx.h"
 # include "sources/structures.h"
 # include "sources/define.h"
-# include "game/game.h"
-# include "parsing/parsing.h"
+# include "game/game_so_long.h"
+# include "parsing/parsing_so_long.h"
 # include <fcntl.h>
 # include <time.h>
 

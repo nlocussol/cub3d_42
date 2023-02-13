@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:01:29 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/12 13:02:06 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 13:28:05 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	set_up_array_ptr_tile_3(t_vars *vars)
 	int	width;
 	int	height;
 
+	vars->array_ptr_sprite[18] = mlx_xpm_file_to_image(vars->mlx,
+			"so_long/sprites/numbers/four.xpm", &width, &height);
 	vars->array_ptr_sprite[19] = mlx_xpm_file_to_image(vars->mlx,
 			"so_long/sprites/numbers/five.xpm", &width, &height);
 	vars->array_ptr_sprite[20] = mlx_xpm_file_to_image(vars->mlx,
@@ -42,6 +44,10 @@ void	set_up_array_ptr_tile_2(t_vars *vars)
 	int	width;
 	int	height;
 
+	vars->array_ptr_sprite[8] = mlx_xpm_file_to_image(vars->mlx,
+			"so_long/sprites/tilemap/black.xpm", &width, &height);
+	vars->array_ptr_sprite[9] = mlx_xpm_file_to_image(vars->mlx,
+			"so_long/sprites/enemies/fly_anim_f0.xpm", &width, &height);
 	vars->array_ptr_sprite[10] = mlx_xpm_file_to_image(vars->mlx,
 			"so_long/sprites/enemies/fly_anim_f1.xpm", &width, &height);
 	vars->array_ptr_sprite[11] = mlx_xpm_file_to_image(vars->mlx,
@@ -58,8 +64,6 @@ void	set_up_array_ptr_tile_2(t_vars *vars)
 			"so_long/sprites/numbers/two.xpm", &width, &height);
 	vars->array_ptr_sprite[17] = mlx_xpm_file_to_image(vars->mlx,
 			"so_long/sprites/numbers/three.xpm", &width, &height);
-	vars->array_ptr_sprite[18] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/numbers/four.xpm", &width, &height);
 	set_up_array_ptr_tile_3(vars);
 }
 
@@ -78,17 +82,16 @@ void	set_up_array_ptr_tile(t_vars *vars)
 	vars->array_ptr_sprite[3] = mlx_xpm_file_to_image(vars->mlx,
 			"so_long/sprites/tilemap/wall_side_mid_left.xpm", &width, &height);
 	vars->array_ptr_sprite[4] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/tilemap/wall_right_bot_corner.xpm", &width, &height);
+			"so_long/sprites/tilemap/wall_right_bot_corner.xpm",
+			&width, &height);
 	vars->array_ptr_sprite[5] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/tilemap/wall_left_bot_corner.xpm", &width, &height);
+			"so_long/sprites/tilemap/wall_left_bot_corner.xpm",
+			&width, &height);
 	vars->array_ptr_sprite[6] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/tilemap/chest_empty_open_anim_f0.xpm", &width, &height);
+			"so_long/sprites/tilemap/chest_empty_open_anim_f0.xpm",
+			&width, &height);
 	vars->array_ptr_sprite[7] = mlx_xpm_file_to_image(vars->mlx,
 			"so_long/sprites/tilemap/floor_ladder.xpm", &width, &height);
-	vars->array_ptr_sprite[8] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/tilemap/black.xpm", &width, &height);
-	vars->array_ptr_sprite[9] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/enemies/fly_anim_f0.xpm", &width, &height);
 	set_up_array_ptr_tile_2(vars);
 }
 
@@ -98,13 +101,17 @@ void	set_up_array_ptr_player_2(t_vars *vars)
 	int				height;
 
 	vars->player->sprite[8] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/player/knight_idle_anim_f0_reverse.xpm", &width, &height);
+			"so_long/sprites/player/knight_idle_anim_f0_reverse.xpm",
+			&width, &height);
 	vars->player->sprite[9] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/player/knight_idle_anim_f2_reverse.xpm", &width, &height);
+			"so_long/sprites/player/knight_idle_anim_f2_reverse.xpm",
+			&width, &height);
 	vars->player->sprite[10] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/player/knight_idle_anim_f2_reverse.xpm", &width, &height);
+			"so_long/sprites/player/knight_idle_anim_f2_reverse.xpm",
+			&width, &height);
 	vars->player->sprite[11] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/player/knight_idle_anim_f2_reverse.xpm", &width, &height);
+			"so_long/sprites/player/knight_idle_anim_f2_reverse.xpm",
+			&width, &height);
 }
 
 void	set_up_array_ptr_player(t_vars *vars)
@@ -126,8 +133,10 @@ void	set_up_array_ptr_player(t_vars *vars)
 	vars->player->sprite[5] = mlx_xpm_file_to_image(vars->mlx,
 			"so_long/sprites/player/knight_idle_anim_f2.xpm", &width, &height);
 	vars->player->sprite[6] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/player/knight_idle_anim_f0_reverse.xpm", &width, &height);
+			"so_long/sprites/player/knight_idle_anim_f0_reverse.xpm",
+			&width, &height);
 	vars->player->sprite[7] = mlx_xpm_file_to_image(vars->mlx,
-			"so_long/sprites/player/knight_idle_anim_f0_reverse.xpm", &width, &height);
+			"so_long/sprites/player/knight_idle_anim_f0_reverse.xpm",
+			&width, &height);
 	set_up_array_ptr_player_2(vars);
 }

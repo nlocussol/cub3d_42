@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:57:59 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/12 14:25:44 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 13:07:44 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	item_collected(t_vars *vars, char *actual_place)
 		display_map(vars);
 		mlx_put_image_to_window(vars->mlx, vars->window,
 			vars->player->sprite[vars->player->frame + vars->player->side],
-			vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME, vars->player->y % (SIZE_BLOCK_SL * 10) + Y_LEFT_UP_CORNER_GAME);
+			vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME,
+			vars->player->y % (SIZE_BLOCK_SL * 10) + Y_LEFT_UP_CORNER_GAME);
 	}
 }
 
@@ -74,7 +75,9 @@ void	display_nb_action(t_vars *vars)
 	while (str[i])
 	{
 		mlx_put_image_to_window(vars->mlx, vars->window,
-			vars->array_ptr_sprite[14 + str[i] - 48], SIZE_BLOCK_SL * 10 + 10  + i * SIZE_BLOCK_SL + X_LEFT_UP_CORNER_GAME, SIZE_BLOCK_SL + Y_LEFT_UP_CORNER_GAME);
+			vars->array_ptr_sprite[14 + str[i] - 48],
+			SIZE_BLOCK_SL * 10 + 10 + i * SIZE_BLOCK_SL + X_LEFT_UP_CORNER_GAME,
+			SIZE_BLOCK_SL + Y_LEFT_UP_CORNER_GAME);
 		i++;
 	}
 	free(str);
@@ -85,13 +88,16 @@ void	modify_display(t_vars *vars)
 	if (vars->game_finish)
 		return ;
 	ft_fdprintf(1, "Number of move : %d\n", vars->player->nb_move);
-	if (vars->player->old_point->x / (SIZE_BLOCK_SL * 10) != (vars->player->x / (SIZE_BLOCK_SL * 10)))
+	if (vars->player->old_point->x / (SIZE_BLOCK_SL * 10)
+		!= (vars->player->x / (SIZE_BLOCK_SL * 10)))
 		display_map(vars);
-	if (vars->player->old_point->y / (SIZE_BLOCK_SL * 10) != (vars->player->y / (SIZE_BLOCK_SL * 10)))
+	if (vars->player->old_point->y / (SIZE_BLOCK_SL * 10)
+		!= (vars->player->y / (SIZE_BLOCK_SL * 10)))
 		display_map(vars);
 	mlx_put_image_to_window(vars->mlx, vars->window,
 		vars->player->sprite[vars->player->frame + vars->player->side],
-		vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME, vars->player->y % (SIZE_BLOCK_SL * 10) + Y_LEFT_UP_CORNER_GAME);
+		vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME,
+		vars->player->y % (SIZE_BLOCK_SL * 10) + Y_LEFT_UP_CORNER_GAME);
 	display_nb_action(vars);
 }
 

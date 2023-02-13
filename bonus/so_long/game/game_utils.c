@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 22:01:19 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/12 13:09:44 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 13:57:28 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,53 +60,6 @@ void	destroy_and_free(t_vars *vars)
 	free(vars);
 }
 
-int	calculate_columns(t_double_list *map)
-{
-	int	columns;
-
-	columns = 0;
-	while (((char *)(map->content))[columns])
-			columns++;
-	return (columns);
-}
-
-int	calculate_rows(t_double_list *map)
-{
-	int				rows;
-	t_double_list	*buffer;
-
-	rows = 0;
-	buffer = map;
-	while (buffer)
-	{
-		buffer = buffer->next;
-		rows++;
-	}
-	return (rows);
-}
-
-int	calculate_collectibles(t_double_list **map)
-{
-	t_double_list	*buffer;
-	int				i;
-	int				nb_collectibles;
-
-	buffer = *map;
-	nb_collectibles = 0;
-	while (buffer)
-	{
-		i = 0;
-		while (((char *)(buffer->content))[i])
-		{
-			if (((char *)(buffer->content))[i] == 'C')
-				nb_collectibles++;
-			i++;
-		}
-		buffer = buffer->next;
-	}
-	return (nb_collectibles);
-}
-
 void	put_black_screen(t_vars *vars)
 {
 	int	x;
@@ -126,7 +79,10 @@ void	put_black_screen(t_vars *vars)
 				substract_x = 10;
 			if (y == 14)
 				substract_y = 10;
-			mlx_put_image_to_window(vars->mlx, vars->window, vars->array_ptr_sprite[8], X_LEFT_UP_CORNER_GAMEBOY + x * SIZE_BLOCK_SL - substract_x,  Y_LEFT_UP_CORNER_GAMEBOY + y * SIZE_BLOCK_SL - substract_y);
+			mlx_put_image_to_window(vars->mlx, vars->window,
+				vars->array_ptr_sprite[8],
+				X_LEFT_UP_CORNER_GAMEBOY + x * SIZE_BLOCK_SL - substract_x,
+				Y_LEFT_UP_CORNER_GAMEBOY + y * SIZE_BLOCK_SL - substract_y);
 			y++;
 		}
 		x++;

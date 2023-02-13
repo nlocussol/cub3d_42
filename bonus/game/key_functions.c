@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/12 14:11:44 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 11:19:46 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,13 @@ int	key_hook(int keycode, t_game *game)
 		{
 			game->started_gameboy = false;
 			mlx_mouse_move(game->mlx, game->window, mouse_pos_x, mouse_pos_y);
+		}
+		else if (keycode == ENTER && game->vars->game_finish)
+		{
+			char *temp[2];
+			temp[0] = "./so_long";
+			temp[1] = "so_long/maps/valid_map/maptest3.ber";
+			main_so_long(2, temp, game);
 		}
 		else
 			key_hook_so_long(keycode, game->vars);

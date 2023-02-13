@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:33:22 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/12 13:19:30 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 11:27:38 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	check_collectibles_to_exit(t_vars *vars)
 	if (vars->player->nb_collectibles == vars->nb_collectibles)
 	{
 		mlx_put_image_to_window(vars->mlx, vars->window,
-			vars->array_ptr_sprite[26], 85 + X_LEFT_UP_CORNER_GAME, 50 + Y_LEFT_UP_CORNER_GAME);
+			vars->array_ptr_sprite[26], 85 + X_LEFT_UP_CORNER_GAME,
+			50 + Y_LEFT_UP_CORNER_GAME);
 		vars->game_finish = 1;
 		ft_fdprintf(1, "you win\n");
 	}

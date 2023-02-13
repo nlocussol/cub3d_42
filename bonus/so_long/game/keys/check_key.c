@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:25:55 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/12 13:19:54 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 13:08:40 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,20 @@ int	check_key_next_next_next(int keycode, t_vars *vars,
 		else if (((char *)(buffer->content))[x + 1] == 'M')
 		{
 			mlx_put_image_to_window(vars->mlx, vars->window,
-				vars->array_ptr_sprite[0], vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME,
+				vars->array_ptr_sprite[0],
+				vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME,
 				vars->player->y % (SIZE_BLOCK_SL * 10) + Y_LEFT_UP_CORNER_GAME);
 			mlx_put_image_to_window(vars->mlx, vars->window,
-				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME, 70 + Y_LEFT_UP_CORNER_GAME);
+				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME,
+				70 + Y_LEFT_UP_CORNER_GAME);
 			vars->game_finish = 1;
 			ft_fdprintf(1, "you lose\n");
 			return (0);
 		}
 		key_right(vars, ((char *)(buffer->content))[x]);
 	}
+	else if (keycode == ECHAP)
+		return (check_echap(vars));
 	return (0);
 }
 
@@ -55,10 +59,12 @@ int	check_key_next_next(int keycode, t_vars *vars, t_double_list *buffer, int x)
 		else if (((char *)(buffer->content))[x - 1] == 'M')
 		{
 			mlx_put_image_to_window(vars->mlx, vars->window,
-				vars->array_ptr_sprite[0], vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME,
+				vars->array_ptr_sprite[0],
+				vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME,
 				vars->player->y % (SIZE_BLOCK_SL * 10) + Y_LEFT_UP_CORNER_GAME);
 			mlx_put_image_to_window(vars->mlx, vars->window,
-				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME, 70 + Y_LEFT_UP_CORNER_GAME);
+				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME,
+				70 + Y_LEFT_UP_CORNER_GAME);
 			vars->game_finish = 1;
 			ft_fdprintf(1, "you lose\n");
 			return (0);
@@ -81,10 +87,12 @@ int	check_key_next(int keycode, t_vars *vars, t_double_list *buffer, int x)
 		else if (((char *)(buffer->next->content))[x] == 'M')
 		{
 			mlx_put_image_to_window(vars->mlx, vars->window,
-				vars->array_ptr_sprite[0], vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME,
+				vars->array_ptr_sprite[0],
+				vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME,
 				vars->player->y % (SIZE_BLOCK_SL * 10) + Y_LEFT_UP_CORNER_GAME);
 			mlx_put_image_to_window(vars->mlx, vars->window,
-				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME, 70 + Y_LEFT_UP_CORNER_GAME);
+				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME,
+				70 + Y_LEFT_UP_CORNER_GAME);
 			vars->game_finish = 1;
 			ft_fdprintf(1, "you lose\n");
 			return (0);
@@ -98,9 +106,7 @@ int	check_key_next(int keycode, t_vars *vars, t_double_list *buffer, int x)
 
 int	check_key(int keycode, t_vars *vars, t_double_list *buffer, int x)
 {
-	if (keycode == ECHAP)
-		return (check_echap(vars));
-	else if (keycode == 'w' || keycode == ARROW_UP)
+	if (keycode == 'w' || keycode == ARROW_UP)
 	{
 		if (((char *)(buffer->previous->content))[x] == '1'
 			|| (((char *)(buffer->previous->content))[x] == 'E'
@@ -109,10 +115,12 @@ int	check_key(int keycode, t_vars *vars, t_double_list *buffer, int x)
 		else if (((char *)(buffer->previous->content))[x] == 'M')
 		{
 			mlx_put_image_to_window(vars->mlx, vars->window,
-				vars->array_ptr_sprite[0], vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME,
+				vars->array_ptr_sprite[0],
+				vars->player->x % (SIZE_BLOCK_SL * 10) + X_LEFT_UP_CORNER_GAME,
 				vars->player->y % (SIZE_BLOCK_SL * 10) + Y_LEFT_UP_CORNER_GAME);
 			mlx_put_image_to_window(vars->mlx, vars->window,
-				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME, 70 + Y_LEFT_UP_CORNER_GAME);
+				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME,
+				70 + Y_LEFT_UP_CORNER_GAME);
 			vars->game_finish = 1;
 			ft_fdprintf(1, "you lose\n");
 			return (0);

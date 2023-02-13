@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:05:09 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/12 12:22:07 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 12:44:27 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	initialize_var(t_vars *vars, t_double_list *map, int argc, char **argv)
 	vars->nb_columns = calculate_columns(vars->map);
 	vars->nb_rows = calculate_rows(vars->map);
 	vars->map_chunk = divise_map(vars);
-	//vars->mlx = mlx_init();
-	//vars->window = mlx_new_window(vars->mlx, 960, 640, "Game");
 	vars->player = ft_calloc(1, sizeof(t_player_so_long));
 	set_up_array_ptr_player(vars);
 	start = find_start(&vars->map);
