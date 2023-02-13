@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/02/13 13:58:48 by averdon          ###   ########.fr        #
+#    Updated: 2023/02/13 17:48:58 by averdon          ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -84,7 +84,7 @@ ${NAME}:	${OBJS}
 			@clear -x
 			@printf "\033[93;1;5mCompiling ...\n\033[0m"
 			@make -C sources/libft
-			@make -C sources/minilibx
+			@make -sC sources/minilibx
 			@${COMPILER} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBRARY}
 			@clear -x
 			@printf '\033[0;92;1mCompilation finished\n\033[0m'

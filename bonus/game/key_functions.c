@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 15:40:24 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 16:41:54 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,8 @@ void	draw_image(t_game *game, unsigned int **img, int x, int y)
 		j = 0;
 		while (img[i][j])
 		{
-			my_mlx_pixel_put(game->screen_img, j + x, i + y, img[i][j]);
+			if ((int)img[i][j] >= 0)
+				my_mlx_pixel_put(game->screen_img, j + x, i + y, img[i][j]);
 			j++;
 		}
 		i++;
