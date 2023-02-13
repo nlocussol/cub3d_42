@@ -69,7 +69,7 @@ int	hit_wall_left_right(t_game *game, int coeff,
 
 void	move_bar(t_game *game)
 {
-	if (game->bar_index == 2)
+	if (game->bar_index == 1)
 		game->minimap = 1;
 	else
 		game->minimap = 0;

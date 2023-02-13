@@ -50,7 +50,7 @@ void	nb_game_bar(t_game *game)
 	x = 834;
 	y = 448;
 	i = 0;
-	while (i != 8)
+	while (i != 7)
 	{
 		nb = ft_itoa(i + 1);
 		mlx_string_put(game->mlx, game->window, y + 20, x + 110, 0xB39797, nb);
@@ -79,6 +79,25 @@ void	put_map_icone(t_game *game, int x, int y, unsigned int **color)
 	}
 }
 
+void	put_arm(t_game *game, int x, int y, unsigned int **color)
+{
+	int	x_img;
+	int	y_img;
+
+	x_img = 0;
+	while (x_img != 314)
+	{
+		y_img = 0;
+		while (y_img != 350)
+		{
+			if (color[x_img][y_img] != 0xff000000)
+				my_mlx_pixel_put(game->screen_img, y_img + y, x_img + x, color[x_img][y_img]);
+			y_img++;
+		}
+		x_img++;
+	}
+}
+
 void	game_bar(t_game *game)
 {
 	int			x;
@@ -90,7 +109,7 @@ void	game_bar(t_game *game)
 	i = 0;
 	x = 834;
 	y = 448;
-	while (y < 1472)
+	while (y < 1344)
 	{
 		put_one_case(game, x, y ,0xB39797);
 		if (i + 1 == game->bar_index)
@@ -114,4 +133,5 @@ void	game_bar(t_game *game)
 		y += 128;
 		i++;
 	}
+	put_arm(game, 766, 1570, game->arm_img[0]);
 }
