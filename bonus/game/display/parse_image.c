@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/10 19:45:19 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 15:31:12 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ unsigned int	**convert_image(int length, int width, t_img img)
 	int				x;
 	unsigned int	**image;
 
-	image = ft_calloc(256 + 1, sizeof(unsigned int *));
+	image = ft_calloc(length + 1, sizeof(unsigned int *));
 	y = 0;
 	while (y < length)
 	{
 		x = 0;
-		image[y] = ft_calloc(256 + 1, sizeof(unsigned int));
+		image[y] = ft_calloc(width + 1, sizeof(unsigned int));
 		while (x < width)
 		{
 			image[y][x] = calculate_color(x, y, &img);
@@ -74,7 +74,7 @@ void	parse_one_group_image(t_game *game, unsigned int ***game_tab,
 void	parse_image_next(t_game *game)
 {
 	char	*name_minimap[4];
-	char	*name_game_bar[6];
+	char	*name_game_bar[7];
 
 	name_minimap[0] = "assets/minimap/floor.xpm";
 	name_minimap[1] = "assets/minimap/wall.xpm";
@@ -87,7 +87,8 @@ void	parse_image_next(t_game *game)
 	name_game_bar[3] = "assets/game_bar/card.xpm";
 	name_game_bar[4] = "assets/game_bar/gameboy.xpm";
 	name_game_bar[5] = "assets/game_bar/sponge.xpm";
-	parse_one_group_image(game, game->bar_img, name_game_bar, 6);
+	name_game_bar[6] = "assets/gameboy_screen.xpm";
+	parse_one_group_image(game, game->bar_img, name_game_bar, 7);
 }
 
 void	parse_image(t_game *game)

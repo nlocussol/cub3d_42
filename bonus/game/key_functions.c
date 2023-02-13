@@ -6,11 +6,12 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 11:19:46 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 15:40:24 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "display/display.h"
 #include "game.h"
 
 int	mouse_hook(int mouse, int x, int y, t_game *game)
@@ -248,12 +249,28 @@ void	check_anim(t_game *game)
 	}
 }
 
+void	draw_image(t_game *game, unsigned int **img, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (img[i])
+	{
+		j = 0;
+		while (img[i][j])
+		{
+			my_mlx_pixel_put(game->screen_img, j + x, i + y, img[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
 int	launch_movements(t_game *game)
 {
 	static bool	first_time;
-	char		*temp2[2];
-	int			width;
-	int 		height;
+	char		*temp[2];
 
 	if (game->started_gameboy == false)
 	{
@@ -275,11 +292,11 @@ int	launch_movements(t_game *game)
 	{
 		if (first_time == true)
 		{
-			void *temp = mlx_xpm_file_to_image(game->mlx, "assets/gameboy_screen.xpm", &width, &height);
-			mlx_put_image_to_window(game->mlx, game->window, temp, WIDTH_SCREEN / 2 - 1014 / 2, HEIGHT_SCREEN - 869 - 85);
-			temp2[0] = "./so_long";
-			temp2[1] = "so_long/maps/valid_map/maptest3.ber";
-			main_so_long(2, temp2, game);
+			draw_image(game, game->bar_img[6], WIDTH_SCREEN / 2 - 1014 / 2, HEIGHT_SCREEN - 869 - 85);
+			mlx_put_image_to_window(game->mlx, game->window, game->screen_img->img, 0, 0);
+			temp[0] = "./so_long";
+			temp[1] = "so_long/maps/valid_map/maptest3.ber";
+			main_so_long(2, temp, game);
 			first_time = false;
 		}
 		animation_and_movement(game->vars);

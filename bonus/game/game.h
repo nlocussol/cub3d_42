@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/11 17:54:43 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 15:22:09 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_game
 
 	unsigned int	**images[11];
 	unsigned int	**minimap_img[4];
-	unsigned int	**bar_img[6];
+	unsigned int	**bar_img[7];
 	char			*text_no;
 	char			*text_so;
 	char			*text_we;
