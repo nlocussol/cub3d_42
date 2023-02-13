@@ -79,6 +79,25 @@ void	put_map_icone(t_game *game, int x, int y, unsigned int **color)
 	}
 }
 
+void	put_arm(t_game *game, int x, int y, unsigned int **color)
+{
+	int	x_img;
+	int	y_img;
+
+	x_img = 0;
+	while (x_img != 314)
+	{
+		y_img = 0;
+		while (y_img != 350)
+		{
+			if (color[x_img][y_img] != 0xff000000)
+				my_mlx_pixel_put(game->screen_img, y_img + y, x_img + x, color[x_img][y_img]);
+			y_img++;
+		}
+		x_img++;
+	}
+}
+
 void	game_bar(t_game *game)
 {
 	int			x;
@@ -114,4 +133,5 @@ void	game_bar(t_game *game)
 		y += 128;
 		i++;
 	}
+	put_arm(game, 766, 1570, game->arm_img[0]);
 }
