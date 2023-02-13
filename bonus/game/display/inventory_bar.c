@@ -50,7 +50,7 @@ void	nb_game_bar(t_game *game)
 	x = 834;
 	y = 448;
 	i = 0;
-	while (i != 8)
+	while (i != 7)
 	{
 		nb = ft_itoa(i + 1);
 		mlx_string_put(game->mlx, game->window, y + 20, x + 110, 0xB39797, nb);
@@ -109,7 +109,7 @@ void	game_bar(t_game *game)
 	i = 0;
 	x = 834;
 	y = 448;
-	while (y < 1472)
+	while (y < 1344)
 	{
 		put_one_case(game, x, y ,0xB39797);
 		if (i + 1 == game->bar_index)
