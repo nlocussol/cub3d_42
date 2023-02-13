@@ -74,7 +74,7 @@ void	parse_one_group_image(t_game *game, unsigned int ***game_tab,
 void	parse_image_next(t_game *game)
 {
 	char	*name_minimap[4];
-	char	*name_game_bar[5];
+	char	*name_game_bar[6];
 
 	name_minimap[0] = "assets/minimap/floor.xpm";
 	name_minimap[1] = "assets/minimap/wall.xpm";
@@ -86,7 +86,8 @@ void	parse_image_next(t_game *game)
 	name_game_bar[2] = "assets/game_bar/spraypaint.xpm";
 	name_game_bar[3] = "assets/game_bar/card.xpm";
 	name_game_bar[4] = "assets/game_bar/gameboy.xpm";
-	parse_one_group_image(game, game->bar_img, name_game_bar, 5);
+	name_game_bar[5] = "assets/game_bar/sponge.xpm";
+	parse_one_group_image(game, game->bar_img, name_game_bar, 6);
 }
 
 void	parse_image(t_game *game)

@@ -95,18 +95,22 @@ void	game_bar(t_game *game)
 		put_one_case(game, x, y ,0xB39797);
 		if (i + 1 == game->bar_index)
 			put_big_case(game, x - 5, y - 5, 0xDFDFDF);
-		if (i == 0)
+		if (i == 3)
 			put_map_icone(game, x + 10, y + 15, game->bar_img[2]);
-		if (i == 1 && anim <= 50)
+		if (i == 0 && anim <= 50)
 			put_map_icone(game, x + 10, y + 15, game->bar_img[0]);
-		else if (i == 1 && anim > 50)
+		else if (i == 0 && anim > 50)
 		{
 			if (anim == 100)
 				anim = 0;
 			put_map_icone(game, x + 10, y + 15, game->bar_img[1]);
 		}
-		if (i == 2)
+		if (i == 1)
 			put_map_icone(game, x + 10, y + 15, game->bar_img[3]);
+		if (i == 2)
+			put_map_icone(game, x + 10, y + 15, game->bar_img[4]);
+		if (i == 4)
+			put_map_icone(game, x + 10, y + 15, game->bar_img[5]);
 		y += 128;
 		i++;
 	}

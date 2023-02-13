@@ -12,19 +12,6 @@
 
 #include "../../cub3d.h"
 
-void	put_player_map(t_game *game, int x, int y)
-{
-	my_mlx_pixel_put(game->screen_img, y, x, 0xFF0101);
-	my_mlx_pixel_put(game->screen_img, y - 1, x, 0xFF0101);
-	my_mlx_pixel_put(game->screen_img, y + 1, x, 0xFF0101);
-	my_mlx_pixel_put(game->screen_img, y, x - 1, 0xFF0101);
-	my_mlx_pixel_put(game->screen_img, y, x + 1, 0xFF0101);
-	my_mlx_pixel_put(game->screen_img, y - 1, x - 1, 0xFF0101);
-	my_mlx_pixel_put(game->screen_img, y + 1, x + 1, 0xFF0101);
-	my_mlx_pixel_put(game->screen_img, y - 1, x + 1, 0xFF0101);
-	my_mlx_pixel_put(game->screen_img, y + 1, x - 1, 0xFF0101);
-}
-
 void	put_one_block(t_game *game, unsigned int color)
 {
 	int				x;
@@ -55,13 +42,6 @@ void	put_assets(t_game *game, unsigned int **color)
 		while (y < game->y_minimap + 16)
 		{
 			my_mlx_pixel_put(game->screen_img, y, x, color[x - game->x_minimap][y - game->y_minimap]);
-		//	printf("\nX player: %d X pixel: %d\n", (int)game->player->x, x);
-		//	printf("Y player: %d Y pixel: %d\n", (int)game->player->y, y);
-			if (x == (int)game->player->x && y == (int)game->player->y)
-			{
-				printf("ok\n");
-				put_player_map(game, x, y);
-			}
 			y++;
 		}
 		x++;
@@ -138,7 +118,7 @@ void	put_cursor(t_game *game, int x, int y)
 
 void	put_pixel_color(t_game *game, int x, int y)
 {
-	if (game->map[x][y] == '1' || game->map[x][y] == '\0')
+	if (game->map[x][y] == '1')
 		put_assets(game, game->minimap_img[1]);
 	else if (ft_strchr("NSEW0", game->map[x][y]))
 		put_assets(game, game->minimap_img[0]);
@@ -146,33 +126,28 @@ void	put_pixel_color(t_game *game, int x, int y)
 		put_assets(game, game->minimap_img[2]);
 	else if (ft_strchr("doO", game->map[x][y]))
 		put_assets(game, game->minimap_img[3]);
-	else
-		put_one_block(game, 0);
+	if (x == (int)(game->player->x / SIZE_BLOCK)
+		&& y == (int)(game->player->y / SIZE_BLOCK))
+		put_one_block(game, 0xF70707);
 }
 
-void	trace_circle(t_game *game)
+void	print_map(char **tab)
 {
-	int	x;
-	int	y;
-	int	d;
+	int j = 0;
+	int i = 0;
 
-	x = 5 * 16;
-	y = 108;
-	d = 1 - x;
-	while (x > y)
+	while (tab[j])
 	{
-		my_mlx_pixel_put(game->screen_img, x, y, 0xF30606);
-		y++;
-		if (d < 0)
-			d = d + 2 * y + 1;
-		else
+		i = 0;
+		while (tab[j][i])
 		{
-			x--;
-			d = d + (2 * x) - (2 * y) + 1;
+			printf("%c", tab[j][i]);
+			i++;
 		}
+		printf("\n");
+		j++;
 	}
 }
-
 void	open_minimap(t_game *game)
 {
 	int			x;
@@ -180,6 +155,7 @@ void	open_minimap(t_game *game)
 	int			value_x;
 	int			value_y;
 
+	//print_map(game->map);
 	game->x_minimap = 20;
 	x = (int)(game->player->x / SIZE_BLOCK) - 5;
 	if (x < 0)
@@ -200,7 +176,7 @@ void	open_minimap(t_game *game)
 		}
 		else
 			value_y = 6;
-		while (y < (int)(game->player->y / SIZE_BLOCK + value_y))
+		while (y < (int)(game->player->y / SIZE_BLOCK + value_y) && game->map[x][y] != '\0')
 		{
 			put_pixel_color(game, x, y);
 			if (x == (int)(game->player->x / SIZE_BLOCK)
@@ -213,5 +189,4 @@ void	open_minimap(t_game *game)
 		game->x_minimap += 16;
 	}
 	put_cursor(game, 0, 0);
-	//trace_circle(game);
 }

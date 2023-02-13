@@ -72,7 +72,7 @@ typedef struct s_game
 
 	unsigned int	**images[11];
 	unsigned int	**minimap_img[4];
-	unsigned int	**bar_img[5];
+	unsigned int	**bar_img[6];
 	char			*text_no;
 	char			*text_so;
 	char			*text_we;
