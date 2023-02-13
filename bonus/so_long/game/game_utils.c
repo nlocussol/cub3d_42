@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 22:01:19 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 13:57:28 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 18:38:43 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,11 @@ void	destroy_all_images(t_vars *vars)
 	}
 }
 
-void	destroy_and_free(t_vars *vars)
+void	destroy_and_free_so_long(t_vars *vars)
 {
 	t_double_list	*buffer;
 
-	mlx_loop_end(vars->mlx);
 	destroy_all_images(vars);
-	mlx_destroy_window(vars->mlx, vars->window);
-	mlx_destroy_display(vars->mlx);
 	ft_double_lstclear(&vars->map, del);
 	buffer = vars->map_chunk;
 	while (vars->map_chunk)
@@ -56,7 +53,6 @@ void	destroy_and_free(t_vars *vars)
 	free(vars->player->old_point);
 	free(vars->player);
 	free(vars->array_ptr_sprite);
-	free(vars->mlx);
 	free(vars);
 }
 

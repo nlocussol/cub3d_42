@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 16:41:54 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 20:12:27 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,29 @@ void	turn_camera(t_game	*game, int move)
 
 int	key_hook(int keycode, t_game *game)
 {
+	static bool	first_time_in_gameboy = true;
 	static int	mouse_pos_x;
 	static int	mouse_pos_y;
+	t_double_list	*buffer;
+	t_double_list	*next;
+	t_song			*song;
+
 	if (game->started_gameboy == false)
 	{
 		if (keycode == ECHAP)
 		{
-			while (game->lst_sound)
-				launch_movements(game);
+			//while (game->lst_sound)
+			//	launch_movements(game);
+			buffer = game->lst_sound;
+			while (buffer)
+			{
+				song = buffer->content;
+				next = buffer->next;
+				pclose(song->stream);
+				free(song);
+				free(buffer);
+				buffer = next;
+			}
 			close_window(game);
 		}
 		if (keycode == W || keycode == A || keycode == S || keycode == D)
@@ -128,12 +143,11 @@ int	key_hook(int keycode, t_game *game)
 			turn_camera(game, 3);
 		else if (keycode == RIGHT_ARROW)
 			turn_camera(game, -3);
-		else if (ft_strchr("egh", keycode))
-			interact(game, keycode);
-		else if (ft_strchr("z", keycode))
+		else if (keycode == E)
 		{
-			game->started_gameboy = true;
-			mlx_mouse_get_pos(game->mlx, game->window, &mouse_pos_x, &mouse_pos_y);
+			interact(game);
+			if (game->bar_index == GAMEBOY)
+				mlx_mouse_get_pos(game->mlx, game->window, &mouse_pos_x, &mouse_pos_y);
 		}
 	}
 	else
@@ -141,7 +155,9 @@ int	key_hook(int keycode, t_game *game)
 		if (keycode == ECHAP)
 		{
 			game->started_gameboy = false;
+			destroy_and_free_so_long(game->vars);
 			mlx_mouse_move(game->mlx, game->window, mouse_pos_x, mouse_pos_y);
+			first_time_in_gameboy = true;
 		}
 		else if (keycode == ENTER && game->vars->game_finish)
 		{
@@ -203,9 +219,9 @@ void	check_anim(t_game *game)
 {
 	t_double_list	*buffer;
 	t_double_list	*next;
+	t_song			*song;
 	t_anim			*anim;
 	t_graff			*graff;
-	t_song			*song;
 	long			time;
 
 	time = calculate_time();
@@ -214,7 +230,8 @@ void	check_anim(t_game *game)
 	{
 		anim = buffer->content;
 		next = buffer->next;
-		if (ft_strchr("oO", game->map[anim->x][anim->y]) && time - anim->time_anim_start >= 2000)
+		if (ft_strchr("oO", game->map[anim->x][anim->y])
+			&& time - anim->time_anim_start >= 2000)
 		{
 			if (game->map[anim->x][anim->y] == 'o')
 				game->map[anim->x][anim->y] = 'D';
@@ -245,6 +262,9 @@ void	check_anim(t_game *game)
 		if ((song->type == SPRAY && time - song->start_time > 1 * 2500)
 			|| (song->type == DOOR && time - song->start_time > 1 * 3500))
 			suppress_node_3(game, buffer);
+		else
+		{
+		}
 		buffer = next;
 	}
 }

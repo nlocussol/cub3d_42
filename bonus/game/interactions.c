@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/10 17:54:31 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 20:12:10 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	suppress_node_2(t_game *game, t_raycast *raycast)
 
 void	suppress_node_3(t_game *game, t_double_list *buffer)
 {
-	fclose(((t_song *)(buffer->content))->stream);
+	pclose(((t_song *)(buffer->content))->stream);
 	if (buffer->previous)
 		buffer->previous->next = buffer->next;
 	else
@@ -122,13 +122,18 @@ void	suppress_node_3(t_game *game, t_double_list *buffer)
 	ft_double_lstdelone(buffer, del);
 }
 
-void	interact(t_game *game, int keycode)
+void	interact(t_game *game)
 {
 	t_anim			*new_anim;
 	t_graff			*new_graff;
 	t_double_list	*new_elt;
 	t_raycast		raycast;
 
+	if (game->bar_index == GAMEBOY)
+	{
+		game->started_gameboy = true;
+		return ;
+	}
 	raycast.pos_x = game->player->x / SIZE_BLOCK;
 	raycast.pos_y = game->player->y / SIZE_BLOCK;
 	raycast.dir_x = cos(radian_value(game->player->orientation));
@@ -140,7 +145,7 @@ void	interact(t_game *game, int keycode)
 	calculate_dist_perp_wall(game, &raycast);
 	if (raycast.dist_perp_wall > (double)1)
 		return ;
-	if (game->bar_index == 3 && keycode == E && game->map[raycast.map_x][raycast.map_y] == 'D')
+	if (game->bar_index == KEYCARD && game->map[raycast.map_x][raycast.map_y] == 'D')
 	{
 		if (find_square(game, raycast.map_x, raycast.map_y))
 			suppress_node(game, raycast.map_x, raycast.map_y);
@@ -153,7 +158,7 @@ void	interact(t_game *game, int keycode)
 		ft_double_lstadd_back(&game->lst_anim, new_elt);
 		game->map[raycast.map_x][raycast.map_y] = 'O';
 	}
-	else if (game->bar_index == 3 && keycode == E && game->map[raycast.map_x][raycast.map_y] == 'd')
+	else if (game->bar_index == KEYCARD && game->map[raycast.map_x][raycast.map_y] == 'd')
 	{
 		if (find_square(game, raycast.map_x, raycast.map_y))
 			suppress_node(game, raycast.map_x, raycast.map_y);
@@ -166,7 +171,7 @@ void	interact(t_game *game, int keycode)
 		ft_double_lstadd_back(&game->lst_anim, new_elt);
 		game->map[raycast.map_x][raycast.map_y] = 'o';
 	}
-	else if (game->bar_index == 1 && keycode == G && ft_strchr("1D", game->map[raycast.map_x][raycast.map_y]))
+	else if (game->bar_index == BOMB_SPRAY && ft_strchr("1D", game->map[raycast.map_x][raycast.map_y]))
 	{
 		if (game->nb_graff == 0 || find_square_2(game, &raycast))
 			return ;
@@ -194,11 +199,10 @@ void	interact(t_game *game, int keycode)
 		ft_double_lstadd_back(&game->lst_graff, new_elt);
 		game->nb_graff -= 1;
 	}
-	else if (game->bar_index == 1 && keycode == H && ft_strchr("1D", game->map[raycast.map_x][raycast.map_y]))
+	else if (game->bar_index == SPONGE && ft_strchr("1D", game->map[raycast.map_x][raycast.map_y]))
 	{
 		if (!find_square_2(game, &raycast))
 			return ;
-		launch_song(game, SPRAY);
 		suppress_node_2(game, &raycast);
 		game->nb_graff += 1;
 	}

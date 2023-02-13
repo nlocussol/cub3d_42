@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:24:24 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/11 17:54:42 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 19:28:02 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	destroy_images(t_game *game)
 		i++;
 	}
 	i = 0;
-	while (i < 5)
+	while (i < 7)
 	{
 		j = 0;
 		while (game->bar_img[i][j])
@@ -53,6 +53,13 @@ void	destroy_images(t_game *game)
 		free(game->bar_img[i]);
 		i++;
 	}
+	j = 0;
+	while (game->arm_img[0][j])
+	{
+		free(game->arm_img[0][j]);
+		j++;
+	}
+	free(game->arm_img[0]);
 }
 
 void	free_all(t_game *game)

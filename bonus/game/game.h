@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 15:22:09 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 20:20:03 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,12 @@ typedef struct s_raycast
 # define SPRAY 1
 # define DOOR 2
 
+# define MAP 1
+# define KEYCARD 2
+# define GAMEBOY 3
+# define BOMB_SPRAY 4
+# define SPONGE 5
+
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
 
@@ -170,7 +176,7 @@ int		key_hook(int keycode, t_game *game);
 void	move_player(t_game	*game, int move);
 void	turn_camera(t_game	*game, int move);
 int		move_camera(void *arg);
-void	interact(t_game *game, int keycode);
+void	interact(t_game *game);
 
 t_anim	*find_square(t_game *game, int x, int y);
 t_graff	*find_square_2(t_game *game, t_raycast *raycast);

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:25:55 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 13:08:40 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 18:34:33 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	close_window_so_long(t_vars *vars)
 {
-	destroy_and_free(vars);
+	destroy_and_free_so_long(vars);
 	ft_fdprintf(1, "Exit program\n");
 	exit(0);
 }

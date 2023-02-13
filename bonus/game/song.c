@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:58:43 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/10 17:40:45 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/13 20:23:44 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	launch_song(t_game *game, int mode)
 {
+	/*
 	t_double_list	*new_elt;
 	t_song			*song;
 
@@ -40,4 +41,15 @@ void	launch_song(t_game *game, int mode)
 		return ;
 	}
 	ft_double_lstadd_back(&game->lst_sound, new_elt);
+	*/
+	int	pid;
+	(void)game;
+	(void)mode;
+	pid = fork();
+	if (pid == 0)
+	{
+		system("paplay game/sound_spray.ogg");
+		exit(0);
+	}
+	kill(pid, SIGKILL);
 }
