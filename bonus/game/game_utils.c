@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:24:24 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 19:28:02 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 18:44:06 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,34 @@ void	destroy_images(t_game *game)
 		free(game->bar_img[i]);
 		i++;
 	}
-	j = 0;
-	while (game->arm_img[0][j])
+	i = 0;
+	while (i < 5)
 	{
-		free(game->arm_img[0][j]);
-		j++;
+		j = 0;
+		while (game->arm_img[i][j])
+		{
+			free(game->arm_img[i][j]);
+			j++;
+		}
+		free(game->arm_img[i]);
+		i++;
 	}
-	free(game->arm_img[0]);
 }
 
 void	free_all(t_game *game)
 {
+	t_double_list	*next;
+	t_song			*song;
+
 	mlx_loop_end(game->mlx);
+	while (game->lst_sound)
+	{
+		song = game->lst_sound->content;
+		kill(song->pid, SIGKILL);
+		next = game->lst_sound->next;
+		ft_double_lstdelone(game->lst_sound, del);
+		game->lst_sound = next;
+	}
 	free(game->player);
 	ft_double_lstclear(&game->lst_anim, del);
 	ft_double_lstclear(&game->lst_graff, del);

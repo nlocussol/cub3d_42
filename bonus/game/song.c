@@ -6,21 +6,20 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:58:43 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 13:00:57 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 17:19:42 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "game.h"
 
 void	play_song(t_game *game, void *arg)
 {
-	char	*arg2[3];
+	char	*temp[3];
 
-	arg2[0] = "paplay";
-	arg2[1] = arg;
-	arg2[2] = NULL;
-	execve("/usr/bin/paplay", arg2, game->env);
+	temp[0] = "paplay";
+	temp[1] = arg;
+	temp[2] = NULL;
+	execve("/usr/bin/paplay", temp, game->env);
 }
 
 void	launch_song(t_game *game, int mode)
@@ -38,12 +37,20 @@ void	launch_song(t_game *game, int mode)
 			arg = ft_strdup("game/sound_spray.ogg");
 		else if (mode == DOOR)
 			arg = ft_strdup("game/sound_door.ogg");
+		else if (mode == START_GAMEBOY)
+			arg = ft_strdup("game/sound_start_gameboy.ogg");
+		else if (mode == PLAY_GAMEBOY)
+			arg = ft_strdup("game/sound_playing_gameboy.ogg");
+		else if (mode == DANCING_CHEESE)
+			arg = ft_strdup("game/sound_dancing_cheese.ogg");
+		else if (mode == ATMOSPHERE)
+			arg = ft_strdup("game/sound_atmosphere.ogg");
 		if (!arg)
 			return ;
 		play_song(game, arg);
 		exit(0);
 	}
-	else
+	else if (pid > 0)
 	{
 		song = malloc(sizeof(t_song));
 		if (!song)

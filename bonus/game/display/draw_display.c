@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:29:09 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/10 20:27:48 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 16:29:04 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,21 @@ unsigned int	find_texture_wall(t_game *game, t_raycast *raycast,
 unsigned int	color_to_draw(t_game *game, t_raycast *raycast,
 		int tex_x, int tex_y)
 {
-	int	color;
-	int	frame;
+	static long	time;
+	t_graff		*graff;
+	int			color;
+	int			frame;
 
-	color = 0;
-	if (find_square_2(game, raycast))
+	if (game == NULL)
 	{
-		frame = 5 + find_square_2(game, raycast)->frame;
+		time = calculate_time();
+		return (0);
+	}
+	color = 0;
+	graff = find_square_2(game, raycast);
+	if (graff && time - graff->time_start >= 2500)
+	{
+		frame = 5 + graff->frame;
 		color = game->images[frame][tex_y][tex_x];
 		if (color >= 0)
 			return (color);
@@ -80,6 +88,7 @@ void	draw_wall(t_game *game, t_raycast *raycast, int x, double wall_x)
 	tex_pos = raycast->draw_start - HEIGHT_SCREEN / 2;
 	tex_pos += raycast->line_height / 2;
 	tex_pos *= step;
+	color_to_draw(NULL, NULL, 0, 0);
 	while (raycast->draw_start < raycast->draw_end)
 	{
 		tex_y = (int)tex_pos % (256 - 1);

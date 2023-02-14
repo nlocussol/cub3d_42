@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 12:57:30 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 16:36:09 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_graff
 	int		y;
 	int		frame;
 	long	last_frame_changed;
+	long	time_start;
 	char	direction;
 }	t_graff;
 
@@ -143,6 +144,10 @@ typedef struct s_raycast
 
 # define SPRAY 1
 # define DOOR 2
+# define START_GAMEBOY 3
+# define PLAY_GAMEBOY 4
+# define DANCING_CHEESE 5
+# define ATMOSPHERE 6
 
 # define MAP 1
 # define KEYCARD 2

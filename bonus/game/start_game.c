@@ -6,11 +6,12 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 12:42:50 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 18:44:31 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "game.h"
 
 void	start_game(t_data *data, char **env)
 {
@@ -20,6 +21,7 @@ void	start_game(t_data *data, char **env)
 	initialize_game(game, data);
 	game->env = env;
 	parse_image(game);
+	launch_song(game, ATMOSPHERE);
 	mlx_mouse_move(game->mlx, game->window, 0, HEIGHT_SCREEN / 2);
 	mlx_mouse_hide(game->mlx, game->window);
 	mlx_loop_hook(game->mlx, launch_movements, game);

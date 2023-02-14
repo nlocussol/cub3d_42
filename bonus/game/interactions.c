@@ -6,11 +6,12 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 12:54:00 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 17:08:59 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "game.h"
 #include <pthread.h>
 
 t_anim	*find_square(t_game *game, int x, int y)
@@ -129,11 +130,6 @@ void	interact(t_game *game)
 	t_double_list	*new_elt;
 	t_raycast		raycast;
 
-	if (game->bar_index == GAMEBOY)
-	{
-		game->started_gameboy = true;
-		return ;
-	}
 	raycast.pos_x = game->player->x / SIZE_BLOCK;
 	raycast.pos_y = game->player->y / SIZE_BLOCK;
 	raycast.dir_x = cos(radian_value(game->player->orientation));
@@ -194,7 +190,8 @@ void	interact(t_game *game)
 				new_graff->direction = 'O';
 		}
 		new_graff->frame = 0;
-		new_graff->last_frame_changed = calculate_time();
+		new_graff->last_frame_changed = calculate_time() + 2500;
+		new_graff->time_start = calculate_time();
 		new_elt = ft_double_lstnew(new_graff);
 		ft_double_lstadd_back(&game->lst_graff, new_elt);
 		game->nb_graff -= 1;
