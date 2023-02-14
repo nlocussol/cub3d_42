@@ -75,7 +75,7 @@ void	parse_image_next(t_game *game)
 {
 	char	*name_minimap[4];
 	char	*name_game_bar[7];
-	char	*name_arm_img[1];
+	char	*name_arm_img[5];
 
 	name_minimap[0] = "assets/minimap/floor.xpm";
 	name_minimap[1] = "assets/minimap/wall.xpm";
@@ -91,7 +91,11 @@ void	parse_image_next(t_game *game)
 	name_game_bar[6] = "assets/gameboy_screen.xpm";
 	parse_one_group_image(game, game->bar_img, name_game_bar, 7);
 	name_arm_img[0] = "assets/arm_img/mine_arm.xpm";
-	parse_one_group_image(game, game->arm_img, name_arm_img, 1);
+	name_arm_img[1] = "assets/arm_img/card_arm.xpm";
+	name_arm_img[2] = "assets/arm_img/gameboy_arm.xpm";
+	name_arm_img[3] = "assets/arm_img/spray_arm.xpm";
+	name_arm_img[4] = "assets/arm_img/sponge_arm.xpm";
+	parse_one_group_image(game, game->arm_img, name_arm_img, 5);
 }
 
 void	parse_image(t_game *game)

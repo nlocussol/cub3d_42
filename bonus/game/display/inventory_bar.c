@@ -133,5 +133,8 @@ void	game_bar(t_game *game)
 		y += 128;
 		i++;
 	}
-	put_arm(game, 766, 1570, game->arm_img[0]);
+	if (game->bar_index < 6 && game->bar_index > 1)
+		put_arm(game, 766, 1570, game->arm_img[game->bar_index - 1]);
+	else
+		put_arm(game, 766, 1570, game->arm_img[0]);
 }
