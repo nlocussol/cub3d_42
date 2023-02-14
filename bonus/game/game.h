@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 10:53:11 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 12:57:30 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_graff
 
 typedef struct s_song
 {
-	pthread_t	thread;
+	int			pid;
 	long		start_time;
 	int			type;
 }	t_song;
@@ -94,6 +94,7 @@ typedef struct s_game
 	t_double_list	*lst_graff;
 	t_double_list	*lst_sound;
 	t_vars			*vars;
+	char			**env;
 }	t_game;
 
 typedef struct s_raycast
@@ -157,7 +158,7 @@ typedef struct s_raycast
 # define HIT_BOX_WALL 10
 
 int		mouse_hook(int mouse, int x, int y, t_game *game);
-void	start_game(t_data *data);
+void	start_game(t_data *data, char **env);
 void	initialize_game(t_game	*game, t_data *data);
 void	parse_image(t_game *game);
 void	create_border(t_game *game);

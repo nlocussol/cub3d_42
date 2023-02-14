@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 10:59:15 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 13:00:07 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ void	turn_camera(t_game	*game, int move)
 
 int	key_hook(int keycode, t_game *game)
 {
-	static int	mouse_pos_x;
-	static int	mouse_pos_y;
+	static int		mouse_pos_x;
+	static int		mouse_pos_y;
 	t_double_list	*next;
 	t_song			*song;
 
@@ -123,9 +123,9 @@ int	key_hook(int keycode, t_game *game)
 		{
 			while (game->lst_sound)
 			{
-				next = game->lst_sound;
 				song = game->lst_sound->content;
-				pthread_cancel(song->thread);
+				kill(song->pid, SIGKILL);
+				next = game->lst_sound->next;
 				ft_double_lstdelone(game->lst_sound, del);
 				game->lst_sound = next;
 			}

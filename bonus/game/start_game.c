@@ -6,18 +6,19 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:02:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/11 18:05:59 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 12:42:50 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	start_game(t_data *data)
+void	start_game(t_data *data, char **env)
 {
 	t_game	*game;
 
 	game = malloc(sizeof(t_game));
 	initialize_game(game, data);
+	game->env = env;
 	parse_image(game);
 	mlx_mouse_move(game->mlx, game->window, 0, HEIGHT_SCREEN / 2);
 	mlx_mouse_hide(game->mlx, game->window);

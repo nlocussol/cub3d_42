@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 11:02:20 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 12:54:00 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void	suppress_node_2(t_game *game, t_raycast *raycast)
 
 void	suppress_node_3(t_game *game, t_double_list *buffer)
 {
-	pthread_cancel(((t_song *)(buffer->content))->thread);
 	if (buffer->previous)
 		buffer->previous->next = buffer->next;
 	else
