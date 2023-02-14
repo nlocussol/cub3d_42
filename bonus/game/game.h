@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 20:20:03 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 10:53:11 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ typedef struct s_graff
 
 typedef struct s_song
 {
-	FILE	*stream;
-	long	start_time;
-	int		type;
+	pthread_t	thread;
+	long		start_time;
+	int			type;
 }	t_song;
 
 typedef struct s_game

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 20:12:27 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 10:56:02 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ int	key_hook(int keycode, t_game *game)
 	static bool	first_time_in_gameboy = true;
 	static int	mouse_pos_x;
 	static int	mouse_pos_y;
-	t_double_list	*buffer;
 	t_double_list	*next;
 	t_song			*song;
 
@@ -123,17 +122,13 @@ int	key_hook(int keycode, t_game *game)
 	{
 		if (keycode == ECHAP)
 		{
-			//while (game->lst_sound)
-			//	launch_movements(game);
-			buffer = game->lst_sound;
-			while (buffer)
+			while (game->lst_sound)
 			{
-				song = buffer->content;
-				next = buffer->next;
-				pclose(song->stream);
-				free(song);
-				free(buffer);
-				buffer = next;
+				next = game->lst_sound;
+				song = game->lst_sound->content;
+				pthread_cancel(song->thread);
+				ft_double_lstdelone(game->lst_sound, del);
+				game->lst_sound = next;
 			}
 			close_window(game);
 		}
