@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 10:56:02 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 10:59:15 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void	turn_camera(t_game	*game, int move)
 
 int	key_hook(int keycode, t_game *game)
 {
-	static bool	first_time_in_gameboy = true;
 	static int	mouse_pos_x;
 	static int	mouse_pos_y;
 	t_double_list	*next;
@@ -152,7 +151,6 @@ int	key_hook(int keycode, t_game *game)
 			game->started_gameboy = false;
 			destroy_and_free_so_long(game->vars);
 			mlx_mouse_move(game->mlx, game->window, mouse_pos_x, mouse_pos_y);
-			first_time_in_gameboy = true;
 		}
 		else if (keycode == ENTER && game->vars->game_finish)
 		{
