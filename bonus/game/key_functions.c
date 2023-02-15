@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/15 16:50:43 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/15 17:01:07 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,8 +261,13 @@ void	check_anim(t_game *game)
 			|| (song->type == DOOR && time - song->start_time > 3500)
 			|| (song->type == ATMOSPHERE && time - song->start_time > 313000)
 			|| (song->type == DANCING_CHEESE && time - song->start_time > 252000)
-			|| (song->type == START_GAMEBOY && time - song->start_time > 5500))
+			|| (song->type == PLAY_GAMEBOY && (time - song->start_time > 252000 || game->started_gameboy == false))
+			|| (song->type == START_GAMEBOY && time - song->start_time > 235000))
+		{
+			if (song->type == PLAY_GAMEBOY && game->started_gameboy == false)
+				kill(song->pid, SIGKILL);
 			suppress_node_3(game, buffer);
+		}
 		buffer = next;
 	}
 	if (game->lst_graff)
@@ -390,6 +395,16 @@ int	launch_movements(t_game *game)
 		}
 		if (!buffer)
 		{
+			buffer = game->lst_sound;
+			while (buffer)
+			{
+				song = buffer->content;
+				if (song->type == PLAY_GAMEBOY)
+					break ;
+				buffer = buffer->next;
+			}
+			if (!buffer)
+				launch_song(game, PLAY_GAMEBOY);
 			if (first_time == true)
 			{
 				temp[0] = "./so_long";
