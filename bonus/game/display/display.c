@@ -6,11 +6,12 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/15 14:23:40 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/15 15:47:40 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include "display.h"
 
 void	detect_wall(t_game *game, t_raycast *raycast)
 {
@@ -160,12 +161,12 @@ bool	door_should_be_recessed(t_game *game, int x,
 	{
 		calculate_dist_perp_wall(game, &raycast_copy);
 		calculate_draw_end(&raycast_copy);
-		if (raycast_copy.draw_end > raycast->draw_end)
+		if (raycast_copy.draw_end > raycast->line_height / 2 + HEIGHT_SCREEN / 2)
 		{
 			display_rayon(game, x, &raycast_copy);
 			return (true);
 		}
-		else if (raycast_copy.draw_end == raycast->draw_end)
+		else if (raycast_copy.draw_end == raycast->line_height / 2 + HEIGHT_SCREEN / 2)
 		{
 			wall_x = calculate_wall_x(game, &raycast_copy, 0);
 			if (rayon_should_be_redisplay(raycast, &raycast_copy, wall_x, 2))
@@ -192,11 +193,15 @@ void	rayon_hit_wall_or_door(t_game *game, int x,
 		}
 	}
 	raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
-	raycast->draw_start = -raycast->line_height / 2 + HEIGHT_SCREEN / 2;
+	raycast->draw_start = -raycast->line_height / 2 + game->mouse_height;
 	if (raycast->draw_start < 0)
 		raycast->draw_start = 0;
-	raycast->draw_end = raycast->line_height / 2 + HEIGHT_SCREEN / 2;
-	if (raycast->draw_end >= HEIGHT_SCREEN)
+	else if (raycast->draw_start >= HEIGHT_SCREEN)
+		raycast->draw_start = HEIGHT_SCREEN - 1;
+	raycast->draw_end = raycast->line_height / 2 + game->mouse_height;
+	if (raycast->draw_end < 0)
+		raycast->draw_end = 0;
+	else if (raycast->draw_end >= HEIGHT_SCREEN)
 		raycast->draw_end = HEIGHT_SCREEN - 1;
 	if (!ft_strchr("DoO", game->map[raycast->map_x][raycast->map_y])
 			|| !door_should_be_recessed(game, x, raycast))

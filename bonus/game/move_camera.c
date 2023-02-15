@@ -6,14 +6,13 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:35:02 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/15 13:24:10 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/15 15:49:22 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #include "game.h"
 
-//comments are to move the camera up and down
 int	move_camera(void *arg)
 {
 	t_game		*game;
@@ -40,10 +39,8 @@ int	move_camera(void *arg)
 		mlx_mouse_move(game->mlx, game->window, x, y);
 	}
 	old_x = x;
-	movement = (old_y - y) / CAMERA_SPEED_REVERSE;
+	movement = ((old_y - y) / CAMERA_SPEED_REVERSE) * 5;
 	game->mouse_height = (game->mouse_height + movement);
-	if (game->mouse_height < 0)
-		game->mouse_height = 360 + game->mouse_height;
 	if (y <= 10)
 	{
 		y = HEIGHT_SCREEN * 9 / 10 - 2;
