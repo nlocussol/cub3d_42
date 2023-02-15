@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:29:09 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 16:29:04 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:25:47 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,12 @@ void	draw_wall(t_game *game, t_raycast *raycast, int x, double wall_x)
 		|| (raycast->side == 1 && raycast->ray_dir_y < 0))
 		tex_x = 256 - tex_x - 1;
 	tex_pos = raycast->draw_start - HEIGHT_SCREEN / 2;
+/*	
+	tex_pos = -raycast->line_height / 2 + game->mouse_height / 2;
+	if (tex_pos < 0)
+		tex_pos = 0;
+	tex_pos = tex_pos - HEIGHT_SCREEN / 2;
+*/
 	tex_pos += raycast->line_height / 2;
 	tex_pos *= step;
 	color_to_draw(NULL, NULL, 0, 0);

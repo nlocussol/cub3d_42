@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/10 20:57:01 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:23:40 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,12 @@ bool	replace_animated_door(t_game *game, int x, t_raycast *raycast)
 		return (false);
 }
 
-void	calculate_draw_end(t_game *game, t_raycast *raycast_copy)
+void	calculate_draw_end(t_raycast *raycast_copy)
 {
 	raycast_copy->line_height = HEIGHT_SCREEN;
 	raycast_copy->line_height /= raycast_copy->dist_perp_wall;
 	raycast_copy->draw_end = raycast_copy->line_height / 2;
-	raycast_copy->draw_end += game->mouse_height;
+	raycast_copy->draw_end += HEIGHT_SCREEN / 2;
 	if (raycast_copy->draw_end >= HEIGHT_SCREEN)
 		raycast_copy->draw_end = HEIGHT_SCREEN - 1;
 }
@@ -159,7 +159,7 @@ bool	door_should_be_recessed(t_game *game, int x,
 	if (rayon_should_be_redisplay(raycast, &raycast_copy, 0, 1))
 	{
 		calculate_dist_perp_wall(game, &raycast_copy);
-		calculate_draw_end(game, &raycast_copy);
+		calculate_draw_end(&raycast_copy);
 		if (raycast_copy.draw_end > raycast->draw_end)
 		{
 			display_rayon(game, x, &raycast_copy);
@@ -192,10 +192,10 @@ void	rayon_hit_wall_or_door(t_game *game, int x,
 		}
 	}
 	raycast->line_height = HEIGHT_SCREEN / raycast->dist_perp_wall;
-	raycast->draw_start = -raycast->line_height / 2 + game->mouse_height;
+	raycast->draw_start = -raycast->line_height / 2 + HEIGHT_SCREEN / 2;
 	if (raycast->draw_start < 0)
 		raycast->draw_start = 0;
-	raycast->draw_end = raycast->line_height / 2 + game->mouse_height;
+	raycast->draw_end = raycast->line_height / 2 + HEIGHT_SCREEN / 2;
 	if (raycast->draw_end >= HEIGHT_SCREEN)
 		raycast->draw_end = HEIGHT_SCREEN - 1;
 	if (!ft_strchr("DoO", game->map[raycast->map_x][raycast->map_y])

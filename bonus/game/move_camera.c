@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:35:02 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/02 20:07:31 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/15 13:24:10 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	move_camera(void *arg)
 {
 	t_game		*game;
 	static int	old_x;
-	//static int	old_y;
+	static int	old_y = HEIGHT_SCREEN / 2;
 	int			x;
 	int			y;
 	int			movement;
@@ -40,7 +40,6 @@ int	move_camera(void *arg)
 		mlx_mouse_move(game->mlx, game->window, x, y);
 	}
 	old_x = x;
-	/*
 	movement = (old_y - y) / CAMERA_SPEED_REVERSE;
 	game->mouse_height = (game->mouse_height + movement);
 	if (game->mouse_height < 0)
@@ -56,6 +55,5 @@ int	move_camera(void *arg)
 		mlx_mouse_move(game->mlx, game->window, x, y);
 	}
 	old_y = y;
-	*/
 	return (0);
 }

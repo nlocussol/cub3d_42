@@ -6,73 +6,44 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:24:24 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 18:44:06 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/14 18:58:32 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	destroy_images(t_game *game)
+void	destroy_one_group_image(unsigned int ***img, int nb_images)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < 11)
+	while (i < nb_images)
 	{
 		j = 0;
-		while (game->images[i][j])
+		while (img[i][j])
 		{
-			free(game->images[i][j]);
+			free(img[i][j]);
 			j++;
 		}
-		free(game->images[i]);
-		i++;
-	}
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (game->minimap_img[i][j])
-		{
-			free(game->minimap_img[i][j]);
-			j++;
-		}
-		free(game->minimap_img[i]);
-		i++;
-	}
-	i = 0;
-	while (i < 7)
-	{
-		j = 0;
-		while (game->bar_img[i][j])
-		{
-			free(game->bar_img[i][j]);
-			j++;
-		}
-		free(game->bar_img[i]);
-		i++;
-	}
-	i = 0;
-	while (i < 5)
-	{
-		j = 0;
-		while (game->arm_img[i][j])
-		{
-			free(game->arm_img[i][j]);
-			j++;
-		}
-		free(game->arm_img[i]);
+		free(img[i]);
 		i++;
 	}
 }
 
-void	free_all(t_game *game)
+void	destroy_images(t_game *game)
+{
+	destroy_one_group_image(game->images, 11);
+	destroy_one_group_image(game->minimap_img, 4);
+	destroy_one_group_image(game->bar_img, 7);
+	destroy_one_group_image(game->arm_img, 5);
+}
+
+void	kill_sound_forks(t_game *game)
 {
 	t_double_list	*next;
 	t_song			*song;
 
-	mlx_loop_end(game->mlx);
 	while (game->lst_sound)
 	{
 		song = game->lst_sound->content;
@@ -81,6 +52,12 @@ void	free_all(t_game *game)
 		ft_double_lstdelone(game->lst_sound, del);
 		game->lst_sound = next;
 	}
+}
+
+void	free_all(t_game *game)
+{
+	mlx_loop_end(game->mlx);
+	kill_sound_forks(game);
 	free(game->player);
 	ft_double_lstclear(&game->lst_anim, del);
 	ft_double_lstclear(&game->lst_graff, del);
