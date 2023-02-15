@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 16:36:09 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/15 16:39:54 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_game
 	unsigned int	**minimap_img[4];
 	unsigned int	**bar_img[7];
 	unsigned int	**arm_img[5];
+	unsigned int	**anim_gameboy[10];
 	char			*text_no;
 	char			*text_so;
 	char			*text_we;
@@ -190,5 +191,6 @@ t_graff	*find_square_2(t_game *game, t_raycast *raycast);
 void	suppress_node(t_game *game, int x, int y);
 void	suppress_node_3(t_game *game, t_double_list *buffer);
 
+void	start_gameboy(t_game *game);
 void	launch_song(t_game *game, int mode);
 #endif

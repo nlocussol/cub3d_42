@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 15:31:12 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/15 16:43:45 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	parse_image_next(t_game *game)
 	char	*name_minimap[4];
 	char	*name_game_bar[7];
 	char	*name_arm_img[5];
+	char	*anim_gameboy[10];
 
 	name_minimap[0] = "assets/minimap/floor.xpm";
 	name_minimap[1] = "assets/minimap/wall.xpm";
@@ -96,6 +97,17 @@ void	parse_image_next(t_game *game)
 	name_arm_img[3] = "assets/arm_img/spray_arm.xpm";
 	name_arm_img[4] = "assets/arm_img/sponge_arm.xpm";
 	parse_one_group_image(game, game->arm_img, name_arm_img, 5);
+	anim_gameboy[0] = "assets/gameboy_intro/f0.xpm";
+	anim_gameboy[1] = "assets/gameboy_intro/f1.xpm";
+	anim_gameboy[2] = "assets/gameboy_intro/f2.xpm";
+	anim_gameboy[3] = "assets/gameboy_intro/f3.xpm";
+	anim_gameboy[4] = "assets/gameboy_intro/f4.xpm";
+	anim_gameboy[5] = "assets/gameboy_intro/f5.xpm";
+	anim_gameboy[6] = "assets/gameboy_intro/f6.xpm";
+	anim_gameboy[7] = "assets/gameboy_intro/f7.xpm";
+	anim_gameboy[8] = "assets/gameboy_intro/f8.xpm";
+	anim_gameboy[9] = "assets/gameboy_intro/f9.xpm";
+	parse_one_group_image(game, game->anim_gameboy, anim_gameboy, 10);
 }
 
 void	parse_image(t_game *game)

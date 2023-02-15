@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:41 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/15 13:20:38 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/15 16:50:43 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ int	key_hook(int keycode, t_game *game)
 			mlx_mouse_get_pos(game->mlx, game->window, &mouse_pos_x, &mouse_pos_y);
 			game->started_gameboy = true;
 			launch_song(game, START_GAMEBOY);
+			start_gameboy(NULL);
 		}
 	}
 	else
@@ -329,6 +330,24 @@ void	draw_image(t_game *game, unsigned int **img, int x, int y)
 	}
 }
 
+void	start_gameboy(t_game *game)
+{
+	static long time_start;
+	long		time;
+	int			frame;
+
+	if (game == NULL)
+	{
+		time_start = calculate_time();
+		return ;
+	}
+	time = calculate_time();
+	frame = (time - time_start) / 550;
+	if (frame > 9)
+		return ;
+	draw_image(game, game->anim_gameboy[frame], 710, 377);
+}
+
 int	launch_movements(t_game *game)
 {
 	t_double_list	*buffer;
@@ -358,6 +377,7 @@ int	launch_movements(t_game *game)
 		if (first_time == true)
 		{
 			draw_image(game, game->bar_img[6], WIDTH_SCREEN / 2 - 1014 / 2, HEIGHT_SCREEN - 869 - 85);
+			start_gameboy(game);
 			mlx_put_image_to_window(game->mlx, game->window, game->screen_img->img, 0, 0);
 		}
 		buffer = game->lst_sound;

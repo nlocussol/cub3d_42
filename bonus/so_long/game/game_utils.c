@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 22:01:19 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 18:38:43 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/15 16:52:11 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ void	put_black_screen(t_vars *vars)
 			substract_x = 0;
 			substract_y = 0;
 			if (x == 16)
-				substract_x = 10;
+				substract_x = 5;
 			if (y == 14)
-				substract_y = 10;
+				substract_y = 5;
 			mlx_put_image_to_window(vars->mlx, vars->window,
 				vars->array_ptr_sprite[8],
 				X_LEFT_UP_CORNER_GAMEBOY + x * SIZE_BLOCK_SL - substract_x,
