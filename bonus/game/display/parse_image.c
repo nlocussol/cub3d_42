@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/15 16:43:45 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/15 17:57:03 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ unsigned int	calculate_color(int x, int y, t_img *img)
 	r = img->addr[pixel + 2];
 	g = img->addr[pixel + 1];
 	b = img->addr[pixel];
-	return ((opacity << 24) + (r << 16) + (g << 8) + b);
+	return ((opacity << 24) | (r << 16) | (g << 8) | b);
 }
 
 unsigned int	**convert_image(int length, int width, t_img img)
