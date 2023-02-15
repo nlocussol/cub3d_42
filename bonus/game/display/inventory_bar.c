@@ -4,7 +4,7 @@ void	put_one_case(t_game *game, int x_tmp, int y_tmp, int color)
 {
 	int	x;
 	int	y;
-	
+
 	x = x_tmp;
 	while (x < x_tmp + 128)
 	{
@@ -12,7 +12,8 @@ void	put_one_case(t_game *game, int x_tmp, int y_tmp, int color)
 		while (y < y_tmp + 128)
 		{
 			if ((x >= x_tmp && x < x_tmp + 5) || (y >= y_tmp && y < y_tmp + 5)
-					|| (y > y_tmp + 123 && y < y_tmp + 128) || (x > x_tmp + 123 && x < x_tmp + 128))
+				|| (y > y_tmp + 123 && y < y_tmp + 128)
+				|| (x > x_tmp + 123 && x < x_tmp + 128))
 				my_mlx_pixel_put(game->screen_img, y, x, color);
 			y++;
 		}
@@ -24,7 +25,7 @@ void	put_big_case(t_game *game, int x_tmp, int y_tmp, int color)
 {
 	int	x;
 	int	y;
-	
+
 	x = x_tmp;
 	while (x < x_tmp + 136)
 	{
@@ -32,7 +33,8 @@ void	put_big_case(t_game *game, int x_tmp, int y_tmp, int color)
 		while (y < y_tmp + 134)
 		{
 			if ((x >= x_tmp && x < x_tmp + 5) || (y >= y_tmp && y < y_tmp + 5)
-					|| (y > y_tmp + 127 && y < y_tmp + 134) || (x > x_tmp + 131 && x < x_tmp + 136))
+				|| (y > y_tmp + 127 && y < y_tmp + 134)
+				|| (x > x_tmp + 131 && x < x_tmp + 136))
 				my_mlx_pixel_put(game->screen_img, y, x, color);
 			y++;
 		}
@@ -60,44 +62,6 @@ void	nb_game_bar(t_game *game)
 	}
 }
 
-void	put_map_icone(t_game *game, int x, int y, unsigned int **color)
-{
-	int	x_img;
-	int	y_img;
-
-	x_img = 0;
-	while (x_img != 100)
-	{
-		y_img = 0;
-		while (y_img != 100)
-		{
-			if (color[x_img][y_img] != 0xff000000)
-				my_mlx_pixel_put(game->screen_img, y_img + y, x_img + x, color[x_img][y_img]);
-			y_img++;
-		}
-		x_img++;
-	}
-}
-
-void	put_arm(t_game *game, int x, int y, unsigned int **color)
-{
-	int	x_img;
-	int	y_img;
-
-	x_img = 0;
-	while (x_img != 314)
-	{
-		y_img = 0;
-		while (y_img != 350)
-		{
-			if (color[x_img][y_img] != 0xff000000)
-				my_mlx_pixel_put(game->screen_img, y_img + y, x_img + x, color[x_img][y_img]);
-			y_img++;
-		}
-		x_img++;
-	}
-}
-
 void	game_bar(t_game *game)
 {
 	int			x;
@@ -111,30 +75,30 @@ void	game_bar(t_game *game)
 	y = 448;
 	while (y < 1344)
 	{
-		put_one_case(game, x, y ,0xB39797);
+		put_one_case(game, x, y, 0xB39797);
 		if (i + 1 == game->bar_index)
 			put_big_case(game, x - 5, y - 5, 0xDFDFDF);
 		if (i == 3)
-			put_map_icone(game, x + 10, y + 15, game->bar_img[2]);
+			draw_image(game, game->bar_img[2], y + 15, x + 10);
 		if (i == 0 && anim <= 50)
-			put_map_icone(game, x + 10, y + 15, game->bar_img[0]);
+			draw_image(game, game->bar_img[0], y + 15, x + 10);
 		else if (i == 0 && anim > 50)
 		{
 			if (anim == 100)
 				anim = 0;
-			put_map_icone(game, x + 10, y + 15, game->bar_img[1]);
+			draw_image(game, game->bar_img[1], y + 15, x + 10);
 		}
 		if (i == 1)
-			put_map_icone(game, x + 10, y + 15, game->bar_img[3]);
+			draw_image(game, game->bar_img[3], y + 15, x + 10);
 		if (i == 2)
-			put_map_icone(game, x + 10, y + 15, game->bar_img[4]);
+			draw_image(game, game->bar_img[4], y + 15, x + 10);
 		if (i == 4)
-			put_map_icone(game, x + 10, y + 15, game->bar_img[5]);
+			draw_image(game, game->bar_img[5], y + 15, x + 10);
 		y += 128;
 		i++;
 	}
 	if (game->bar_index < 6 && game->bar_index > 1)
-		put_arm(game, 766, 1570, game->arm_img[game->bar_index - 1]);
+		draw_image(game, game->arm_img[game->bar_index - 1], 1570, 766);
 	else
-		put_arm(game, 766, 1570, game->arm_img[0]);
+		draw_image(game, game->arm_img[0], 1570, 766);
 }

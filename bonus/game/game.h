@@ -162,6 +162,7 @@ typedef struct s_raycast
 # define CAMERA_SPEED_REVERSE 25
 # define HIT_BOX_WALL 10
 
+void	draw_image(t_game *game, unsigned int **img, int x, int y);
 int		mouse_hook(int mouse, int x, int y, t_game *game);
 void	start_game(t_data *data, char **env);
 void	initialize_game(t_game	*game, t_data *data);

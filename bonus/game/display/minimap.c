@@ -41,14 +41,15 @@ void	put_assets(t_game *game, unsigned int **color)
 		y = game->y_minimap;
 		while (y < game->y_minimap + 16)
 		{
-			my_mlx_pixel_put(game->screen_img, y, x, color[x - game->x_minimap][y - game->y_minimap]);
+			my_mlx_pixel_put(game->screen_img, y, x,
+				color[x - game->x_minimap][y - game->y_minimap]);
 			y++;
 		}
 		x++;
 	}
 }
 
-int	calculate_arrow(int	a, int b, int mode)
+int	calculate_arrow(int a, int b, int mode)
 {
 	if (mode == 1)
 		return ((a - b) / 2);
@@ -56,7 +57,7 @@ int	calculate_arrow(int	a, int b, int mode)
 		return ((b - a + 16) / 2);
 }
 
-void	put_arrow(t_game *game, int	i_minimap, int	j_minimap, int mode)
+void	put_arrow(t_game *game, int i_minimap, int j_minimap, int mode)
 {
 	int	x;
 	int	y;
@@ -131,23 +132,6 @@ void	put_pixel_color(t_game *game, int x, int y)
 		put_one_block(game, 0xF70707);
 }
 
-void	print_map(char **tab)
-{
-	int j = 0;
-	int i = 0;
-
-	while (tab[j])
-	{
-		i = 0;
-		while (tab[j][i])
-		{
-			printf("%c", tab[j][i]);
-			i++;
-		}
-		printf("\n");
-		j++;
-	}
-}
 void	open_minimap(t_game *game)
 {
 	int			x;
@@ -155,7 +139,6 @@ void	open_minimap(t_game *game)
 	int			value_x;
 	int			value_y;
 
-	//print_map(game->map);
 	game->x_minimap = 20;
 	x = (int)(game->player->x / SIZE_BLOCK) - 5;
 	if (x < 0)
@@ -176,7 +159,8 @@ void	open_minimap(t_game *game)
 		}
 		else
 			value_y = 6;
-		while (y < (int)(game->player->y / SIZE_BLOCK + value_y) && game->map[x][y] != '\0')
+		while (y < (int)(game->player->y / SIZE_BLOCK + value_y)
+			&& game->map[x][y] != '\0')
 		{
 			put_pixel_color(game, x, y);
 			if (x == (int)(game->player->x / SIZE_BLOCK)
