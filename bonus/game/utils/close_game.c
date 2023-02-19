@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_utils.c                                       :+:      :+:    :+:   */
+/*   close_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 16:24:24 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 18:58:32 by averdon          ###   ########.fr       */
+/*   Created: 2023/02/19 15:00:26 by averdon           #+#    #+#             */
+/*   Updated: 2023/02/19 15:02:21 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	destroy_one_group_image(unsigned int ***img, int nb_images)
 {
@@ -81,16 +81,4 @@ int	close_window(t_game *game)
 	ft_fdprintf(1, "Exit Program\n");
 	free_all(game);
 	exit (0);
-}
-
-double	abs_value(double nb)
-{
-	if (nb < 0)
-		return (-nb);
-	return (nb);
-}
-
-double	radian_value(double degree)
-{
-	return (degree * M_PI / 180);
 }

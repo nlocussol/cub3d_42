@@ -6,11 +6,12 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:25:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/11 17:57:53 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/19 16:27:51 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "game.h"
 
 void	find_player_place(t_game *game, int *x, int *y)
 {
@@ -59,15 +60,14 @@ void	initialize_player(t_game *game)
 	calculate_player_orientation(game);
 	game->player->direction = game->map[x][y];
 	game->player->speed = 7;
+	game->movements[0] = 0;
+	game->movements[1] = 0;
+	game->movements[2] = 0;
+	game->movements[3] = 0;
 }
 
-void	initialize_game(t_game	*game, t_data *data)
+void	initialize_texture(t_game *game, t_data *data)
 {
-	game->mlx = mlx_init();
-	game->minimap = 0;
-	game->window = mlx_new_window(game->mlx,
-			WIDTH_SCREEN, HEIGHT_SCREEN, TITLE);
-	game->map = data->map;
 	game->text_ea = data->text_ea;
 	game->text_no = data->text_no;
 	game->text_so = data->text_so;
@@ -75,19 +75,28 @@ void	initialize_game(t_game	*game, t_data *data)
 	game->text_do = data->text_door;
 	game->hex_c = data->hex_c;
 	game->hex_f = data->hex_f;
+	free_tab(data->text_c);
+	free_tab(data->text_f);
+}
+
+void	initialize_game(t_game	*game, t_data *data)
+{
+	unsigned char	*temp;
+
+	game->mlx = mlx_init();
+	game->minimap = 0;
+	game->window = mlx_new_window(game->mlx,
+			WIDTH_SCREEN, HEIGHT_SCREEN, TITLE);
+	game->map = data->map;
+	initialize_texture(game, data);
 	initialize_player(game);
 	game->screen_img = ft_calloc(1, sizeof(t_img));
 	game->screen_img->img = mlx_new_image(game->mlx,
 			WIDTH_SCREEN, HEIGHT_SCREEN);
-	game->screen_img->addr = (unsigned char *)mlx_get_data_addr(game->screen_img->img,
+	temp = (unsigned char *)mlx_get_data_addr(game->screen_img->img,
 			&game->screen_img->bits_per_pixel, &game->screen_img->line_length,
 			&game->screen_img->endian);
-	free_tab(data->text_c);
-	free_tab(data->text_f);
-	game->movements[0] = 0;
-	game->movements[1] = 0;
-	game->movements[2] = 0;
-	game->movements[3] = 0;
+	game->screen_img->addr = temp;
 	game->mouse_height = HEIGHT_SCREEN / 2;
 	game->lst_anim = NULL;
 	game->lst_graff = NULL;

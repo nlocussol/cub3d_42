@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:29:09 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/15 17:18:40 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/19 16:46:26 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ unsigned int	color_to_draw(t_game *game, t_raycast *raycast,
 		return (0);
 	}
 	color = 0;
-	graff = find_square_2(game, raycast);
+	graff = find_square_graff(game, raycast);
 	if (graff && time - graff->time_start >= 2500)
 	{
 		frame = 5 + graff->frame;

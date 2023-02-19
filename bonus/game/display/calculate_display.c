@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:27:50 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/10 20:27:31 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/19 16:29:24 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ void	calculate_delta_and_dist_next(t_raycast *raycast)
 
 void	calculate_delta_and_dist(int x, t_raycast *raycast)
 {
-	raycast->camera_x = 2 * x / (double)(WIDTH_SCREEN) - 1;
-	raycast->ray_dir_x = raycast->dir_x + raycast->plane_x * raycast->camera_x;
-	raycast->ray_dir_y = raycast->dir_y + raycast->plane_y * raycast->camera_x;
+	double	camera_x;
+
+	camera_x = 2 * x / (double)(WIDTH_SCREEN) - 1;
+	raycast->ray_dir_x = raycast->dir_x + raycast->plane_x * camera_x;
+	raycast->ray_dir_y = raycast->dir_y + raycast->plane_y * camera_x;
 	raycast->map_x = raycast->pos_x;
 	raycast->map_y = raycast->pos_y;
 	if (raycast->ray_dir_x == 0)
@@ -85,9 +87,12 @@ double	calculate_wall_x(t_game *game, t_raycast *raycast, int mode)
 	long	time;
 
 	time = calculate_time();
-	if (mode && find_square(game, raycast->map_x, raycast->map_y))
-		percentage_time = (double)((time - find_square(game, raycast->map_x,
-						raycast->map_y)->time_anim_start)) / 2000;
+	if (mode && find_square_anim(game, raycast->map_x, raycast->map_y))
+	{
+		percentage_time = (double)(time - find_square_anim(game, raycast->map_x,
+					raycast->map_y)->time_anim_start);
+		percentage_time = percentage_time / 2000;
+	}
 	else
 		percentage_time = (double)0;
 	if (ft_strchr("o", game->map[raycast->map_x][raycast->map_y]))
@@ -96,7 +101,7 @@ double	calculate_wall_x(t_game *game, t_raycast *raycast, int mode)
 		wall_x = raycast->pos_y + raycast->dist_perp_wall * raycast->ray_dir_y;
 	else
 		wall_x = raycast->pos_x + raycast->dist_perp_wall * raycast->ray_dir_x;
-	wall_x -= percentage_time;
-	wall_x -= floor(wall_x);
+	wall_x = wall_x - percentage_time;
+	wall_x = wall_x - floor(wall_x);
 	return (wall_x);
 }

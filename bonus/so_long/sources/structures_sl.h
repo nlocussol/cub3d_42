@@ -6,13 +6,13 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:46:33 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 12:49:12 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/19 15:35:23 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURES_H
+#ifndef STRUCTURES_SL_H
 
-# define STRUCTURES_H
+# define STRUCTURES_SL_H
 
 typedef struct s_components
 {

@@ -6,11 +6,24 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:58:43 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/14 18:49:54 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/19 16:40:51 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	suppress_node_sound(t_game *game, t_double_list *buffer)
+{
+	if (buffer->previous)
+		buffer->previous->next = buffer->next;
+	else
+		game->lst_sound = buffer->next;
+	if (buffer->next)
+		buffer->next->previous = buffer->previous;
+	if (!buffer->previous && !buffer->next)
+		game->lst_sound = NULL;
+	ft_double_lstdelone(buffer, del);
+}
 
 void	play_song(t_game *game, void *arg)
 {

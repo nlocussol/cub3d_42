@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 23:32:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/11 17:49:03 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/19 17:00:08 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@
 # include "libft/libft.h"
 # include "minilibx/mlx.h"
 # include "../so_long/so_long.h"
+# include "define.h"
+# include "structures.h"
 # include "../parsing/parsing.h"
 # include "../game/game.h"
 # include "../game/display/display.h"
+# include "../game/utils/utils.h"
+# include "../game/key_functions/key_functions.h"
+
 #endif

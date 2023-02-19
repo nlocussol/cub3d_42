@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:36:40 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/02/04 15:43:01 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/02/19 16:47:48 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,4 +173,12 @@ void	open_minimap(t_game *game)
 		game->x_minimap += 16;
 	}
 	put_cursor(game, 0, 0);
+}
+
+void	move_bar(t_game *game)
+{
+	if (game->bar_index == 1)
+		game->minimap = 1;
+	else
+		game->minimap = 0;
 }

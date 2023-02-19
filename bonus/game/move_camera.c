@@ -6,24 +6,24 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:35:02 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/15 15:49:22 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/19 16:53:15 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "game.h"
 
-int	move_camera(void *arg)
+void	turn_camera(t_game	*game, int move)
 {
-	t_game		*game;
-	static int	old_x;
-	static int	old_y = HEIGHT_SCREEN / 2;
-	int			x;
-	int			y;
+	game->player->orientation = (game->player->orientation + move) % 360;
+	if (game->player->orientation < 0)
+		game->player->orientation = 360 + game->player->orientation;
+}
+
+void	move_left_right(t_game *game, int x, int y)
+{
+	static int	old_x = 0;
 	int			movement;
 
-	game = (t_game *)arg;
-	mlx_mouse_get_pos(game->mlx, game->window, &x, &y);
 	movement = (old_x - x) / CAMERA_SPEED_REVERSE;
 	game->player->orientation = (game->player->orientation + movement) % 360;
 	if (game->player->orientation < 0)
@@ -39,6 +39,13 @@ int	move_camera(void *arg)
 		mlx_mouse_move(game->mlx, game->window, x, y);
 	}
 	old_x = x;
+}
+
+void	move_up_down(t_game *game, int x, int y)
+{
+	static int	old_y = HEIGHT_SCREEN / 2;
+	int			movement;
+
 	movement = ((old_y - y) / CAMERA_SPEED_REVERSE) * 5;
 	game->mouse_height = (game->mouse_height + movement);
 	if (y <= 10)
@@ -52,5 +59,17 @@ int	move_camera(void *arg)
 		mlx_mouse_move(game->mlx, game->window, x, y);
 	}
 	old_y = y;
+}
+
+int	move_camera(void *arg)
+{
+	t_game		*game;
+	int			x;
+	int			y;
+
+	game = (t_game *)arg;
+	mlx_mouse_get_pos(game->mlx, game->window, &x, &y);
+	move_left_right(game, x, y);
+	move_up_down(game, x, y);
 	return (0);
 }

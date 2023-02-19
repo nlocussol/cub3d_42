@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define.h                                           :+:      :+:    :+:   */
+/*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 01:03:55 by averdon           #+#    #+#             */
-/*   Updated: 2022/11/18 01:04:40 by averdon          ###   ########.fr       */
+/*   Created: 2023/02/19 16:46:00 by averdon           #+#    #+#             */
+/*   Updated: 2023/02/19 16:46:39 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINE_H
+#include "../../cub3d.h"
 
-# define DEFINE_H
+void	draw_image(t_game *game, unsigned int **img, int x, int y)
+{
+	int	i;
+	int	j;
 
-# define ECHAP 65307
-# define ENTER 65293
-# define ARROW_LEFT 65361
-# define ARROW_UP 65362
-# define ARROW_RIGHT 65363
-# define ARROW_DOWN 65364
-
-#endif
+	i = 0;
+	while (img[i])
+	{
+		j = 0;
+		while (img[i][j])
+		{
+			if ((int)img[i][j] >= 0)
+				my_mlx_pixel_put(game->screen_img, j + x, i + y, img[i][j]);
+			j++;
+		}
+		i++;
+	}
+}

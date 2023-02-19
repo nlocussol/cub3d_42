@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/02/13 17:48:58 by averdon          ###   ########.fr        #
+#    Updated: 2023/02/19 17:00:27 by averdon          ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -19,17 +19,25 @@ SRCS		?= 	main.c \
 				parsing/pars_rgb.c \
 				game/start_game.c \
 				game/initialize_game.c \
-				game/game_utils.c \
-				game/key_functions.c \
 				game/move_camera.c \
 				game/interactions.c \
 				game/song.c \
+				game/key_functions/animations.c \
+				game/key_functions/launch_animations_and_movement.c \
+				game/key_functions/player_movement.c \
+				game/key_functions/utils.c \
 				game/display/display.c \
+				game/display/door_recessed.c \
 				game/display/calculate_display.c \
 				game/display/draw_display.c \
+				game/display/draw_image.c \
 				game/display/parse_image.c \
+				game/display/parse_image_utils.c \
 			   	game/display/inventory_bar.c \
 			   	game/display/minimap.c \
+				game/utils/calculation.c \
+				game/utils/close_game.c \
+				game/utils/suppress_nodes.c \
 				so_long/main_so_long.c \
 				so_long/parsing/check_valid_path/check_components.c \
 				so_long/parsing/check_valid_path/check_valid_path.c \
