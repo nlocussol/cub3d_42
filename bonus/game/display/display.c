@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:58:13 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/15 18:58:01 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/19 14:27:30 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,12 +160,12 @@ bool	door_should_be_recessed(t_game *game, int x,
 	{
 		calculate_dist_perp_wall(game, &raycast_copy);
 		calculate_draw_end(game, &raycast_copy);
-		if (raycast_copy.draw_end > raycast->line_height / 2 + game->mouse_height)
+		if (raycast_copy.draw_end > raycast->line_height / 2 + HEIGHT_SCREEN / 2)
 		{
 			display_rayon(game, x, &raycast_copy);
 			return (true);
 		}
-		else if (raycast_copy.draw_end == raycast->line_height / 2 + game->mouse_height)
+		else if (raycast_copy.draw_end == raycast->line_height / 2 + HEIGHT_SCREEN / 2)
 		{
 			wall_x = calculate_wall_x(game, &raycast_copy, 0);
 			if (rayon_should_be_redisplay(raycast, &raycast_copy, wall_x, 2))
