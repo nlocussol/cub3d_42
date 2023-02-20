@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/02/19 17:00:27 by averdon          ###   ########.fr        #
+#    Updated: 2023/02/20 10:56:12 by averdon          ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -23,8 +23,10 @@ SRCS		?= 	main.c \
 				game/interactions.c \
 				game/song.c \
 				game/key_functions/animations.c \
+				game/key_functions/update_song.c \
 				game/key_functions/launch_animations_and_movement.c \
 				game/key_functions/player_movement.c \
+				game/key_functions/player_actions.c \
 				game/key_functions/utils.c \
 				game/display/display.c \
 				game/display/door_recessed.c \

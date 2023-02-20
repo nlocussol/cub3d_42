@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:21:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/19 15:40:09 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 10:20:51 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	choose_interaction(t_game *game, t_raycast *raycast)
 		choose_interaction_next(game, raycast);
 }
 
-void	interact(t_game *game)
+void	interact(t_game *game, int *mouse_pos_x, int *mouse_pos_y)
 {
 	t_raycast		raycast;
 
@@ -113,6 +113,14 @@ void	interact(t_game *game)
 	calculate_delta_and_dist(WIDTH_SCREEN / 2, &raycast);
 	detect_wall(game, &raycast);
 	calculate_dist_perp_wall(game, &raycast);
+	if (game->bar_index == GAMEBOY)
+	{
+		mlx_mouse_get_pos(game->mlx, game->window,
+			mouse_pos_x, mouse_pos_y);
+		game->started_gameboy = true;
+		launch_song(game, START_GAMEBOY);
+		anim_start_gameboy(NULL);
+	}
 	if (raycast.dist_perp_wall > (double)1)
 		return ;
 	else

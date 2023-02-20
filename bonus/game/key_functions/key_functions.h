@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:53:52 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/19 16:59:32 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 10:52:33 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 # define KEY_FUNCTIONS_H
 
-void	check_anim(t_game *game);
+void	check_update(t_game *game);
+void	anim_start_gameboy(t_game *game);
+void	update_song(t_game *game);
+
 #endif

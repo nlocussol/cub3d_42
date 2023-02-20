@@ -6,22 +6,33 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:50:25 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/19 16:51:25 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 10:55:20 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	check_anim(t_game *game)
+bool	must_delete_song(t_game *game, long time, t_song *song)
+{
+	if ((song->type == SPRAY && time - song->start_time > 2500)
+		|| (song->type == DOOR && time - song->start_time > 3500)
+		|| (song->type == ATMOSPHERE && time - song->start_time > 313000)
+		|| (song->type == DANCING_CHEESE && time - song->start_time > 252000)
+		|| (song->type == PLAY_GAMEBOY
+			&& (time - song->start_time > 252000
+				|| game->started_gameboy == false))
+		|| (song->type == START_GAMEBOY && time - song->start_time > 235000))
+		return (true);
+	else
+		return (false);
+}
+
+void	check_anim(t_game *game, long time)
 {
 	t_double_list	*buffer;
 	t_double_list	*next;
-	t_song			*song;
 	t_anim			*anim;
-	t_graff			*graff;
-	long			time;
 
-	time = calculate_time();
 	buffer = game->lst_anim;
 	while (buffer)
 	{
@@ -38,6 +49,13 @@ void	check_anim(t_game *game)
 		}
 		buffer = next;
 	}
+}
+
+void	check_graff(t_game *game, long time)
+{
+	t_double_list	*buffer;
+	t_graff			*graff;
+
 	buffer = game->lst_graff;
 	while (buffer)
 	{
@@ -51,17 +69,20 @@ void	check_anim(t_game *game)
 		}
 		buffer = buffer->next;
 	}
+}
+
+void	check_song(t_game *game, long time)
+{
+	t_double_list	*buffer;
+	t_double_list	*next;
+	t_song			*song;
+
 	buffer = game->lst_sound;
 	while (buffer)
 	{
 		song = buffer->content;
 		next = buffer->next;
-		if ((song->type == SPRAY && time - song->start_time > 2500)
-			|| (song->type == DOOR && time - song->start_time > 3500)
-			|| (song->type == ATMOSPHERE && time - song->start_time > 313000)
-			|| (song->type == DANCING_CHEESE && time - song->start_time > 252000)
-			|| (song->type == PLAY_GAMEBOY && (time - song->start_time > 252000 || game->started_gameboy == false))
-			|| (song->type == START_GAMEBOY && time - song->start_time > 235000))
+		if (must_delete_song(game, time, song))
 		{
 			if (song->type == PLAY_GAMEBOY && game->started_gameboy == false)
 				kill(song->pid, SIGKILL);
@@ -69,48 +90,15 @@ void	check_anim(t_game *game)
 		}
 		buffer = next;
 	}
-	if (game->lst_graff)
-	{
-		buffer = game->lst_sound;
-		while (buffer)
-		{
-			song = buffer->content;
-			if (song->type == DANCING_CHEESE || song->type == SPRAY)
-				break ;
-			buffer = buffer->next;
-		}
-		if (!buffer)
-		{
-			launch_song(game, DANCING_CHEESE);
-			buffer = game->lst_sound;
-			while (buffer)
-			{
-				song = buffer->content;
-				if (song->type == ATMOSPHERE)
-				{
-					kill(song->pid, SIGKILL);
-					suppress_node_sound(game, buffer);
-				}
-				buffer = buffer->next;
-			}
-		}
-	}
-	else
-	{
-		buffer = game->lst_sound;
-		while (buffer)
-		{
-			song = buffer->content;
-			if (song->type == ATMOSPHERE)
-				break ;
-			else if (song->type == DANCING_CHEESE)
-			{
-				kill(song->pid, SIGKILL);
-				suppress_node_sound(game, buffer);
-			}
-			buffer = buffer->next;
-		}
-		if (!buffer)
-			launch_song(game, ATMOSPHERE);
-	}
+}
+
+void	check_update(t_game *game)
+{
+	long			time;
+
+	time = calculate_time();
+	check_anim(game, time);
+	check_graff(game, time);
+	check_song(game, time);
+	update_song(game);
 }

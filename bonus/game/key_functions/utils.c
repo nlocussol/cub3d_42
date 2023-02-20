@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:51:50 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/19 16:52:38 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 10:05:27 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	mouse_hook(int mouse, int x, int y, t_game *game)
 	return (0);
 }
 
-void	start_gameboy(t_game *game)
+void	anim_start_gameboy(t_game *game)
 {
 	static long	time_start;
 	long		time;
