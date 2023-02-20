@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:25:55 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 18:34:33 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 13:35:54 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	close_window_so_long(t_vars *vars)
 {
 	destroy_and_free_so_long(vars);
-	ft_fdprintf(1, "Exit program\n");
 	exit(0);
 }
 
@@ -38,7 +37,6 @@ int	check_key_next_next_next(int keycode, t_vars *vars,
 				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME,
 				70 + Y_LEFT_UP_CORNER_GAME);
 			vars->game_finish = 1;
-			ft_fdprintf(1, "you lose\n");
 			return (0);
 		}
 		key_right(vars, ((char *)(buffer->content))[x]);
@@ -66,7 +64,6 @@ int	check_key_next_next(int keycode, t_vars *vars, t_double_list *buffer, int x)
 				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME,
 				70 + Y_LEFT_UP_CORNER_GAME);
 			vars->game_finish = 1;
-			ft_fdprintf(1, "you lose\n");
 			return (0);
 		}
 		key_left(vars, ((char *)(buffer->content))[x]);
@@ -94,7 +91,6 @@ int	check_key_next(int keycode, t_vars *vars, t_double_list *buffer, int x)
 				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME,
 				70 + Y_LEFT_UP_CORNER_GAME);
 			vars->game_finish = 1;
-			ft_fdprintf(1, "you lose\n");
 			return (0);
 		}
 		key_down(vars, ((char *)(buffer->content))[x]);
@@ -122,7 +118,6 @@ int	check_key(int keycode, t_vars *vars, t_double_list *buffer, int x)
 				vars->array_ptr_sprite[27], 95 + X_LEFT_UP_CORNER_GAME,
 				70 + Y_LEFT_UP_CORNER_GAME);
 			vars->game_finish = 1;
-			ft_fdprintf(1, "you lose\n");
 			return (0);
 		}
 		key_up(vars, ((char *)(buffer->content))[x]);

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:00:16 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/11 17:41:11 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 13:37:30 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	check_last_line(t_double_list **map)
 	{
 		if (str[i] != '1')
 		{
-			ft_fdprintf(2, "Error\nmap isn't surrounded by walls\n");
 			ft_double_lstclear(map, del);
 			exit (0);
 		}
@@ -50,7 +49,6 @@ void	check_first_line(t_double_list **map)
 	{
 		if (str[i] != '1')
 		{
-			ft_fdprintf(2, "Error\nmap isn't surrounded by walls\n");
 			ft_double_lstclear(map, del);
 			exit (0);
 		}
@@ -70,7 +68,6 @@ void	check_borders(t_double_list **map)
 		if (((char *)(buffer->content))[0] != '1'
 				|| ((char *)(buffer->content))[len_line - 1] != '1')
 		{
-			ft_fdprintf(2, "Error\nmap isn't surrounded by walls\n");
 			ft_double_lstclear(map, del);
 			exit (0);
 		}

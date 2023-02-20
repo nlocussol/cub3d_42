@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:20:48 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 12:48:44 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 13:35:43 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	enemy_kill_player(t_vars *vars)
 		85 + X_LEFT_UP_CORNER_GAME,
 		70 + Y_LEFT_UP_CORNER_GAME);
 	vars->game_finish = 1;
-	ft_fdprintf(1, "you lose\n");
 }
 
 void	update_map_chunk(t_vars *vars)

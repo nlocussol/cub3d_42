@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:23:29 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/11 17:40:17 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 13:37:00 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,6 @@
 void	check_components(int memory, t_components *components,
 		t_double_list **map)
 {
-	if (!memory)
-		ft_fdprintf(2, "Error\nmap has a unknown character\n");
-	if (components->start < 1)
-		ft_fdprintf(2, "Error\nmap hasn't any spawn for player\n");
-	else if (components->start > 1)
-		ft_fdprintf(2, "Error\nmap has more than one spawn for player\n");
-	if (components->exit < 1)
-		ft_fdprintf(2, "Error\nmap hasn't any exit for player\n");
-	else if (components->exit > 1)
-		ft_fdprintf(2, "Error\nmap has more than one exit for player\n");
-	if (components->collectibles < 1)
-		ft_fdprintf(2, "Error\nmap hasn't any collectibles\n");
 	if (!memory || components->start != 1
 		|| components->exit != 1 || components->collectibles == 0)
 	{

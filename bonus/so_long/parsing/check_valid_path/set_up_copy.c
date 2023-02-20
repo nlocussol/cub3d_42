@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:36:43 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/11 17:40:38 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 13:37:51 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ t_double_list	*create_list_copy(t_double_list **initial_list)
 	{
 		ft_double_lstclear(&map_clean, del);
 		ft_double_lstclear(initial_list, del);
-		ft_fdprintf(2, "Error\nmalloc error\n");
 		exit(0);
 	}
 	return (map_clean);

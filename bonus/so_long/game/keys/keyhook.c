@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:57:59 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/13 13:07:44 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 13:36:21 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	item_collected(t_vars *vars, char *actual_place)
 	t_double_list	*buffer_2;
 
 	*actual_place = '0';
-	ft_fdprintf(1, "you collected one collectible\n");
 	vars->player->nb_collectibles++;
 	buffer_2 = vars->map_chunk;
 	while (vars->map_chunk)
@@ -87,7 +86,6 @@ void	modify_display(t_vars *vars)
 {
 	if (vars->game_finish)
 		return ;
-	ft_fdprintf(1, "Number of move : %d\n", vars->player->nb_move);
 	if (vars->player->old_point->x / (SIZE_BLOCK_SL * 10)
 		!= (vars->player->x / (SIZE_BLOCK_SL * 10)))
 		display_map(vars);

@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:36:40 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/02/19 16:47:48 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 13:05:41 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	open_minimap(t_game *game)
 	}
 	else
 		value_x = 6;
-	while (x < (int)(game->player->x / SIZE_BLOCK + value_x))
+	while (x < (int)(game->player->x / SIZE_BLOCK + value_x) && game->map[x])
 	{
 		game->y_minimap = 20;
 		y = (int)(game->player->y / SIZE_BLOCK) - 5;
@@ -160,7 +160,7 @@ void	open_minimap(t_game *game)
 		else
 			value_y = 6;
 		while (y < (int)(game->player->y / SIZE_BLOCK + value_y)
-			&& game->map[x][y] != '\0')
+			&& game->map[x][y])
 		{
 			put_pixel_color(game, x, y);
 			if (x == (int)(game->player->x / SIZE_BLOCK)

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:23:52 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/11 17:39:23 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 13:37:53 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	check_valid_path(t_double_list	**map)
 	ft_double_lstclear(&head_map_clean, del);
 	if (value_return)
 	{
-		ft_fdprintf(2, "Error\nThe exit or a collectible isn't accessible\n");
 		ft_double_lstclear(map, del);
 		exit(0);
 	}

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:23:04 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/11 17:41:50 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 13:37:28 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	add_to_list(char *str, t_double_list **map)
 	new_elt = ft_double_lstnew(str);
 	if (!str || !new_elt)
 	{
-		ft_fdprintf(2, "Error\nmalloc error\n");
 		free(str);
 		ft_double_lstclear(map, del);
 		exit (0);
@@ -33,7 +32,6 @@ void	check_len_line(int len_line, int len_first_line, t_double_list **map)
 {
 	if (len_line != len_first_line)
 	{
-		ft_fdprintf(2, "Error\nmap is not rectangular\n");
 		ft_double_lstclear(map, del);
 		exit (0);
 	}
@@ -48,7 +46,6 @@ void	create_and_check_map(int fd, t_double_list **map)
 	str = get_next_line(fd);
 	if (!str)
 	{
-		ft_fdprintf(2, "Error\nfile empty\n");
 		exit (0);
 	}
 	len_first_line = ft_strlen(str) - 1;
@@ -73,7 +70,6 @@ t_double_list	*initialize_map(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_fdprintf(2, "Error\nfile doesn't exist\n");
 		exit(0);
 	}
 	map = NULL;
