@@ -1,0 +1,15 @@
+NO 			assets/north_text.xpm
+SO 			assets/south_text.xpm
+WE 			assets/west_text.xpm
+EA 			assets/east_text.xpm
+D			assets/door.xpm
+
+
+
+  C 		255,255,255
+   F		 0,0,0
+
+ 11111111111111
+111100000000001111111
+1111111111N11111111
+111111111111111111

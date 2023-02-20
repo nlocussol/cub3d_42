@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+void	print_map(char **tab) {
+	for (int j = 0; tab[j]; j++) {
+		for (int i = 0; tab[j][i]; i++)
+			printf("%c", tab[j][i]);
+		printf("\n");
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
@@ -21,6 +29,7 @@ int	main(int argc, char **argv, char **env)
 		print_error("Error\nUsage: ./cub3D <map.cub>\n");
 	if (early_parsing(argc, argv, &data) != 1)
 	{
+		print_map(data.map);
 		start_game(&data, env);
 		return (0);
 	}
