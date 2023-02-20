@@ -41,13 +41,11 @@ void	pars_empty(t_data *data, int i, int j)
 	int	error;
 
 	error = 0;
-	if (data->map[i][j + 1] == '\0' || data->map[i][j + 1] == ' ')
+	if (j == 0 || i == 0 || !data->map[i][j + 1]
+		|| !data->map[i + 1] || !data->map[i - 1][j] || !data->map[i][j - 1])
 		error = 1;
-	else if (j != 0 && data->map[i][j - 1] == ' ')
-		error = 1;
-	else if (i != 0 && data->map[i - 1][j] == ' ')
-		error = 1;
-	else if (data->map[i + 1] && data->map[i + 1][j] == ' ')
+	else if (data->map[i][j + 1] == ' ' || data->map[i][j - 1] == ' '
+		|| data->map[i - 1][j] == ' ' || data->map[i + 1][j] == ' ')
 		error = 1;
 	if (error == 1)
 	{

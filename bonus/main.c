@@ -29,7 +29,6 @@ int	main(int argc, char **argv, char **env)
 		print_error("Error\nUsage: ./cub3D <map.cub>\n");
 	if (early_parsing(argc, argv, &data) != 1)
 	{
-		print_map(data.map);
 		start_game(&data, env);
 		return (0);
 	}

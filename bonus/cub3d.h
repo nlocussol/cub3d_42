@@ -16,5 +16,6 @@
 # include "sources/includes.h"
 
 int	main_so_long(int argc, char **argv, t_game *game);
+void	print_map(char **tab);
 
 #endif
