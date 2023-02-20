@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:31:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/19 16:48:01 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 16:33:13 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ bool			door_should_be_recessed(t_game *game, int x,
 					t_raycast *raycast);
 bool			wall_should_appear_not_door(t_game *game, t_raycast *raycast,
 					long time);
-void			parse_one_group_image(t_game *game, unsigned int ***game_tab,
+bool			parse_one_group_image(t_game *game, unsigned int ***game_tab,
 					char **name_img_tab, int length_tab);
 void			move_bar(t_game *game);
+void			free_previous_malloc(unsigned int ***image, int y);
+void			free_group(t_game *game, int nb_group_image);
 
 #endif

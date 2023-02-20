@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:03:49 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/20 10:20:36 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 13:55:40 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_image(t_game *game, unsigned int **img, int x, int y);
 int		mouse_hook(int mouse, int x, int y, t_game *game);
 void	start_game(t_data *data, char **env);
 void	initialize_game(t_game	*game, t_data *data);
-void	parse_image(t_game *game);
+bool	parse_image(t_game *game);
 void	create_border(t_game *game);
 
 int		launch_movements(t_game *game);

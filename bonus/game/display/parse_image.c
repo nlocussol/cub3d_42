@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/20 13:17:59 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 16:33:15 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,18 @@ unsigned int	**convert_image(int length, int width, t_img img)
 	unsigned int	**image;
 
 	image = ft_calloc(length + 1, sizeof(unsigned int *));
+	if (!image)
+		return (NULL);
 	y = 0;
 	while (y < length)
 	{
 		x = 0;
 		image[y] = ft_calloc(width + 1, sizeof(unsigned int));
+		if (!image[y])
+		{
+			free_previous_malloc(&image, y);
+			return (NULL);
+		}
 		while (x < width)
 		{
 			image[y][x] = calculate_color(x, y, &img);
@@ -50,7 +57,7 @@ unsigned int	**convert_image(int length, int width, t_img img)
 	return (image);
 }
 
-void	parse_one_group_image(t_game *game, unsigned int ***game_tab,
+bool	parse_one_group_image(t_game *game, unsigned int ***game_tab,
 		char **name_img_tab, int length_tab)
 {
 	int		i;
@@ -67,6 +74,9 @@ void	parse_one_group_image(t_game *game, unsigned int ***game_tab,
 				&img.bits_per_pixel, &img.line_length, &img.endian);
 		game_tab[i] = convert_image(length, width, img);
 		mlx_destroy_image(game->mlx, img.img);
+		if (!game_tab[i])
+			return (false);
 		i++;
 	}
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:36:16 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/19 16:24:37 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 15:18:06 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ typedef struct s_game
 	int				mouse_height;
 	int				bar_index;
 	bool			started_gameboy;
-	unsigned int	**images[11];
-	unsigned int	**minimap_img[4];
-	unsigned int	**bar_img[7];
-	unsigned int	**arm_img[5];
-	unsigned int	**anim_gameboy[10];
+	unsigned int	**images[12];
+	unsigned int	**minimap_img[5];
+	unsigned int	**bar_img[8];
+	unsigned int	**arm_img[6];
+	unsigned int	**anim_gameboy[11];
 	char			*text_no;
 	char			*text_so;
 	char			*text_we;

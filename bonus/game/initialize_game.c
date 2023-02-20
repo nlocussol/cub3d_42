@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:25:45 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/19 16:27:51 by averdon          ###   ########.fr       */
+/*   Updated: 2023/02/20 16:25:04 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,27 @@ void	initialize_player(t_game *game)
 	game->movements[3] = 0;
 }
 
+void	initialize_tab_image(t_game *game)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 12)
+		game->images[i] = NULL;
+	i = -1;
+	while (++i < 5)
+		game->minimap_img[i] = NULL;
+	i = -1;
+	while (++i < 8)
+		game->bar_img[i] = NULL;
+	i = -1;
+	while (++i < 6)
+		game->arm_img[i] = NULL;
+	i = -1;
+	while (++i < 11)
+		game->anim_gameboy[i] = NULL;
+}
+
 void	initialize_texture(t_game *game, t_data *data)
 {
 	game->text_ea = data->text_ea;
@@ -77,6 +98,7 @@ void	initialize_texture(t_game *game, t_data *data)
 	game->hex_f = data->hex_f;
 	free_tab(data->text_c);
 	free_tab(data->text_f);
+	initialize_tab_image(game);
 }
 
 void	initialize_game(t_game	*game, t_data *data)
