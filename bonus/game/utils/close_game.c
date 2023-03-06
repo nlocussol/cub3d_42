@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:00:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/20 15:26:05 by averdon          ###   ########.fr       */
+/*   Updated: 2023/03/06 17:06:27 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	destroy_images(t_game *game)
 	destroy_one_group_image(game->minimap_img, 4);
 	destroy_one_group_image(game->bar_img, 7);
 	destroy_one_group_image(game->arm_img, 5);
+	destroy_one_group_image(game->anim_gameboy, 10);
 }
 
 void	kill_sound_forks(t_game *game)
