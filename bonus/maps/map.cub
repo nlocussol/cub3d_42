@@ -2,12 +2,12 @@ NO 			assets/north_text.xpm
 SO 			assets/south_text.xpm
 WE 			assets/west_text.xpm
 EA 			assets/east_text.xpm
+  C 		255,255,255
+   F		 0,0,,,,,,,,,,,,,,,,,,0
 D			assets/door.xpm
 
 
 
-  C 		255,255,255
-   F		 0,0,0
 
 
 
