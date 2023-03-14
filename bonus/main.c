@@ -6,19 +6,11 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:03:15 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/02/14 12:42:22 by averdon          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:19:38 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	print_map(char **tab) {
-	for (int j = 0; tab[j]; j++) {
-		for (int i = 0; tab[j][i]; i++)
-			printf("%c", tab[j][i]);
-		printf("\n");
-	}
-}
 
 int	main(int argc, char **argv, char **env)
 {

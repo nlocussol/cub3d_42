@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:58:05 by averdon           #+#    #+#             */
-/*   Updated: 2023/01/26 13:13:26 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:24:40 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,24 @@ void	put_eol(t_data *data)
 	}
 }
 
+char	*check_infile(int fd)
+{
+	char	*str;
+
+	if (fd < 0)
+	{
+		close(fd);
+		print_error("Error\nThe file cannot be opened\n");
+	}
+	str = get_next_line(fd);
+	if (!str)
+	{
+		close(fd);
+		print_error("Error\nThe file is empty\n");
+	}
+	return (str);
+}
+
 int	early_parsing(int argc, char **argv, t_data *data)
 {
 	char	*str;
@@ -31,11 +49,7 @@ int	early_parsing(int argc, char **argv, t_data *data)
 
 	(void)argc;
 	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		print_error("Error\nThe file cannot be opened\n");
-	str = get_next_line(fd);
-	if (!str)
-		print_error("Error\nThe file is empty\n");
+	str = check_infile(fd);
 	while (str)
 	{
 		data->map = append_to_tab(data->map, str);
@@ -44,6 +58,7 @@ int	early_parsing(int argc, char **argv, t_data *data)
 			return (1);
 		str = get_next_line(fd);
 	}
+	close(fd);
 	put_eol(data);
 	find_texture(data);
 	return (0);

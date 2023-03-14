@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/03/14 13:59:29 by nlocusso         ###   ########.fr        #
+#    Updated: 2023/03/14 16:02:35 by nlocusso         ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -81,7 +81,7 @@ COMPILER	?= clang
 
 RM			?= @rm -f
 
-CFLAGS		?= -Wall -Wextra -Werror -g 
+CFLAGS		?= -Wall -Wextra -Werror -g -O3 -Ofast 
 
 LIBRARY     ?= -Lsources/libft -lft \
 			   -Lsources/libft/ft_fdprintf -lftfdprintf \
