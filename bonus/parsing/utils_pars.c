@@ -6,11 +6,19 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:14:19 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/27 11:20:36 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:49:43 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	check_all_data(t_data *data)
+{
+	if (data->text_no && data->text_so && data->text_we && data->text_ea
+		&& data->text_f && data->text_c && data->text_door)
+		return (1);
+	return (0);
+}
 
 void	print_error(char *message)
 {

@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/02/20 16:45:09 by averdon          ###   ########.fr        #
+#    Updated: 2023/03/14 13:59:29 by nlocusso         ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -37,7 +37,9 @@ SRCS		?= 	main.c \
 				game/display/launch_parsing_image.c \
 				game/display/parse_image_utils.c \
 			   	game/display/inventory_bar.c \
+			   	game/display/put_case_bar.c \
 			   	game/display/minimap.c \
+			   	game/display/put_minimap_textures.c \
 				game/utils/calculation.c \
 				game/utils/close_game.c \
 				game/utils/suppress_nodes.c \

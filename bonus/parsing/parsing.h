@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:20:37 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/27 10:22:35 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:49:56 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	free_data(t_data *data);
 void	find_texture(t_data *data);
 void	init_data(t_data *data);
 int		early_parsing(int argc, char **argv, t_data *data);
+int		check_all_data(t_data *data);
 
 #endif

@@ -1,46 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   inventory_bar.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/14 11:13:31 by nlocusso          #+#    #+#             */
+/*   Updated: 2023/03/14 13:58:33 by nlocusso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3d.h"
-
-void	put_one_case(t_game *game, int x_tmp, int y_tmp, int color)
-{
-	int	x;
-	int	y;
-
-	x = x_tmp;
-	while (x < x_tmp + 128)
-	{
-		y = y_tmp;
-		while (y < y_tmp + 128)
-		{
-			if ((x >= x_tmp && x < x_tmp + 5) || (y >= y_tmp && y < y_tmp + 5)
-				|| (y > y_tmp + 123 && y < y_tmp + 128)
-				|| (x > x_tmp + 123 && x < x_tmp + 128))
-				my_mlx_pixel_put(game->screen_img, y, x, color);
-			y++;
-		}
-		x++;
-	}
-}
-
-void	put_big_case(t_game *game, int x_tmp, int y_tmp, int color)
-{
-	int	x;
-	int	y;
-
-	x = x_tmp;
-	while (x < x_tmp + 136)
-	{
-		y = y_tmp;
-		while (y < y_tmp + 134)
-		{
-			if ((x >= x_tmp && x < x_tmp + 5) || (y >= y_tmp && y < y_tmp + 5)
-				|| (y > y_tmp + 127 && y < y_tmp + 134)
-				|| (x > x_tmp + 131 && x < x_tmp + 136))
-				my_mlx_pixel_put(game->screen_img, y, x, color);
-			y++;
-		}
-		x++;
-	}
-}
 
 void	nb_game_bar(t_game *game)
 {
@@ -62,6 +32,28 @@ void	nb_game_bar(t_game *game)
 	}
 }
 
+void	draw_bar(t_game *game, int x, int y, int i)
+{
+	if (i + 1 == game->bar_index)
+		put_big_case(game, x - 5, y - 5, 0xDFDFDF);
+	if (i == 3)
+		draw_image(game, game->bar_img[2], y + 15, x + 10);
+	if (i == 1)
+		draw_image(game, game->bar_img[3], y + 15, x + 10);
+	if (i == 2)
+		draw_image(game, game->bar_img[4], y + 15, x + 10);
+	if (i == 4)
+		draw_image(game, game->bar_img[5], y + 15, x + 10);
+}
+
+void	define_var(int *x, int *y, int *i, int *anim)
+{
+	*x = 834;
+	*y = 448;
+	*i = 0;
+	(*anim)++;
+}
+
 void	game_bar(t_game *game)
 {
 	int			x;
@@ -69,17 +61,10 @@ void	game_bar(t_game *game)
 	int			i;
 	static int	anim = 0;
 
-	anim++;
-	i = 0;
-	x = 834;
-	y = 448;
+	define_var(&x, &y, &i, &anim);
 	while (y < 1344)
 	{
 		put_one_case(game, x, y, 0xB39797);
-		if (i + 1 == game->bar_index)
-			put_big_case(game, x - 5, y - 5, 0xDFDFDF);
-		if (i == 3)
-			draw_image(game, game->bar_img[2], y + 15, x + 10);
 		if (i == 0 && anim <= 50)
 			draw_image(game, game->bar_img[0], y + 15, x + 10);
 		else if (i == 0 && anim > 50)
@@ -88,12 +73,7 @@ void	game_bar(t_game *game)
 				anim = 0;
 			draw_image(game, game->bar_img[1], y + 15, x + 10);
 		}
-		if (i == 1)
-			draw_image(game, game->bar_img[3], y + 15, x + 10);
-		if (i == 2)
-			draw_image(game, game->bar_img[4], y + 15, x + 10);
-		if (i == 4)
-			draw_image(game, game->bar_img[5], y + 15, x + 10);
+		draw_bar(game, x, y, i);
 		y += 128;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:51:42 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/27 10:53:52 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:49:44 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,24 @@ void	pars_texture(t_data *data)
 	pars_rgb_color(data);
 }
 
-int	check_all_data(t_data *data)
+void	check_texture_bis(t_data *data, char *line)
 {
-	if (data->text_no && data->text_so && data->text_we && data->text_ea
-		&& data->text_f && data->text_c && data->text_door)
-		return (1);
-	return (0);
+	if ((ft_strncmp(line, "EA ", 3) == 0
+			|| ft_strncmp(line, "EA\t", 3) == 0) && !data->text_ea)
+		data->text_ea = ft_strdup(&line[3]);
+	else if ((ft_strncmp(line, "F ", 2) == 0
+			|| ft_strncmp(line, "F\t", 2) == 0) && !data->text_f)
+		data->text_f = ft_split(&line[2], ',');
+	else if ((!ft_strncmp(line, "C ", 2)
+			|| !ft_strncmp(line, "C\t", 2)) && !data->text_c)
+		data->text_c = ft_split(&line[2], ',');
+	else
+	{
+		free(line);
+		free_data(data);
+		print_error("Error\nBad data,\
+ you can only put: NO, SO, WE, EA, F, C, D\n");
+	}
 }
 
 void	check_texture(t_data *data, char *line)
@@ -61,22 +73,8 @@ void	check_texture(t_data *data, char *line)
 	else if ((ft_strncmp(line, "WE ", 3) == 0
 			|| ft_strncmp(line, "WE\t", 3) == 0) && !data->text_we)
 		data->text_we = ft_strdup(&line[3]);
-	else if ((ft_strncmp(line, "EA ", 3) == 0
-			|| ft_strncmp(line, "EA\t", 3) == 0) && !data->text_ea)
-		data->text_ea = ft_strdup(&line[3]);
-	else if ((ft_strncmp(line, "F ", 2) == 0
-			|| ft_strncmp(line, "F\t", 2) == 0) && !data->text_f)
-		data->text_f = ft_split(&line[2], ',');
-	else if ((!ft_strncmp(line, "C ", 2)
-			|| !ft_strncmp(line, "C\t", 2)) && !data->text_c)
-		data->text_c = ft_split(&line[2], ',');
 	else
-	{
-		free(line);
-		free_data(data);
-		print_error("Error\nBad data,\
- you can only put: NO, SO, WE, EA, F, C, D\n");
-	}
+		check_texture_bis(data, line);
 }
 
 int	fill_data(t_data *data)

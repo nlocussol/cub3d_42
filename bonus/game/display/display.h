@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:31:35 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/20 16:43:29 by averdon          ###   ########.fr       */
+/*   Updated: 2023/03/14 13:58:52 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,16 @@ void			draw_line(t_game *game, int x, t_raycast *raycast);
 void			nb_game_bar(t_game *game);
 void			game_bar(t_game *game);
 void			move_bar(t_game *game);
+void			put_one_case(t_game *game, int x_tmp, int y_tmp, int color);
+void			put_big_case(t_game *game, int x_tmp, int y_tmp, int color);
 
 /*minimap.c*/
 void			open_minimap(t_game *game);
+void			put_one_block(t_game *game, unsigned int color);
+void			put_assets(t_game *game, unsigned int **color);
+int				calculate_arrow(int a, int b, int mode);
+void			put_cursor(t_game *game, int x, int y);
+void			put_arrow(t_game *game, int i_minimap, int j_minimap, int mode);
 
 /*door_recessed.c*/
 bool			door_should_be_recessed(t_game *game, int x,
