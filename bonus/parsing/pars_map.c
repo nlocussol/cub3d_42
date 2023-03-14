@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:54:29 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/02/02 10:33:34 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/03/14 14:30:53 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	pars_empty(t_data *data, int i, int j)
 		free_data(data);
 		print_error("Error\nThe map is not closed\n");
 	}
+	if (data->map[i][j] == 'D')
+		pars_door(data, i, j);
 }
 
 void	map_error(t_data *data, int i, int j)
@@ -62,10 +64,8 @@ void	map_error(t_data *data, int i, int j)
 		print_error("Error\nThe map can only be composed of '01' \
 and can own only one character position (N, S, E, W)");
 	}
-	else if (data->map[i][j] == '0')
+	else if (data->map[i][j] == '0' || data->map[i][j] == 'D')
 		pars_empty(data, i, j);
-	else if (data->map[i][j] == 'D')
-		pars_door(data, i, j);
 	else if (ft_strchr("NSEW", data->map[i][j]) != NULL)
 	{
 		if (data->orientation != 0
