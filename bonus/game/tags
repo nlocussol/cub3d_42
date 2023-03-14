@@ -1,0 +1,2 @@
+Mmain	../main.c	/^int	main(int argc, char **argv, char **env)$/
+print_map	../main.c	/^void	print_map(char **tab) {$/

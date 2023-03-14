@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:27:50 by averdon           #+#    #+#             */
-/*   Updated: 2023/02/19 16:29:24 by averdon          ###   ########.fr       */
+/*   Updated: 2023/03/08 12:48:04 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ double	calculate_wall_x(t_game *game, t_raycast *raycast, int mode)
 		percentage_time = percentage_time / 2000;
 	}
 	else
-		percentage_time = (double)0;
+	percentage_time = (double)0;
 	if (ft_strchr("o", game->map[raycast->map_x][raycast->map_y]))
 		percentage_time = (double)(1 - percentage_time);
 	if (raycast->side == 0)

@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:00:26 by averdon           #+#    #+#             */
-/*   Updated: 2023/03/06 17:06:27 by averdon          ###   ########.fr       */
+/*   Updated: 2023/03/14 10:52:30 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,22 @@ void	free_all(t_game *game)
 
 int	close_window(t_game *game)
 {
+	t_double_list	*buffer;
+	t_double_list	*next;
+	t_song			*song;
+
 	ft_fdprintf(1, "Exit Program\n");
+	buffer = game->lst_sound;
+	while (buffer)
+	{
+		song = buffer->content;
+		next = buffer->next;
+		if (song->type == START_GAMEBOY)
+			break ;
+		buffer = next;
+	}
+	if (game->started_gameboy == true && !buffer)
+		destroy_and_free_so_long(game->vars);
 	free_all(game);
 	exit (0);
 }

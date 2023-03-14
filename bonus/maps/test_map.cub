@@ -1,20 +1,21 @@
-		NO 			textures/nord_text
-   SO 			textures/south_text
-   WE 			textures/west_text
-  EA 			textures/east_text
+
+NO 			assets/north_text.xpm
+SO 			assets/south_text.xpm
+WE 			assets/west_text.xpm
+EA 			assets/east_text.xpm
+  C 		255,255,255
+   F		 0,0,,,,,,,,,,,,,,,,,,0
+D			assets/door.xpm
 
 
-
-  F 		0,0,0
-   C		 72,223,246
 
 11111111111
 10000100001
 10000100001
 10000000001
-10000000001
-11100N00111
-10000000001
+1D1D1D1D1D1
+11100000111
+10000N00001
 10000000001
 10000100001
 10000100001
