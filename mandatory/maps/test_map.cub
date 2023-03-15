@@ -1,7 +1,7 @@
-		NO 			textures/nord_text
-   SO 			textures/south_text
-   WE 			textures/west_text
-  EA 			textures/east_text
+		NO 			textures/north_text.xpm
+   SO 			textures/south_text.xpm
+   WE 			textures/west_text.xpm
+  EA 			textures/east_text.xpm
 
 
 

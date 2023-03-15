@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:54:29 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 13:10:56 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/03/15 13:28:24 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	map_error(t_data *data, int i, int j)
 		print_error("Error\nThe map can only be composed of '01' \
 and can own only one character position (N, S, E, W)");
 	}
-	else if (data->map[i][j] == '0')
+	else if (data->map[i][j] == '0' || ft_strchr("NSEW", data->map[i][j]))
 		pars_empty(data, i, j);
-	else if (ft_strchr("NSEW", data->map[i][j]) != NULL)
+	if (ft_strchr("NSEW", data->map[i][j]) != NULL)
 	{
 		if (data->orientation != 0
 			|| !ft_strchr("01", data->map[i - 1][j])
