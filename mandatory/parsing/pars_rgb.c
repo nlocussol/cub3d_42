@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rgb_pars.c                                         :+:      :+:    :+:   */
+/*   pars_rgb.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:06:04 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 13:07:01 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:18:35 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_rgb_value(t_data *data)
 			|| ft_atoi(data->text_c[i]) < 0 || ft_atoi(data->text_c[i]) > 255)
 		{
 			free_data(data);
-			print_error("Error\nRGB colors can only be between 0 and 256\n");
+			print_error("Error\nRGB colors can only be between 0 and 255\n");
 		}
 		i++;
 	}

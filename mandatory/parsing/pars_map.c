@@ -6,7 +6,7 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:54:29 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/03/15 13:28:24 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:57:50 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ void	pars_empty(t_data *data, int i, int j)
 	int	error;
 
 	error = 0;
-	if (data->map[i][j + 1] == '\0' || data->map[i][j + 1] == ' ')
+	if (j == 0 || i == 0 || !data->map[i][j + 1]
+		|| !data->map[i + 1] || !data->map[i - 1][j] || !data->map[i][j - 1])
 		error = 1;
-	else if (j != 0 && data->map[i][j - 1] == ' ')
-		error = 1;
-	else if (i != 0 && data->map[i - 1][j] == ' ')
-		error = 1;
-	else if (data->map[i + 1] && data->map[i + 1][j] == ' ')
+	else if (data->map[i][j + 1] == ' ' || data->map[i][j - 1] == ' '
+		|| data->map[i - 1][j] == ' ' || data->map[i + 1][j] == ' ')
 		error = 1;
 	if (error == 1)
 	{

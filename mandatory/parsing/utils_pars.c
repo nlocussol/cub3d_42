@@ -6,11 +6,27 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:14:19 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/03/14 16:23:22 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:17:35 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	ft_count(char *str, char c)
+{
+	int	i;
+	int	cnt;
+
+	i = 0;
+	cnt = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			cnt++;
+		i++;
+	}
+	return (cnt);
+}
 
 void	print_error(char *message)
 {
@@ -25,7 +41,6 @@ void	open_texture(t_data *data, char *texture)
 	fd = open(texture, O_RDONLY);
 	if (fd < 0 || check_extension(texture, ".xpm") == 1)
 	{
-		close(fd);
 		free(texture);
 		free_data(data);
 		print_error("Error\nBad texture path or extension (only .xpm)\n");

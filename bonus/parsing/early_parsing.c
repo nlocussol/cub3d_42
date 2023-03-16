@@ -6,11 +6,27 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:58:05 by averdon           #+#    #+#             */
-/*   Updated: 2023/03/14 16:21:10 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:13:52 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	ft_count(char *str, char c)
+{
+	int	i;
+	int	cnt;
+
+	i = 0;
+	cnt = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			cnt++;
+		i++;
+	}
+	return (cnt);
+}
 
 void	put_eol(t_data *data)
 {

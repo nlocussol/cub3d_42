@@ -6,11 +6,12 @@
 /*   By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 09:51:42 by nlocusso          #+#    #+#             */
-/*   Updated: 2023/01/26 16:45:21 by nlocusso         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:11:47 by nlocusso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "parsing.h"
 
 void	pars_texture(t_data *data)
 {
@@ -57,11 +58,11 @@ void	check_texture(t_data *data, char *line)
 	else if ((ft_strncmp(line, "EA ", 3) == 0
 			|| ft_strncmp(line, "EA\t", 3) == 0) && !data->text_ea)
 		data->text_ea = ft_strdup(&line[3]);
-	else if ((ft_strncmp(line, "F ", 2) == 0
-			|| ft_strncmp(line, "F\t", 2) == 0) && !data->text_f)
+	else if ((ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "F\t", 2) == 0)
+		&& !data->text_f && ft_count(line, ',') == 2)
 		data->text_f = ft_split(&line[2], ',');
-	else if ((!ft_strncmp(line, "C ", 2)
-			|| !ft_strncmp(line, "C\t", 2)) && !data->text_c)
+	else if ((!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "C\t", 2))
+		&& !data->text_c && ft_count(line, ',') == 2)
 		data->text_c = ft_split(&line[2], ',');
 	else
 	{
