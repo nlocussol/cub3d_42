@@ -6,7 +6,7 @@
 #    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
-#    Updated: 2023/03/17 15:10:42 by averdon          ###   ########.fr        #
+#    Updated: 2023/03/17 15:22:59 by averdon          ###   ########.fr        #
 #    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -27,67 +27,67 @@ SRCS		:= mandatory/main.c \
 			   mandatory/game/parse_image.c \
 			   mandatory/game/create_border.c
 
-BSRCS		:= 	bonus/main.c \
-				bonus/parsing/early_parsing.c \
-				bonus/parsing/utils_pars.c \
-				bonus/parsing/pars_texture.c \
-				bonus/parsing/pars_map.c \
-				bonus/parsing/pars_rgb.c \
-				bonus/game/start_game.c \
-				bonus/game/initialize_game.c \
-				bonus/game/move_camera.c \
-				bonus/game/song.c \
-				bonus/game/key_functions/animations.c \
-				bonus/game/key_functions/update_song.c \
-				bonus/game/key_functions/launch_animations_and_movement.c \
-				bonus/game/key_functions/player_movement.c \
-				bonus/game/key_functions/player_actions.c \
-				bonus/game/key_functions/utils.c \
-				bonus/game/key_functions/interactions.c \
-				bonus/game/display/display.c \
-				bonus/game/display/door_recessed.c \
-				bonus/game/display/calculate_display.c \
-				bonus/game/display/draw_display.c \
-				bonus/game/display/draw_image.c \
-				bonus/game/display/parse_image.c \
-				bonus/game/display/launch_parsing_image.c \
-				bonus/game/display/parse_image_utils.c \
-			   	bonus/game/display/inventory_bar.c \
-			   	bonus/game/display/put_case_bar.c \
-			   	bonus/game/display/minimap.c \
-			   	bonus/game/display/put_minimap_textures.c \
-				bonus/game/utils/calculation.c \
-				bonus/game/utils/close_game.c \
-				bonus/game/utils/suppress_nodes.c \
-				bonus/so_long/main_so_long.c \
-				bonus/so_long/parsing/check_valid_path/check_components.c \
-				bonus/so_long/parsing/check_valid_path/check_valid_path.c \
-				bonus/so_long/parsing/check_valid_path/fload_map.c \
-				bonus/so_long/parsing/check_valid_path/set_up_copy.c \
-				bonus/so_long/parsing/initialize_map/check_outline.c \
-				bonus/so_long/parsing/initialize_map/initialize_map.c \
-				bonus/so_long/parsing/check_argument.c \
-				bonus/so_long/parsing/check_valid_map.c \
-				bonus/so_long/parsing/parsing.c \
-				bonus/so_long/game/display_map/check_walls.c \
-				bonus/so_long/game/display_map/check_walls_2.c \
-				bonus/so_long/game/display_map/display_good_walls.c \
-				bonus/so_long/game/display_map/display_map.c \
-				bonus/so_long/game/enemies/enemies.c \
-				bonus/so_long/game/enemies/enemies_movements.c \
-				bonus/so_long/game/enemies/enemies_utils.c \
-				bonus/so_long/game/enemies/randomize_enemies.c \
-				bonus/so_long/game/enemies/randomize_enemies_utils.c \
-				bonus/so_long/game/keys/actions_key.c \
-				bonus/so_long/game/keys/check_key.c \
-				bonus/so_long/game/keys/key_utils.c \
-				bonus/so_long/game/keys/keyhook.c \
-				bonus/so_long/game/set_up_game/divise_map.c \
-				bonus/so_long/game/set_up_game/set_up_sprite.c \
-				bonus/so_long/game/set_up_game/set_up_var.c \
-				bonus/so_long/game/game_utils.c \
-				bonus/so_long/game/launch_animation_and_movement.c \
-				bonus/so_long/game/calculate_utils.c \
+BSRCS		:= 	bonus/main_bonus.c \
+				bonus/parsing/early_parsing_bonus.c \
+				bonus/parsing/utils_pars_bonus.c \
+				bonus/parsing/pars_texture_bonus.c \
+				bonus/parsing/pars_map_bonus.c \
+				bonus/parsing/pars_rgb_bonus.c \
+				bonus/game/start_game_bonus.c \
+				bonus/game/initialize_game_bonus.c \
+				bonus/game/move_camera_bonus.c \
+				bonus/game/song_bonus.c \
+				bonus/game/key_functions/animations_bonus.c \
+				bonus/game/key_functions/update_song_bonus.c \
+				bonus/game/key_functions/launch_animations_and_movement_bonus.c \
+				bonus/game/key_functions/player_movement_bonus.c \
+				bonus/game/key_functions/player_actions_bonus.c \
+				bonus/game/key_functions/utils_bonus.c \
+				bonus/game/key_functions/interactions_bonus.c \
+				bonus/game/display/display_bonus.c \
+				bonus/game/display/door_recessed_bonus.c \
+				bonus/game/display/calculate_display_bonus.c \
+				bonus/game/display/draw_display_bonus.c \
+				bonus/game/display/draw_image_bonus.c \
+				bonus/game/display/parse_image_bonus.c \
+				bonus/game/display/launch_parsing_image_bonus.c \
+				bonus/game/display/parse_image_utils_bonus.c \
+			   	bonus/game/display/inventory_bar_bonus.c \
+			   	bonus/game/display/put_case_bar_bonus.c \
+			   	bonus/game/display/minimap_bonus.c \
+			   	bonus/game/display/put_minimap_textures_bonus.c \
+				bonus/game/utils/calculation_bonus.c \
+				bonus/game/utils/close_game_bonus.c \
+				bonus/game/utils/suppress_nodes_bonus.c \
+				bonus/so_long/main_so_long_bonus.c \
+				bonus/so_long/parsing/check_valid_path/check_components_bonus.c \
+				bonus/so_long/parsing/check_valid_path/check_valid_path_bonus.c \
+				bonus/so_long/parsing/check_valid_path/fload_map_bonus.c \
+				bonus/so_long/parsing/check_valid_path/set_up_copy_bonus.c \
+				bonus/so_long/parsing/initialize_map/check_outline_bonus.c \
+				bonus/so_long/parsing/initialize_map/initialize_map_bonus.c \
+				bonus/so_long/parsing/check_argument_bonus.c \
+				bonus/so_long/parsing/check_valid_map_bonus.c \
+				bonus/so_long/parsing/parsing_bonus.c \
+				bonus/so_long/game/display_map/check_walls_bonus.c \
+				bonus/so_long/game/display_map/check_walls_2_bonus.c \
+				bonus/so_long/game/display_map/display_good_walls_bonus.c \
+				bonus/so_long/game/display_map/display_map_bonus.c \
+				bonus/so_long/game/enemies/enemies_bonus.c \
+				bonus/so_long/game/enemies/enemies_movements_bonus.c \
+				bonus/so_long/game/enemies/enemies_utils_bonus.c \
+				bonus/so_long/game/enemies/randomize_enemies_bonus.c \
+				bonus/so_long/game/enemies/randomize_enemies_utils_bonus.c \
+				bonus/so_long/game/keys/actions_key_bonus.c \
+				bonus/so_long/game/keys/check_key_bonus.c \
+				bonus/so_long/game/keys/key_utils_bonus.c \
+				bonus/so_long/game/keys/keyhook_bonus.c \
+				bonus/so_long/game/set_up_game/divise_map_bonus.c \
+				bonus/so_long/game/set_up_game/set_up_sprite_bonus.c \
+				bonus/so_long/game/set_up_game/set_up_var_bonus.c \
+				bonus/so_long/game/game_utils_bonus.c \
+				bonus/so_long/game/launch_animation_and_movement_bonus.c \
+				bonus/so_long/game/calculate_utils_bonus.c \
 
 OBJS		:= ${SRCS:.c=.o}
 
@@ -131,14 +131,14 @@ cleaning:
 			@printf "\033[93;1;5mCleaning ...\n\033[0m"
 
 clean :		clear cleaning
-			${RM} ${OBJS} 
+			${RM} ${OBJS} ${BOBJS} 
 			@make -C libraries/libft clean
 			@make -C libraries/minilibx clean
 			@clear -x
 			@printf '\033[0;92;1mCleaning finished\n\033[0m'
 
 fclean :	clear clean cleaning 
-			${RM} ${NAME} 
+			${RM} ${NAME} ${NAME_BONUS}
 			@clear -x
 			@printf '\033[0;92;1mCleaning finished\n\033[0m'
 
