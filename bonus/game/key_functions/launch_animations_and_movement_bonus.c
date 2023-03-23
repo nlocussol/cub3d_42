@@ -31,7 +31,7 @@ void	start_gameboy(t_game *game, bool *first_time)
 	if (*first_time == true)
 	{
 		temp[0] = "./so_long";
-		temp[1] = "so_long/maps/valid_map/maptest3.ber";
+		temp[1] = "bonus/so_long/maps/valid_map/maptest3.ber";
 		main_so_long(2, temp, game);
 		*first_time = false;
 	}

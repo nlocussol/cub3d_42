@@ -41,17 +41,17 @@ char	*select_song(int mode)
 
 	arg = NULL;
 	if (mode == SPRAY)
-		arg = ft_strdup("assets/songs/sound_spray.ogg");
+		arg = ft_strdup("bonus/assets/songs/sound_spray.ogg");
 	else if (mode == DOOR)
-		arg = ft_strdup("assets/songs/sound_door.ogg");
+		arg = ft_strdup("bonus/assets/songs/sound_door.ogg");
 	else if (mode == START_GAMEBOY)
-		arg = ft_strdup("assets/songs/sound_start_gameboy.ogg");
+		arg = ft_strdup("bonus/assets/songs/sound_start_gameboy.ogg");
 	else if (mode == PLAY_GAMEBOY)
-		arg = ft_strdup("assets/songs/sound_playing_gameboy.ogg");
+		arg = ft_strdup("bonus/assets/songs/sound_playing_gameboy.ogg");
 	else if (mode == DANCING_CHEESE)
-		arg = ft_strdup("assets/songs/sound_dancing_cheese.ogg");
+		arg = ft_strdup("bonus/assets/songs/sound_dancing_cheese.ogg");
 	else if (mode == ATMOSPHERE)
-		arg = ft_strdup("assets/songs/sound_atmosphere.ogg");
+		arg = ft_strdup("bonus/assets/songs/sound_atmosphere.ogg");
 	return (arg);
 }
 
