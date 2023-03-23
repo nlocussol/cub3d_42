@@ -18,7 +18,7 @@ void	destroy_images(t_game *game)
 	int	j;
 
 	i = 0;
-	while (i < 4)
+	while (i < 4 && game->images[i])
 	{
 		j = 0;
 		while (game->images[i][j])

@@ -74,6 +74,10 @@ void	initialize_game(t_game	*game, t_data *data)
 	game->text_we = data->text_we;
 	game->hex_c = data->hex_c;
 	game->hex_f = data->hex_f;
+	game->images[0] = NULL;
+	game->images[1] = NULL;
+	game->images[2] = NULL;
+	game->images[3] = NULL;
 	initialize_player(game);
 	game->screen_img = ft_calloc(1, sizeof(t_img));
 	game->screen_img->img = mlx_new_image(game->mlx,

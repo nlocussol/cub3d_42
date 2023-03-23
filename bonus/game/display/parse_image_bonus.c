@@ -6,7 +6,7 @@
 /*   By: averdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:22:15 by averdon           #+#    #+#             */
-/*   Updated: 2023/03/18 13:01:50 by averdon          ###   ########.fr       */
+/*   Updated: 2023/03/18 13:06:56 by averdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ bool	parse_one_group_image(t_game *game, unsigned int ***game_tab,
 	{
 		img.img = mlx_xpm_file_to_image(game->mlx, name_img_tab[i],
 				&width, &length);
+		if (!img.img)
+			return (false);
 		img.addr = (unsigned char *)mlx_get_data_addr(img.img,
 				&img.bits_per_pixel, &img.line_length, &img.endian);
 		game_tab[i] = convert_image(length, width, img);

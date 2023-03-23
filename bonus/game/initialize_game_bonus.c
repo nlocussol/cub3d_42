@@ -29,23 +29,6 @@ void	find_player_place(t_game *game, int *x, int *y)
 	}
 }
 
-void	calculate_player_orientation(t_game *game)
-{
-	int	x;
-	int	y;
-
-	x = game->player->x / SIZE_BLOCK;
-	y = game->player->y / SIZE_BLOCK;
-	if (game->map[x][y] == 'E')
-		game->player->orientation = 90;
-	else if (game->map[x][y] == 'N')
-		game->player->orientation = 180;
-	else if (game->map[x][y] == 'W')
-		game->player->orientation = 270;
-	else if (game->map[x][y] == 'S')
-		game->player->orientation = 0;
-}
-
 void	initialize_player(t_game *game)
 {
 	int	x;

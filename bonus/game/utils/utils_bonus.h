@@ -21,6 +21,7 @@ int		close_window(t_game *game);
 double	abs_value(double nb);
 double	radian_value(double degree);
 long	calculate_time(void);
+void	calculate_player_orientation(t_game *game);
 
 t_anim	*find_square_anim(t_game *game, int x, int y);
 t_graff	*find_square_graff(t_game *game, t_raycast *raycast);
