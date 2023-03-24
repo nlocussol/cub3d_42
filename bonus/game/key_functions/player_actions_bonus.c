@@ -26,7 +26,8 @@ void	input_enter_echap(int keycode, t_game *game,
 	else if (keycode == ENTER && game->vars->game_finish)
 	{
 		temp[0] = "./so_long";
-		temp[1] = "so_long/maps/valid_map/maptest3.ber";
+		temp[1] = "bonus/so_long/maps/valid_map/maptest3.ber";
+		destroy_and_free_so_long(game->vars);
 		main_so_long(2, temp, game);
 	}
 }
