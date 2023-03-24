@@ -51,3 +51,19 @@ void	pars_rgb_color(t_data *data)
 	data->hex_c = (ft_atoi(data->text_c[0]) << 16)
 		+ (ft_atoi(data->text_c[1]) << 8) + ft_atoi(data->text_c[2]);
 }
+
+bool	pars_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ' || str[i] == '\t' || str[i] == '1' || str[i] == '0'
+			|| str[i] == '\n')
+			i++;
+		else
+			return (false);
+	}
+	return (true);
+}

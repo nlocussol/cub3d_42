@@ -30,6 +30,7 @@ typedef struct s_data
 	char	orientation;
 }	t_data;
 
+bool	pars_line(char *str);
 void	check_rgb_value(t_data *data);
 void	pars_rgb_color(t_data *data);
 void	print_error(char *message);

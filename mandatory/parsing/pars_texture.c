@@ -105,7 +105,14 @@ void	find_texture(t_data *data)
 	i = fill_data(data);
 	pars_texture(data);
 	while (!ft_strchr(data->map[i], '1') && !ft_strchr(data->map[i], '0'))
+	{
+		if (pars_line(data->map[i]) == false)
+		{
+			free_data(data);
+			print_error("Error\nThe map contains bad datas!\n");
+		}
 		i++;
+	}
 	while (data->map[i])
 	{
 		new_map = append_to_tab(new_map, data->map[i]);
