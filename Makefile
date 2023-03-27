@@ -101,7 +101,7 @@ COMPILER	?= clang
 
 RM			:= @rm -f
 
-CFLAGS		:= -Wall -Wextra -Werror -g 
+CFLAGS		:= -Wall -Wextra -Werror -g -Ilibraries
 
 LIBRARY     := -Llibraries/libft -lft \
 			   -Llibraries/libft/ft_fdprintf -lftfdprintf \

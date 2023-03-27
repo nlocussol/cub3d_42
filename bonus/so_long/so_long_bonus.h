@@ -13,8 +13,8 @@
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 
-# include "../sources/libft/libft.h"
-# include "../sources/minilibx/mlx.h"
+# include "libft/libft.h"
+# include "minilibx/mlx.h"
 # include "sources/structures_sl_bonus.h"
 # include "sources/define_sl_bonus.h"
 # include "game/game_so_long_bonus.h"

@@ -109,7 +109,7 @@ void	find_texture(t_data *data)
 		if (pars_line(data->map[i]) == false)
 		{
 			free_data(data);
-			print_error("Error\nThe map contains bad datas!\n");
+			print_error("Error\nThe map contains bad data!\n");
 		}
 		i++;
 	}
